@@ -1,0 +1,17 @@
+syntax = "proto3";
+package imhub.node.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "imhub/node/v1/params.proto";
+
+option go_package = "github.com/dun-io/imhub/x/node/types/v1";
+
+// GenesisState defines the node module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

@@ -3,24 +3,146 @@ package nodev1
 
 import (
 	_ "cosmossdk.io/api/amino"
+	v1beta1 "cosmossdk.io/api/cosmos/base/v1beta1"
 	fmt "fmt"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	io "io"
 	reflect "reflect"
 	sync "sync"
 )
 
+var _ protoreflect.List = (*_Params_3_list)(nil)
+
+type _Params_3_list struct {
+	list *[]*v1beta1.Coin
+}
+
+func (x *_Params_3_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_Params_3_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_Params_3_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*v1beta1.Coin)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_Params_3_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*v1beta1.Coin)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_Params_3_list) AppendMutable() protoreflect.Value {
+	v := new(v1beta1.Coin)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Params_3_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_Params_3_list) NewElement() protoreflect.Value {
+	v := new(v1beta1.Coin)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Params_3_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_Params_4_list)(nil)
+
+type _Params_4_list struct {
+	list *[]*v1beta1.Coin
+}
+
+func (x *_Params_4_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_Params_4_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_Params_4_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*v1beta1.Coin)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_Params_4_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*v1beta1.Coin)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_Params_4_list) AppendMutable() protoreflect.Value {
+	v := new(v1beta1.Coin)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Params_4_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_Params_4_list) NewElement() protoreflect.Value {
+	v := new(v1beta1.Coin)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_Params_4_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_Params protoreflect.MessageDescriptor
+	md_Params                       protoreflect.MessageDescriptor
+	fd_Params_deposit               protoreflect.FieldDescriptor
+	fd_Params_active_duration       protoreflect.FieldDescriptor
+	fd_Params_min_gigabyte_prices   protoreflect.FieldDescriptor
+	fd_Params_min_hourly_prices     protoreflect.FieldDescriptor
+	fd_Params_max_session_gigabytes protoreflect.FieldDescriptor
+	fd_Params_min_session_gigabytes protoreflect.FieldDescriptor
+	fd_Params_max_session_hours     protoreflect.FieldDescriptor
+	fd_Params_min_session_hours     protoreflect.FieldDescriptor
+	fd_Params_staking_share         protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_imhub_node_v1_params_proto_init()
 	md_Params = File_imhub_node_v1_params_proto.Messages().ByName("Params")
+	fd_Params_deposit = md_Params.Fields().ByName("deposit")
+	fd_Params_active_duration = md_Params.Fields().ByName("active_duration")
+	fd_Params_min_gigabyte_prices = md_Params.Fields().ByName("min_gigabyte_prices")
+	fd_Params_min_hourly_prices = md_Params.Fields().ByName("min_hourly_prices")
+	fd_Params_max_session_gigabytes = md_Params.Fields().ByName("max_session_gigabytes")
+	fd_Params_min_session_gigabytes = md_Params.Fields().ByName("min_session_gigabytes")
+	fd_Params_max_session_hours = md_Params.Fields().ByName("max_session_hours")
+	fd_Params_min_session_hours = md_Params.Fields().ByName("min_session_hours")
+	fd_Params_staking_share = md_Params.Fields().ByName("staking_share")
 }
 
 var _ protoreflect.Message = (*fastReflection_Params)(nil)
@@ -88,6 +210,60 @@ func (x *fastReflection_Params) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_Params) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Deposit != nil {
+		value := protoreflect.ValueOfMessage(x.Deposit.ProtoReflect())
+		if !f(fd_Params_deposit, value) {
+			return
+		}
+	}
+	if x.ActiveDuration != nil {
+		value := protoreflect.ValueOfMessage(x.ActiveDuration.ProtoReflect())
+		if !f(fd_Params_active_duration, value) {
+			return
+		}
+	}
+	if len(x.MinGigabytePrices) != 0 {
+		value := protoreflect.ValueOfList(&_Params_3_list{list: &x.MinGigabytePrices})
+		if !f(fd_Params_min_gigabyte_prices, value) {
+			return
+		}
+	}
+	if len(x.MinHourlyPrices) != 0 {
+		value := protoreflect.ValueOfList(&_Params_4_list{list: &x.MinHourlyPrices})
+		if !f(fd_Params_min_hourly_prices, value) {
+			return
+		}
+	}
+	if x.MaxSessionGigabytes != int64(0) {
+		value := protoreflect.ValueOfInt64(x.MaxSessionGigabytes)
+		if !f(fd_Params_max_session_gigabytes, value) {
+			return
+		}
+	}
+	if x.MinSessionGigabytes != int64(0) {
+		value := protoreflect.ValueOfInt64(x.MinSessionGigabytes)
+		if !f(fd_Params_min_session_gigabytes, value) {
+			return
+		}
+	}
+	if x.MaxSessionHours != int64(0) {
+		value := protoreflect.ValueOfInt64(x.MaxSessionHours)
+		if !f(fd_Params_max_session_hours, value) {
+			return
+		}
+	}
+	if x.MinSessionHours != int64(0) {
+		value := protoreflect.ValueOfInt64(x.MinSessionHours)
+		if !f(fd_Params_min_session_hours, value) {
+			return
+		}
+	}
+	if x.StakingShare != "" {
+		value := protoreflect.ValueOfString(x.StakingShare)
+		if !f(fd_Params_staking_share, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -103,6 +279,24 @@ func (x *fastReflection_Params) Range(f func(protoreflect.FieldDescriptor, proto
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_Params) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "imhub.node.v1.Params.deposit":
+		return x.Deposit != nil
+	case "imhub.node.v1.Params.active_duration":
+		return x.ActiveDuration != nil
+	case "imhub.node.v1.Params.min_gigabyte_prices":
+		return len(x.MinGigabytePrices) != 0
+	case "imhub.node.v1.Params.min_hourly_prices":
+		return len(x.MinHourlyPrices) != 0
+	case "imhub.node.v1.Params.max_session_gigabytes":
+		return x.MaxSessionGigabytes != int64(0)
+	case "imhub.node.v1.Params.min_session_gigabytes":
+		return x.MinSessionGigabytes != int64(0)
+	case "imhub.node.v1.Params.max_session_hours":
+		return x.MaxSessionHours != int64(0)
+	case "imhub.node.v1.Params.min_session_hours":
+		return x.MinSessionHours != int64(0)
+	case "imhub.node.v1.Params.staking_share":
+		return x.StakingShare != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.Params"))
@@ -119,6 +313,24 @@ func (x *fastReflection_Params) Has(fd protoreflect.FieldDescriptor) bool {
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Params) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "imhub.node.v1.Params.deposit":
+		x.Deposit = nil
+	case "imhub.node.v1.Params.active_duration":
+		x.ActiveDuration = nil
+	case "imhub.node.v1.Params.min_gigabyte_prices":
+		x.MinGigabytePrices = nil
+	case "imhub.node.v1.Params.min_hourly_prices":
+		x.MinHourlyPrices = nil
+	case "imhub.node.v1.Params.max_session_gigabytes":
+		x.MaxSessionGigabytes = int64(0)
+	case "imhub.node.v1.Params.min_session_gigabytes":
+		x.MinSessionGigabytes = int64(0)
+	case "imhub.node.v1.Params.max_session_hours":
+		x.MaxSessionHours = int64(0)
+	case "imhub.node.v1.Params.min_session_hours":
+		x.MinSessionHours = int64(0)
+	case "imhub.node.v1.Params.staking_share":
+		x.StakingShare = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.Params"))
@@ -135,6 +347,39 @@ func (x *fastReflection_Params) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_Params) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "imhub.node.v1.Params.deposit":
+		value := x.Deposit
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "imhub.node.v1.Params.active_duration":
+		value := x.ActiveDuration
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "imhub.node.v1.Params.min_gigabyte_prices":
+		if len(x.MinGigabytePrices) == 0 {
+			return protoreflect.ValueOfList(&_Params_3_list{})
+		}
+		listValue := &_Params_3_list{list: &x.MinGigabytePrices}
+		return protoreflect.ValueOfList(listValue)
+	case "imhub.node.v1.Params.min_hourly_prices":
+		if len(x.MinHourlyPrices) == 0 {
+			return protoreflect.ValueOfList(&_Params_4_list{})
+		}
+		listValue := &_Params_4_list{list: &x.MinHourlyPrices}
+		return protoreflect.ValueOfList(listValue)
+	case "imhub.node.v1.Params.max_session_gigabytes":
+		value := x.MaxSessionGigabytes
+		return protoreflect.ValueOfInt64(value)
+	case "imhub.node.v1.Params.min_session_gigabytes":
+		value := x.MinSessionGigabytes
+		return protoreflect.ValueOfInt64(value)
+	case "imhub.node.v1.Params.max_session_hours":
+		value := x.MaxSessionHours
+		return protoreflect.ValueOfInt64(value)
+	case "imhub.node.v1.Params.min_session_hours":
+		value := x.MinSessionHours
+		return protoreflect.ValueOfInt64(value)
+	case "imhub.node.v1.Params.staking_share":
+		value := x.StakingShare
+		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.Params"))
@@ -155,6 +400,28 @@ func (x *fastReflection_Params) Get(descriptor protoreflect.FieldDescriptor) pro
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Params) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "imhub.node.v1.Params.deposit":
+		x.Deposit = value.Message().Interface().(*v1beta1.Coin)
+	case "imhub.node.v1.Params.active_duration":
+		x.ActiveDuration = value.Message().Interface().(*durationpb.Duration)
+	case "imhub.node.v1.Params.min_gigabyte_prices":
+		lv := value.List()
+		clv := lv.(*_Params_3_list)
+		x.MinGigabytePrices = *clv.list
+	case "imhub.node.v1.Params.min_hourly_prices":
+		lv := value.List()
+		clv := lv.(*_Params_4_list)
+		x.MinHourlyPrices = *clv.list
+	case "imhub.node.v1.Params.max_session_gigabytes":
+		x.MaxSessionGigabytes = value.Int()
+	case "imhub.node.v1.Params.min_session_gigabytes":
+		x.MinSessionGigabytes = value.Int()
+	case "imhub.node.v1.Params.max_session_hours":
+		x.MaxSessionHours = value.Int()
+	case "imhub.node.v1.Params.min_session_hours":
+		x.MinSessionHours = value.Int()
+	case "imhub.node.v1.Params.staking_share":
+		x.StakingShare = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.Params"))
@@ -175,6 +442,38 @@ func (x *fastReflection_Params) Set(fd protoreflect.FieldDescriptor, value proto
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Params) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "imhub.node.v1.Params.deposit":
+		if x.Deposit == nil {
+			x.Deposit = new(v1beta1.Coin)
+		}
+		return protoreflect.ValueOfMessage(x.Deposit.ProtoReflect())
+	case "imhub.node.v1.Params.active_duration":
+		if x.ActiveDuration == nil {
+			x.ActiveDuration = new(durationpb.Duration)
+		}
+		return protoreflect.ValueOfMessage(x.ActiveDuration.ProtoReflect())
+	case "imhub.node.v1.Params.min_gigabyte_prices":
+		if x.MinGigabytePrices == nil {
+			x.MinGigabytePrices = []*v1beta1.Coin{}
+		}
+		value := &_Params_3_list{list: &x.MinGigabytePrices}
+		return protoreflect.ValueOfList(value)
+	case "imhub.node.v1.Params.min_hourly_prices":
+		if x.MinHourlyPrices == nil {
+			x.MinHourlyPrices = []*v1beta1.Coin{}
+		}
+		value := &_Params_4_list{list: &x.MinHourlyPrices}
+		return protoreflect.ValueOfList(value)
+	case "imhub.node.v1.Params.max_session_gigabytes":
+		panic(fmt.Errorf("field max_session_gigabytes of message imhub.node.v1.Params is not mutable"))
+	case "imhub.node.v1.Params.min_session_gigabytes":
+		panic(fmt.Errorf("field min_session_gigabytes of message imhub.node.v1.Params is not mutable"))
+	case "imhub.node.v1.Params.max_session_hours":
+		panic(fmt.Errorf("field max_session_hours of message imhub.node.v1.Params is not mutable"))
+	case "imhub.node.v1.Params.min_session_hours":
+		panic(fmt.Errorf("field min_session_hours of message imhub.node.v1.Params is not mutable"))
+	case "imhub.node.v1.Params.staking_share":
+		panic(fmt.Errorf("field staking_share of message imhub.node.v1.Params is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.Params"))
@@ -188,6 +487,28 @@ func (x *fastReflection_Params) Mutable(fd protoreflect.FieldDescriptor) protore
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_Params) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "imhub.node.v1.Params.deposit":
+		m := new(v1beta1.Coin)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "imhub.node.v1.Params.active_duration":
+		m := new(durationpb.Duration)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "imhub.node.v1.Params.min_gigabyte_prices":
+		list := []*v1beta1.Coin{}
+		return protoreflect.ValueOfList(&_Params_3_list{list: &list})
+	case "imhub.node.v1.Params.min_hourly_prices":
+		list := []*v1beta1.Coin{}
+		return protoreflect.ValueOfList(&_Params_4_list{list: &list})
+	case "imhub.node.v1.Params.max_session_gigabytes":
+		return protoreflect.ValueOfInt64(int64(0))
+	case "imhub.node.v1.Params.min_session_gigabytes":
+		return protoreflect.ValueOfInt64(int64(0))
+	case "imhub.node.v1.Params.max_session_hours":
+		return protoreflect.ValueOfInt64(int64(0))
+	case "imhub.node.v1.Params.min_session_hours":
+		return protoreflect.ValueOfInt64(int64(0))
+	case "imhub.node.v1.Params.staking_share":
+		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.Params"))
@@ -257,6 +578,42 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
+		if x.Deposit != nil {
+			l = options.Size(x.Deposit)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.ActiveDuration != nil {
+			l = options.Size(x.ActiveDuration)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if len(x.MinGigabytePrices) > 0 {
+			for _, e := range x.MinGigabytePrices {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if len(x.MinHourlyPrices) > 0 {
+			for _, e := range x.MinHourlyPrices {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.MaxSessionGigabytes != 0 {
+			n += 1 + runtime.Sov(uint64(x.MaxSessionGigabytes))
+		}
+		if x.MinSessionGigabytes != 0 {
+			n += 1 + runtime.Sov(uint64(x.MinSessionGigabytes))
+		}
+		if x.MaxSessionHours != 0 {
+			n += 1 + runtime.Sov(uint64(x.MaxSessionHours))
+		}
+		if x.MinSessionHours != 0 {
+			n += 1 + runtime.Sov(uint64(x.MinSessionHours))
+		}
+		l = len(x.StakingShare)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -285,6 +642,93 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if len(x.StakingShare) > 0 {
+			i -= len(x.StakingShare)
+			copy(dAtA[i:], x.StakingShare)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.StakingShare)))
+			i--
+			dAtA[i] = 0x4a
+		}
+		if x.MinSessionHours != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.MinSessionHours))
+			i--
+			dAtA[i] = 0x40
+		}
+		if x.MaxSessionHours != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.MaxSessionHours))
+			i--
+			dAtA[i] = 0x38
+		}
+		if x.MinSessionGigabytes != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.MinSessionGigabytes))
+			i--
+			dAtA[i] = 0x30
+		}
+		if x.MaxSessionGigabytes != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.MaxSessionGigabytes))
+			i--
+			dAtA[i] = 0x28
+		}
+		if len(x.MinHourlyPrices) > 0 {
+			for iNdEx := len(x.MinHourlyPrices) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.MinHourlyPrices[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x22
+			}
+		}
+		if len(x.MinGigabytePrices) > 0 {
+			for iNdEx := len(x.MinGigabytePrices) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.MinGigabytePrices[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x1a
+			}
+		}
+		if x.ActiveDuration != nil {
+			encoded, err := options.Marshal(x.ActiveDuration)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if x.Deposit != nil {
+			encoded, err := options.Marshal(x.Deposit)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -335,6 +779,254 @@ func (x *fastReflection_Params) ProtoMethods() *protoiface.Methods {
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: Params: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Deposit", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Deposit == nil {
+					x.Deposit = &v1beta1.Coin{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Deposit); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ActiveDuration", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.ActiveDuration == nil {
+					x.ActiveDuration = &durationpb.Duration{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.ActiveDuration); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MinGigabytePrices", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.MinGigabytePrices = append(x.MinGigabytePrices, &v1beta1.Coin{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.MinGigabytePrices[len(x.MinGigabytePrices)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 4:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MinHourlyPrices", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.MinHourlyPrices = append(x.MinHourlyPrices, &v1beta1.Coin{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.MinHourlyPrices[len(x.MinHourlyPrices)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 5:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MaxSessionGigabytes", wireType)
+				}
+				x.MaxSessionGigabytes = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.MaxSessionGigabytes |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 6:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MinSessionGigabytes", wireType)
+				}
+				x.MinSessionGigabytes = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.MinSessionGigabytes |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 7:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MaxSessionHours", wireType)
+				}
+				x.MaxSessionHours = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.MaxSessionHours |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 8:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MinSessionHours", wireType)
+				}
+				x.MinSessionHours = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.MinSessionHours |= int64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 9:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StakingShare", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.StakingShare = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -388,6 +1080,16 @@ type Params struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Deposit             *v1beta1.Coin        `protobuf:"bytes,1,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	ActiveDuration      *durationpb.Duration `protobuf:"bytes,2,opt,name=active_duration,json=activeDuration,proto3" json:"active_duration,omitempty"`
+	MinGigabytePrices   []*v1beta1.Coin      `protobuf:"bytes,3,rep,name=min_gigabyte_prices,json=minGigabytePrices,proto3" json:"min_gigabyte_prices,omitempty"`
+	MinHourlyPrices     []*v1beta1.Coin      `protobuf:"bytes,4,rep,name=min_hourly_prices,json=minHourlyPrices,proto3" json:"min_hourly_prices,omitempty"`
+	MaxSessionGigabytes int64                `protobuf:"varint,5,opt,name=max_session_gigabytes,json=maxSessionGigabytes,proto3" json:"max_session_gigabytes,omitempty"`
+	MinSessionGigabytes int64                `protobuf:"varint,6,opt,name=min_session_gigabytes,json=minSessionGigabytes,proto3" json:"min_session_gigabytes,omitempty"`
+	MaxSessionHours     int64                `protobuf:"varint,7,opt,name=max_session_hours,json=maxSessionHours,proto3" json:"max_session_hours,omitempty"`
+	MinSessionHours     int64                `protobuf:"varint,8,opt,name=min_session_hours,json=minSessionHours,proto3" json:"min_session_hours,omitempty"`
+	StakingShare        string               `protobuf:"bytes,9,opt,name=staking_share,json=stakingShare,proto3" json:"staking_share,omitempty"`
 }
 
 func (x *Params) Reset() {
@@ -410,6 +1112,69 @@ func (*Params) Descriptor() ([]byte, []int) {
 	return file_imhub_node_v1_params_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *Params) GetDeposit() *v1beta1.Coin {
+	if x != nil {
+		return x.Deposit
+	}
+	return nil
+}
+
+func (x *Params) GetActiveDuration() *durationpb.Duration {
+	if x != nil {
+		return x.ActiveDuration
+	}
+	return nil
+}
+
+func (x *Params) GetMinGigabytePrices() []*v1beta1.Coin {
+	if x != nil {
+		return x.MinGigabytePrices
+	}
+	return nil
+}
+
+func (x *Params) GetMinHourlyPrices() []*v1beta1.Coin {
+	if x != nil {
+		return x.MinHourlyPrices
+	}
+	return nil
+}
+
+func (x *Params) GetMaxSessionGigabytes() int64 {
+	if x != nil {
+		return x.MaxSessionGigabytes
+	}
+	return 0
+}
+
+func (x *Params) GetMinSessionGigabytes() int64 {
+	if x != nil {
+		return x.MinSessionGigabytes
+	}
+	return 0
+}
+
+func (x *Params) GetMaxSessionHours() int64 {
+	if x != nil {
+		return x.MaxSessionHours
+	}
+	return 0
+}
+
+func (x *Params) GetMinSessionHours() int64 {
+	if x != nil {
+		return x.MinSessionHours
+	}
+	return 0
+}
+
+func (x *Params) GetStakingShare() string {
+	if x != nil {
+		return x.StakingShare
+	}
+	return ""
+}
+
 var File_imhub_node_v1_params_proto protoreflect.FileDescriptor
 
 var file_imhub_node_v1_params_proto_rawDesc = []byte{
@@ -418,20 +1183,64 @@ var file_imhub_node_v1_params_proto_rawDesc = []byte{
 	0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x1a, 0x11, 0x61, 0x6d, 0x69,
 	0x6e, 0x6f, 0x2f, 0x61, 0x6d, 0x69, 0x6e, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x14,
 	0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x26, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x3a, 0x1c,
-	0xe8, 0xa0, 0x1f, 0x01, 0x8a, 0xe7, 0xb0, 0x2a, 0x13, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x78,
-	0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0xa8, 0x01, 0x0a,
-	0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e,
-	0x76, 0x31, 0x42, 0x0b, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
-	0x01, 0x5a, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x75,
-	0x6e, 0x2d, 0x69, 0x6f, 0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x69,
-	0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x6e, 0x6f, 0x64,
-	0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x49, 0x4e, 0x58, 0xaa, 0x02, 0x0d, 0x49, 0x6d, 0x68, 0x75,
-	0x62, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x0d, 0x49, 0x6d, 0x68, 0x75,
-	0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x19, 0x49, 0x6d, 0x68, 0x75,
-	0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74,
-	0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x3a, 0x3a, 0x4e,
-	0x6f, 0x64, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x62, 0x61, 0x73,
+	0x65, 0x2f, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2f, 0x63, 0x6f, 0x69, 0x6e, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x91, 0x05, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12,
+	0x39, 0x0a, 0x07, 0x64, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76,
+	0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x04, 0xc8, 0xde, 0x1f,
+	0x00, 0x52, 0x07, 0x64, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x12, 0x4c, 0x0a, 0x0f, 0x61, 0x63,
+	0x74, 0x69, 0x76, 0x65, 0x5f, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x08,
+	0xc8, 0xde, 0x1f, 0x00, 0x98, 0xdf, 0x1f, 0x01, 0x52, 0x0e, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65,
+	0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x7b, 0x0a, 0x13, 0x6d, 0x69, 0x6e, 0x5f,
+	0x67, 0x69, 0x67, 0x61, 0x62, 0x79, 0x74, 0x65, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x73, 0x18,
+	0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62,
+	0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e,
+	0x42, 0x30, 0xc8, 0xde, 0x1f, 0x00, 0xaa, 0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d,
+	0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69,
+	0x6e, 0x73, 0x52, 0x11, 0x6d, 0x69, 0x6e, 0x47, 0x69, 0x67, 0x61, 0x62, 0x79, 0x74, 0x65, 0x50,
+	0x72, 0x69, 0x63, 0x65, 0x73, 0x12, 0x77, 0x0a, 0x11, 0x6d, 0x69, 0x6e, 0x5f, 0x68, 0x6f, 0x75,
+	0x72, 0x6c, 0x79, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76,
+	0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x30, 0xc8, 0xde, 0x1f,
+	0x00, 0xaa, 0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
+	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64,
+	0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x73, 0x52, 0x0f, 0x6d,
+	0x69, 0x6e, 0x48, 0x6f, 0x75, 0x72, 0x6c, 0x79, 0x50, 0x72, 0x69, 0x63, 0x65, 0x73, 0x12, 0x32,
+	0x0a, 0x15, 0x6d, 0x61, 0x78, 0x5f, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x67, 0x69,
+	0x67, 0x61, 0x62, 0x79, 0x74, 0x65, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x13, 0x6d,
+	0x61, 0x78, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x47, 0x69, 0x67, 0x61, 0x62, 0x79, 0x74,
+	0x65, 0x73, 0x12, 0x32, 0x0a, 0x15, 0x6d, 0x69, 0x6e, 0x5f, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f,
+	0x6e, 0x5f, 0x67, 0x69, 0x67, 0x61, 0x62, 0x79, 0x74, 0x65, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x13, 0x6d, 0x69, 0x6e, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x47, 0x69, 0x67,
+	0x61, 0x62, 0x79, 0x74, 0x65, 0x73, 0x12, 0x2a, 0x0a, 0x11, 0x6d, 0x61, 0x78, 0x5f, 0x73, 0x65,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x68, 0x6f, 0x75, 0x72, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x0f, 0x6d, 0x61, 0x78, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x48, 0x6f, 0x75,
+	0x72, 0x73, 0x12, 0x2a, 0x0a, 0x11, 0x6d, 0x69, 0x6e, 0x5f, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f,
+	0x6e, 0x5f, 0x68, 0x6f, 0x75, 0x72, 0x73, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0f, 0x6d,
+	0x69, 0x6e, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x48, 0x6f, 0x75, 0x72, 0x73, 0x12, 0x48,
+	0x0a, 0x0d, 0x73, 0x74, 0x61, 0x6b, 0x69, 0x6e, 0x67, 0x5f, 0x73, 0x68, 0x61, 0x72, 0x65, 0x18,
+	0x09, 0x20, 0x01, 0x28, 0x09, 0x42, 0x23, 0xc8, 0xde, 0x1f, 0x00, 0xda, 0xde, 0x1f, 0x1b, 0x63,
+	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x6d, 0x61, 0x74, 0x68,
+	0x2e, 0x4c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x44, 0x65, 0x63, 0x52, 0x0c, 0x73, 0x74, 0x61, 0x6b,
+	0x69, 0x6e, 0x67, 0x53, 0x68, 0x61, 0x72, 0x65, 0x42, 0xb0, 0x01, 0xc8, 0xe1, 0x1e, 0x00, 0xa8,
+	0xe2, 0x1e, 0x00, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e,
+	0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x0b, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x50, 0x72,
+	0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x64, 0x75, 0x6e, 0x2d, 0x69, 0x6f, 0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x61,
+	0x70, 0x69, 0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x76, 0x31,
+	0x3b, 0x6e, 0x6f, 0x64, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x49, 0x4e, 0x58, 0xaa, 0x02, 0x0d,
+	0x49, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x0d,
+	0x49, 0x6d, 0x68, 0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x19,
+	0x49, 0x6d, 0x68, 0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50,
+	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x49, 0x6d, 0x68, 0x75,
+	0x62, 0x3a, 0x3a, 0x4e, 0x6f, 0x64, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -448,14 +1257,20 @@ func file_imhub_node_v1_params_proto_rawDescGZIP() []byte {
 
 var file_imhub_node_v1_params_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_imhub_node_v1_params_proto_goTypes = []interface{}{
-	(*Params)(nil), // 0: imhub.node.v1.Params
+	(*Params)(nil),              // 0: imhub.node.v1.Params
+	(*v1beta1.Coin)(nil),        // 1: cosmos.base.v1beta1.Coin
+	(*durationpb.Duration)(nil), // 2: google.protobuf.Duration
 }
 var file_imhub_node_v1_params_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: imhub.node.v1.Params.deposit:type_name -> cosmos.base.v1beta1.Coin
+	2, // 1: imhub.node.v1.Params.active_duration:type_name -> google.protobuf.Duration
+	1, // 2: imhub.node.v1.Params.min_gigabyte_prices:type_name -> cosmos.base.v1beta1.Coin
+	1, // 3: imhub.node.v1.Params.min_hourly_prices:type_name -> cosmos.base.v1beta1.Coin
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_imhub_node_v1_params_proto_init() }

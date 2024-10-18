@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package imhub.node.v1;
 
 import "amino/amino.proto";
@@ -11,13 +12,8 @@ import "google/protobuf/timestamp.proto";
 import "imhub/types/v1/status.proto";
 option go_package = "github.com/dun-io/imhub/x/node/types/v1";
 
-// Msg defines the Msg service.
-service Msg {
-  rpc MsgRegisterNode(MsgRegisterNodeRequest) returns (MsgRegisterNodeResponse);
-}
-
-message MsgRegisterNodeRequest {
-  string from = 1;
+message Node {
+  string address = 1;
   repeated cosmos.base.v1beta1.Coin gigabyte_prices = 2 [
     (gogoproto.nullable) = false,
     (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
@@ -27,8 +23,13 @@ message MsgRegisterNodeRequest {
     (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
   ];
   string remote_url = 4 [(gogoproto.customname) = "RemoteURL"];
-}
-
-message MsgRegisterNodeResponse {
-
+  google.protobuf.Timestamp inactive_at = 5 [
+    (gogoproto.nullable) = false,
+    (gogoproto.stdtime) = true
+  ];
+  imhub.types.v1.Status status = 6;
+  google.protobuf.Timestamp status_at = 7 [
+    (gogoproto.nullable) = false,
+    (gogoproto.stdtime) = true
+  ];
 }

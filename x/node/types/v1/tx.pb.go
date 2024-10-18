@@ -7,13 +7,14 @@ import (
 	context "context"
 	fmt "fmt"
 	_ "github.com/cosmos/cosmos-proto"
+	github_com_cosmos_cosmos_sdk_types "github.com/cosmos/cosmos-sdk/types"
+	types "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/cosmos-sdk/types/msgservice"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	grpc1 "github.com/cosmos/gogoproto/grpc"
 	proto "github.com/cosmos/gogoproto/proto"
-	github_com_cosmos_gogoproto_types "github.com/cosmos/gogoproto/types"
-	v1 "github.com/dun-io/imhub/types/v1"
+	_ "github.com/dun-io/imhub/types/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -21,14 +22,12 @@ import (
 	io "io"
 	math "math"
 	math_bits "math/bits"
-	time "time"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
-var _ = time.Kitchen
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
@@ -37,13 +36,10 @@ var _ = time.Kitchen
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type MsgRegisterNodeRequest struct {
-	Name     string    `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Type     string    `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	Address  string    `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
-	Ext      string    `protobuf:"bytes,4,opt,name=ext,proto3" json:"ext,omitempty"`
-	Owner    string    `protobuf:"bytes,5,opt,name=owner,proto3" json:"owner,omitempty"`
-	Status   v1.Status `protobuf:"varint,6,opt,name=status,proto3,enum=imhub.types.v1.Status" json:"status,omitempty"`
-	StatusAt time.Time `protobuf:"bytes,7,opt,name=status_at,json=statusAt,proto3,stdtime" json:"status_at"`
+	From           string                                   `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	GigabytePrices github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,2,rep,name=gigabyte_prices,json=gigabytePrices,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"gigabyte_prices"`
+	HourlyPrices   github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,3,rep,name=hourly_prices,json=hourlyPrices,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"hourly_prices"`
+	RemoteURL      string                                   `protobuf:"bytes,4,opt,name=remote_url,json=remoteUrl,proto3" json:"remote_url,omitempty"`
 }
 
 func (m *MsgRegisterNodeRequest) Reset()         { *m = MsgRegisterNodeRequest{} }
@@ -79,53 +75,32 @@ func (m *MsgRegisterNodeRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgRegisterNodeRequest proto.InternalMessageInfo
 
-func (m *MsgRegisterNodeRequest) GetName() string {
+func (m *MsgRegisterNodeRequest) GetFrom() string {
 	if m != nil {
-		return m.Name
+		return m.From
 	}
 	return ""
 }
 
-func (m *MsgRegisterNodeRequest) GetType() string {
+func (m *MsgRegisterNodeRequest) GetGigabytePrices() github_com_cosmos_cosmos_sdk_types.Coins {
 	if m != nil {
-		return m.Type
+		return m.GigabytePrices
+	}
+	return nil
+}
+
+func (m *MsgRegisterNodeRequest) GetHourlyPrices() github_com_cosmos_cosmos_sdk_types.Coins {
+	if m != nil {
+		return m.HourlyPrices
+	}
+	return nil
+}
+
+func (m *MsgRegisterNodeRequest) GetRemoteURL() string {
+	if m != nil {
+		return m.RemoteURL
 	}
 	return ""
-}
-
-func (m *MsgRegisterNodeRequest) GetAddress() string {
-	if m != nil {
-		return m.Address
-	}
-	return ""
-}
-
-func (m *MsgRegisterNodeRequest) GetExt() string {
-	if m != nil {
-		return m.Ext
-	}
-	return ""
-}
-
-func (m *MsgRegisterNodeRequest) GetOwner() string {
-	if m != nil {
-		return m.Owner
-	}
-	return ""
-}
-
-func (m *MsgRegisterNodeRequest) GetStatus() v1.Status {
-	if m != nil {
-		return m.Status
-	}
-	return v1.StatusUnspecified
-}
-
-func (m *MsgRegisterNodeRequest) GetStatusAt() time.Time {
-	if m != nil {
-		return m.StatusAt
-	}
-	return time.Time{}
 }
 
 type MsgRegisterNodeResponse struct {
@@ -172,33 +147,35 @@ func init() {
 func init() { proto.RegisterFile("imhub/node/v1/tx.proto", fileDescriptor_992faf421a3a872b) }
 
 var fileDescriptor_992faf421a3a872b = []byte{
-	// 404 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x52, 0xcd, 0xce, 0x12, 0x31,
-	0x14, 0x9d, 0xca, 0x7f, 0x8d, 0x7f, 0x0d, 0x81, 0x32, 0x26, 0x03, 0x21, 0x51, 0xd9, 0xd8, 0x06,
-	0x7c, 0x02, 0xd8, 0xe3, 0x62, 0x74, 0xe5, 0x06, 0x0b, 0x53, 0xeb, 0x24, 0x76, 0x3a, 0x4e, 0x3b,
-	0x88, 0x6f, 0xc1, 0x63, 0xb1, 0x64, 0xe9, 0x4a, 0x0d, 0x3c, 0x83, 0x7b, 0xd3, 0x76, 0x66, 0x81,
-	0x7e, 0xc9, 0xb7, 0x99, 0xdc, 0x73, 0xee, 0x39, 0x9d, 0xdb, 0x73, 0x0b, 0x07, 0xa9, 0xfc, 0x5c,
-	0x6e, 0x69, 0xa6, 0x12, 0x4e, 0xf7, 0x73, 0x6a, 0x0e, 0x24, 0x2f, 0x94, 0x51, 0xe8, 0x91, 0xe3,
-	0x89, 0xe5, 0xc9, 0x7e, 0x1e, 0x3e, 0x63, 0x32, 0xcd, 0x14, 0x75, 0x5f, 0xaf, 0x08, 0x87, 0x3b,
-	0xa5, 0xa5, 0xd2, 0x54, 0x6a, 0x61, 0x9d, 0x52, 0x8b, 0xaa, 0x31, 0xf2, 0x8d, 0x8d, 0x43, 0xd4,
-	0x83, 0xaa, 0xd5, 0x17, 0x4a, 0x28, 0xcf, 0xdb, 0xaa, 0x62, 0xc3, 0xdb, 0x19, 0x72, 0x56, 0x30,
-	0x59, 0x3b, 0xc6, 0x42, 0x29, 0xf1, 0x85, 0x53, 0x87, 0xb6, 0xe5, 0x27, 0x6a, 0x52, 0xc9, 0xb5,
-	0x61, 0x32, 0xaf, 0x04, 0xcf, 0xbd, 0xd9, 0x7c, 0xcf, 0xb9, 0xb6, 0x6e, 0x6d, 0x98, 0x29, 0x2b,
-	0xf7, 0xf4, 0x0f, 0x80, 0x83, 0xb5, 0x16, 0x31, 0x17, 0xa9, 0x36, 0xbc, 0x78, 0xab, 0x12, 0x1e,
-	0xf3, 0xaf, 0x25, 0xd7, 0x06, 0x21, 0xd8, 0xcc, 0x98, 0xe4, 0x18, 0x4c, 0xc0, 0xac, 0x17, 0xbb,
-	0xda, 0x72, 0xf6, 0x1c, 0xfc, 0xc0, 0x73, 0xb6, 0x46, 0x18, 0x76, 0x58, 0x92, 0x14, 0x5c, 0x6b,
-	0xdc, 0x70, 0x74, 0x0d, 0xd1, 0x53, 0xd8, 0xe0, 0x07, 0x83, 0x9b, 0x8e, 0xb5, 0x25, 0xea, 0xc3,
-	0x96, 0xfa, 0x96, 0xf1, 0x02, 0xb7, 0x1c, 0xe7, 0x01, 0x22, 0xb0, 0xed, 0x87, 0xc2, 0xed, 0x09,
-	0x98, 0x3d, 0x5e, 0x0c, 0x88, 0xcf, 0xd6, 0x8d, 0x4c, 0xf6, 0x73, 0xf2, 0xce, 0x75, 0xe3, 0x4a,
-	0x85, 0x96, 0xb0, 0xe7, 0xab, 0x0d, 0x33, 0xb8, 0x33, 0x01, 0xb3, 0x87, 0x8b, 0x90, 0xf8, 0x18,
-	0x48, 0x1d, 0x03, 0x79, 0x5f, 0xc7, 0xb0, 0xea, 0x9e, 0x7e, 0x8e, 0x83, 0xe3, 0xaf, 0x31, 0x88,
-	0xbb, 0xde, 0xb6, 0x34, 0xd3, 0x11, 0x1c, 0xfe, 0x77, 0x6d, 0x9d, 0xab, 0x4c, 0xf3, 0x85, 0x80,
-	0x8d, 0xb5, 0x16, 0xe8, 0x23, 0x7c, 0xf2, 0x8f, 0x02, 0xbd, 0x20, 0x37, 0x3b, 0x27, 0x77, 0x07,
-	0x17, 0xbe, 0xbc, 0x4f, 0xe6, 0x7f, 0xb4, 0x5a, 0x9e, 0x2e, 0x11, 0x38, 0x5f, 0x22, 0xf0, 0xfb,
-	0x12, 0x81, 0xe3, 0x35, 0x0a, 0xce, 0xd7, 0x28, 0xf8, 0x71, 0x8d, 0x82, 0x0f, 0xaf, 0x44, 0x6a,
-	0xec, 0x09, 0x3b, 0x25, 0x69, 0x52, 0x66, 0xaf, 0x53, 0x45, 0xfd, 0x12, 0x0f, 0xfe, 0x0d, 0xd4,
-	0xbb, 0xdc, 0xb6, 0xdd, 0x75, 0xdf, 0xfc, 0x0d, 0x00, 0x00, 0xff, 0xff, 0x40, 0x68, 0x2b, 0x27,
-	0xa5, 0x02, 0x00, 0x00,
+	// 435 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x52, 0xcd, 0x6e, 0xd3, 0x40,
+	0x10, 0x8e, 0x9b, 0x0a, 0x29, 0x0b, 0xa1, 0xc2, 0x42, 0x6d, 0x12, 0x24, 0xa7, 0xaa, 0x04, 0xe4,
+	0x40, 0x77, 0x49, 0x79, 0x02, 0xc2, 0x95, 0x22, 0x64, 0xa9, 0x17, 0x2e, 0x61, 0x9d, 0x6c, 0xb7,
+	0x2b, 0xb2, 0x1e, 0xb3, 0xb3, 0xae, 0x9a, 0xb7, 0xe0, 0x39, 0x78, 0x0c, 0x4e, 0x3d, 0xf6, 0xc8,
+	0xa9, 0x20, 0xe7, 0x45, 0xd0, 0xfe, 0x58, 0x22, 0x80, 0xc4, 0xa5, 0x17, 0x7b, 0x67, 0xe6, 0xfb,
+	0xfc, 0xed, 0x7c, 0xfe, 0xc8, 0xbe, 0xd2, 0x17, 0x75, 0xc1, 0x4a, 0x58, 0x0a, 0x76, 0x39, 0x65,
+	0xf6, 0x8a, 0x56, 0x06, 0x2c, 0xa4, 0x7d, 0xdf, 0xa7, 0xae, 0x4f, 0x2f, 0xa7, 0xa3, 0x47, 0x5c,
+	0xab, 0x12, 0x98, 0x7f, 0x06, 0xc4, 0xe8, 0x60, 0x01, 0xa8, 0x01, 0x99, 0x46, 0xe9, 0x98, 0x1a,
+	0x65, 0x1c, 0x0c, 0xc3, 0x60, 0xee, 0x2b, 0x16, 0x8a, 0x38, 0xca, 0x22, 0xa7, 0xe0, 0xe8, 0xe4,
+	0x0a, 0x61, 0xf9, 0x94, 0x2d, 0x40, 0x95, 0x71, 0xfe, 0x58, 0x82, 0x84, 0xc0, 0x73, 0xa7, 0xd8,
+	0x1d, 0x6d, 0xdf, 0xb1, 0xe2, 0x86, 0xeb, 0xf6, 0x8b, 0x63, 0x09, 0x20, 0x57, 0x82, 0xf9, 0xaa,
+	0xa8, 0xcf, 0x99, 0x55, 0x5a, 0xa0, 0xe5, 0xba, 0x8a, 0x80, 0x27, 0x81, 0x6c, 0xd7, 0x95, 0x40,
+	0xc7, 0x46, 0xcb, 0x6d, 0x1d, 0xd9, 0x47, 0xdf, 0x76, 0xc8, 0xfe, 0x29, 0xca, 0x5c, 0x48, 0x85,
+	0x56, 0x98, 0x77, 0xb0, 0x14, 0xb9, 0xf8, 0x5c, 0x0b, 0xb4, 0x69, 0x4a, 0x76, 0xcf, 0x0d, 0xe8,
+	0x41, 0x72, 0x98, 0x4c, 0x7a, 0xb9, 0x3f, 0xa7, 0x96, 0xec, 0x49, 0x25, 0x79, 0xb1, 0xb6, 0x62,
+	0x5e, 0x19, 0xb5, 0x10, 0x38, 0xd8, 0x39, 0xec, 0x4e, 0xee, 0x9f, 0x0c, 0x69, 0x5c, 0xd3, 0x2d,
+	0x46, 0xe3, 0x62, 0xf4, 0x0d, 0xa8, 0x72, 0xf6, 0xf2, 0xfa, 0x76, 0xdc, 0xf9, 0xfa, 0x63, 0x3c,
+	0x91, 0xca, 0x3a, 0x47, 0x17, 0xa0, 0xa3, 0x27, 0xf1, 0x75, 0x8c, 0xcb, 0x4f, 0xe1, 0x7a, 0x9e,
+	0x80, 0xf9, 0xc3, 0x56, 0xe3, 0xbd, 0x97, 0x48, 0x2b, 0xd2, 0xbf, 0x80, 0xda, 0xac, 0xd6, 0xad,
+	0x66, 0xf7, 0xee, 0x35, 0x1f, 0x04, 0x85, 0xa8, 0xf8, 0x82, 0x10, 0x23, 0x34, 0x58, 0x31, 0xaf,
+	0xcd, 0x6a, 0xb0, 0xeb, 0x1c, 0x98, 0xf5, 0x9b, 0xdb, 0x71, 0x2f, 0xf7, 0xdd, 0xb3, 0xfc, 0x6d,
+	0xde, 0x0b, 0x80, 0x33, 0xb3, 0x3a, 0x1a, 0x92, 0x83, 0xbf, 0x3c, 0xc4, 0x0a, 0x4a, 0x14, 0x27,
+	0x92, 0x74, 0x4f, 0x51, 0xa6, 0x1f, 0xc9, 0xde, 0x1f, 0x88, 0xf4, 0x29, 0xdd, 0x0a, 0x18, 0xfd,
+	0xf7, 0x5f, 0x18, 0x3d, 0xfb, 0x1f, 0x2c, 0x08, 0xcd, 0x5e, 0x5f, 0x37, 0x59, 0x72, 0xd3, 0x64,
+	0xc9, 0xcf, 0x26, 0x4b, 0xbe, 0x6c, 0xb2, 0xce, 0xcd, 0x26, 0xeb, 0x7c, 0xdf, 0x64, 0x9d, 0x0f,
+	0xcf, 0x7f, 0xf3, 0x60, 0x59, 0x97, 0xc7, 0x0a, 0x58, 0x48, 0xc4, 0x55, 0x08, 0x54, 0x1b, 0x8c,
+	0xe2, 0x9e, 0x8f, 0xc4, 0xab, 0x5f, 0x01, 0x00, 0x00, 0xff, 0xff, 0xc0, 0xf2, 0xe8, 0x95, 0x12,
+	0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -302,51 +279,45 @@ func (m *MsgRegisterNodeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	_ = i
 	var l int
 	_ = l
-	n1, err1 := github_com_cosmos_gogoproto_types.StdTimeMarshalTo(m.StatusAt, dAtA[i-github_com_cosmos_gogoproto_types.SizeOfStdTime(m.StatusAt):])
-	if err1 != nil {
-		return 0, err1
-	}
-	i -= n1
-	i = encodeVarintTx(dAtA, i, uint64(n1))
-	i--
-	dAtA[i] = 0x3a
-	if m.Status != 0 {
-		i = encodeVarintTx(dAtA, i, uint64(m.Status))
-		i--
-		dAtA[i] = 0x30
-	}
-	if len(m.Owner) > 0 {
-		i -= len(m.Owner)
-		copy(dAtA[i:], m.Owner)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Owner)))
-		i--
-		dAtA[i] = 0x2a
-	}
-	if len(m.Ext) > 0 {
-		i -= len(m.Ext)
-		copy(dAtA[i:], m.Ext)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Ext)))
+	if len(m.RemoteURL) > 0 {
+		i -= len(m.RemoteURL)
+		copy(dAtA[i:], m.RemoteURL)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.RemoteURL)))
 		i--
 		dAtA[i] = 0x22
 	}
-	if len(m.Address) > 0 {
-		i -= len(m.Address)
-		copy(dAtA[i:], m.Address)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Address)))
-		i--
-		dAtA[i] = 0x1a
+	if len(m.HourlyPrices) > 0 {
+		for iNdEx := len(m.HourlyPrices) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.HourlyPrices[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTx(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1a
+		}
 	}
-	if len(m.Type) > 0 {
-		i -= len(m.Type)
-		copy(dAtA[i:], m.Type)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Type)))
-		i--
-		dAtA[i] = 0x12
+	if len(m.GigabytePrices) > 0 {
+		for iNdEx := len(m.GigabytePrices) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.GigabytePrices[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintTx(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+		}
 	}
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Name)))
+	if len(m.From) > 0 {
+		i -= len(m.From)
+		copy(dAtA[i:], m.From)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.From)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -393,31 +364,26 @@ func (m *MsgRegisterNodeRequest) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.Name)
+	l = len(m.From)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = len(m.Type)
+	if len(m.GigabytePrices) > 0 {
+		for _, e := range m.GigabytePrices {
+			l = e.Size()
+			n += 1 + l + sovTx(uint64(l))
+		}
+	}
+	if len(m.HourlyPrices) > 0 {
+		for _, e := range m.HourlyPrices {
+			l = e.Size()
+			n += 1 + l + sovTx(uint64(l))
+		}
+	}
+	l = len(m.RemoteURL)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = len(m.Address)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.Ext)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.Owner)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	if m.Status != 0 {
-		n += 1 + sovTx(uint64(m.Status))
-	}
-	l = github_com_cosmos_gogoproto_types.SizeOfStdTime(m.StatusAt)
-	n += 1 + l + sovTx(uint64(l))
 	return n
 }
 
@@ -467,7 +433,7 @@ func (m *MsgRegisterNodeRequest) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field From", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -495,158 +461,11 @@ func (m *MsgRegisterNodeRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Name = string(dAtA[iNdEx:postIndex])
+			m.From = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Type", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Type = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Address = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Ext", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Ext = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 5:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Owner", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Owner = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 6:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
-			}
-			m.Status = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Status |= v1.Status(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 7:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StatusAt", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field GigabytePrices", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -673,9 +492,76 @@ func (m *MsgRegisterNodeRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := github_com_cosmos_gogoproto_types.StdTimeUnmarshal(&m.StatusAt, dAtA[iNdEx:postIndex]); err != nil {
+			m.GigabytePrices = append(m.GigabytePrices, types.Coin{})
+			if err := m.GigabytePrices[len(m.GigabytePrices)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HourlyPrices", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.HourlyPrices = append(m.HourlyPrices, types.Coin{})
+			if err := m.HourlyPrices[len(m.HourlyPrices)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RemoteURL", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RemoteURL = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

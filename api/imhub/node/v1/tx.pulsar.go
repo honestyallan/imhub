@@ -3,42 +3,139 @@ package nodev1
 
 import (
 	_ "cosmossdk.io/api/amino"
+	v1beta1 "cosmossdk.io/api/cosmos/base/v1beta1"
 	_ "cosmossdk.io/api/cosmos/msg/v1"
 	fmt "fmt"
 	_ "github.com/cosmos/cosmos-proto"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
-	v1 "github.com/dun-io/imhub/api/imhub/types/v1"
+	_ "github.com/dun-io/imhub/api/imhub/types/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
 	io "io"
 	reflect "reflect"
 	sync "sync"
 )
 
+var _ protoreflect.List = (*_MsgRegisterNodeRequest_2_list)(nil)
+
+type _MsgRegisterNodeRequest_2_list struct {
+	list *[]*v1beta1.Coin
+}
+
+func (x *_MsgRegisterNodeRequest_2_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_MsgRegisterNodeRequest_2_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_MsgRegisterNodeRequest_2_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*v1beta1.Coin)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_MsgRegisterNodeRequest_2_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*v1beta1.Coin)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_MsgRegisterNodeRequest_2_list) AppendMutable() protoreflect.Value {
+	v := new(v1beta1.Coin)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_MsgRegisterNodeRequest_2_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_MsgRegisterNodeRequest_2_list) NewElement() protoreflect.Value {
+	v := new(v1beta1.Coin)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_MsgRegisterNodeRequest_2_list) IsValid() bool {
+	return x.list != nil
+}
+
+var _ protoreflect.List = (*_MsgRegisterNodeRequest_3_list)(nil)
+
+type _MsgRegisterNodeRequest_3_list struct {
+	list *[]*v1beta1.Coin
+}
+
+func (x *_MsgRegisterNodeRequest_3_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_MsgRegisterNodeRequest_3_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_MsgRegisterNodeRequest_3_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*v1beta1.Coin)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_MsgRegisterNodeRequest_3_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*v1beta1.Coin)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_MsgRegisterNodeRequest_3_list) AppendMutable() protoreflect.Value {
+	v := new(v1beta1.Coin)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_MsgRegisterNodeRequest_3_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_MsgRegisterNodeRequest_3_list) NewElement() protoreflect.Value {
+	v := new(v1beta1.Coin)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_MsgRegisterNodeRequest_3_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_MsgRegisterNodeRequest           protoreflect.MessageDescriptor
-	fd_MsgRegisterNodeRequest_name      protoreflect.FieldDescriptor
-	fd_MsgRegisterNodeRequest_type      protoreflect.FieldDescriptor
-	fd_MsgRegisterNodeRequest_address   protoreflect.FieldDescriptor
-	fd_MsgRegisterNodeRequest_ext       protoreflect.FieldDescriptor
-	fd_MsgRegisterNodeRequest_owner     protoreflect.FieldDescriptor
-	fd_MsgRegisterNodeRequest_status    protoreflect.FieldDescriptor
-	fd_MsgRegisterNodeRequest_status_at protoreflect.FieldDescriptor
+	md_MsgRegisterNodeRequest                 protoreflect.MessageDescriptor
+	fd_MsgRegisterNodeRequest_from            protoreflect.FieldDescriptor
+	fd_MsgRegisterNodeRequest_gigabyte_prices protoreflect.FieldDescriptor
+	fd_MsgRegisterNodeRequest_hourly_prices   protoreflect.FieldDescriptor
+	fd_MsgRegisterNodeRequest_remote_url      protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_imhub_node_v1_tx_proto_init()
 	md_MsgRegisterNodeRequest = File_imhub_node_v1_tx_proto.Messages().ByName("MsgRegisterNodeRequest")
-	fd_MsgRegisterNodeRequest_name = md_MsgRegisterNodeRequest.Fields().ByName("name")
-	fd_MsgRegisterNodeRequest_type = md_MsgRegisterNodeRequest.Fields().ByName("type")
-	fd_MsgRegisterNodeRequest_address = md_MsgRegisterNodeRequest.Fields().ByName("address")
-	fd_MsgRegisterNodeRequest_ext = md_MsgRegisterNodeRequest.Fields().ByName("ext")
-	fd_MsgRegisterNodeRequest_owner = md_MsgRegisterNodeRequest.Fields().ByName("owner")
-	fd_MsgRegisterNodeRequest_status = md_MsgRegisterNodeRequest.Fields().ByName("status")
-	fd_MsgRegisterNodeRequest_status_at = md_MsgRegisterNodeRequest.Fields().ByName("status_at")
+	fd_MsgRegisterNodeRequest_from = md_MsgRegisterNodeRequest.Fields().ByName("from")
+	fd_MsgRegisterNodeRequest_gigabyte_prices = md_MsgRegisterNodeRequest.Fields().ByName("gigabyte_prices")
+	fd_MsgRegisterNodeRequest_hourly_prices = md_MsgRegisterNodeRequest.Fields().ByName("hourly_prices")
+	fd_MsgRegisterNodeRequest_remote_url = md_MsgRegisterNodeRequest.Fields().ByName("remote_url")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgRegisterNodeRequest)(nil)
@@ -106,45 +203,27 @@ func (x *fastReflection_MsgRegisterNodeRequest) Interface() protoreflect.ProtoMe
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_MsgRegisterNodeRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Name != "" {
-		value := protoreflect.ValueOfString(x.Name)
-		if !f(fd_MsgRegisterNodeRequest_name, value) {
+	if x.From != "" {
+		value := protoreflect.ValueOfString(x.From)
+		if !f(fd_MsgRegisterNodeRequest_from, value) {
 			return
 		}
 	}
-	if x.Type_ != "" {
-		value := protoreflect.ValueOfString(x.Type_)
-		if !f(fd_MsgRegisterNodeRequest_type, value) {
+	if len(x.GigabytePrices) != 0 {
+		value := protoreflect.ValueOfList(&_MsgRegisterNodeRequest_2_list{list: &x.GigabytePrices})
+		if !f(fd_MsgRegisterNodeRequest_gigabyte_prices, value) {
 			return
 		}
 	}
-	if x.Address != "" {
-		value := protoreflect.ValueOfString(x.Address)
-		if !f(fd_MsgRegisterNodeRequest_address, value) {
+	if len(x.HourlyPrices) != 0 {
+		value := protoreflect.ValueOfList(&_MsgRegisterNodeRequest_3_list{list: &x.HourlyPrices})
+		if !f(fd_MsgRegisterNodeRequest_hourly_prices, value) {
 			return
 		}
 	}
-	if x.Ext != "" {
-		value := protoreflect.ValueOfString(x.Ext)
-		if !f(fd_MsgRegisterNodeRequest_ext, value) {
-			return
-		}
-	}
-	if x.Owner != "" {
-		value := protoreflect.ValueOfString(x.Owner)
-		if !f(fd_MsgRegisterNodeRequest_owner, value) {
-			return
-		}
-	}
-	if x.Status != 0 {
-		value := protoreflect.ValueOfEnum((protoreflect.EnumNumber)(x.Status))
-		if !f(fd_MsgRegisterNodeRequest_status, value) {
-			return
-		}
-	}
-	if x.StatusAt != nil {
-		value := protoreflect.ValueOfMessage(x.StatusAt.ProtoReflect())
-		if !f(fd_MsgRegisterNodeRequest_status_at, value) {
+	if x.RemoteUrl != "" {
+		value := protoreflect.ValueOfString(x.RemoteUrl)
+		if !f(fd_MsgRegisterNodeRequest_remote_url, value) {
 			return
 		}
 	}
@@ -163,20 +242,14 @@ func (x *fastReflection_MsgRegisterNodeRequest) Range(f func(protoreflect.FieldD
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_MsgRegisterNodeRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "imhub.node.v1.MsgRegisterNodeRequest.name":
-		return x.Name != ""
-	case "imhub.node.v1.MsgRegisterNodeRequest.type":
-		return x.Type_ != ""
-	case "imhub.node.v1.MsgRegisterNodeRequest.address":
-		return x.Address != ""
-	case "imhub.node.v1.MsgRegisterNodeRequest.ext":
-		return x.Ext != ""
-	case "imhub.node.v1.MsgRegisterNodeRequest.owner":
-		return x.Owner != ""
-	case "imhub.node.v1.MsgRegisterNodeRequest.status":
-		return x.Status != 0
-	case "imhub.node.v1.MsgRegisterNodeRequest.status_at":
-		return x.StatusAt != nil
+	case "imhub.node.v1.MsgRegisterNodeRequest.from":
+		return x.From != ""
+	case "imhub.node.v1.MsgRegisterNodeRequest.gigabyte_prices":
+		return len(x.GigabytePrices) != 0
+	case "imhub.node.v1.MsgRegisterNodeRequest.hourly_prices":
+		return len(x.HourlyPrices) != 0
+	case "imhub.node.v1.MsgRegisterNodeRequest.remote_url":
+		return x.RemoteUrl != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.MsgRegisterNodeRequest"))
@@ -193,20 +266,14 @@ func (x *fastReflection_MsgRegisterNodeRequest) Has(fd protoreflect.FieldDescrip
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgRegisterNodeRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "imhub.node.v1.MsgRegisterNodeRequest.name":
-		x.Name = ""
-	case "imhub.node.v1.MsgRegisterNodeRequest.type":
-		x.Type_ = ""
-	case "imhub.node.v1.MsgRegisterNodeRequest.address":
-		x.Address = ""
-	case "imhub.node.v1.MsgRegisterNodeRequest.ext":
-		x.Ext = ""
-	case "imhub.node.v1.MsgRegisterNodeRequest.owner":
-		x.Owner = ""
-	case "imhub.node.v1.MsgRegisterNodeRequest.status":
-		x.Status = 0
-	case "imhub.node.v1.MsgRegisterNodeRequest.status_at":
-		x.StatusAt = nil
+	case "imhub.node.v1.MsgRegisterNodeRequest.from":
+		x.From = ""
+	case "imhub.node.v1.MsgRegisterNodeRequest.gigabyte_prices":
+		x.GigabytePrices = nil
+	case "imhub.node.v1.MsgRegisterNodeRequest.hourly_prices":
+		x.HourlyPrices = nil
+	case "imhub.node.v1.MsgRegisterNodeRequest.remote_url":
+		x.RemoteUrl = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.MsgRegisterNodeRequest"))
@@ -223,27 +290,24 @@ func (x *fastReflection_MsgRegisterNodeRequest) Clear(fd protoreflect.FieldDescr
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_MsgRegisterNodeRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "imhub.node.v1.MsgRegisterNodeRequest.name":
-		value := x.Name
+	case "imhub.node.v1.MsgRegisterNodeRequest.from":
+		value := x.From
 		return protoreflect.ValueOfString(value)
-	case "imhub.node.v1.MsgRegisterNodeRequest.type":
-		value := x.Type_
+	case "imhub.node.v1.MsgRegisterNodeRequest.gigabyte_prices":
+		if len(x.GigabytePrices) == 0 {
+			return protoreflect.ValueOfList(&_MsgRegisterNodeRequest_2_list{})
+		}
+		listValue := &_MsgRegisterNodeRequest_2_list{list: &x.GigabytePrices}
+		return protoreflect.ValueOfList(listValue)
+	case "imhub.node.v1.MsgRegisterNodeRequest.hourly_prices":
+		if len(x.HourlyPrices) == 0 {
+			return protoreflect.ValueOfList(&_MsgRegisterNodeRequest_3_list{})
+		}
+		listValue := &_MsgRegisterNodeRequest_3_list{list: &x.HourlyPrices}
+		return protoreflect.ValueOfList(listValue)
+	case "imhub.node.v1.MsgRegisterNodeRequest.remote_url":
+		value := x.RemoteUrl
 		return protoreflect.ValueOfString(value)
-	case "imhub.node.v1.MsgRegisterNodeRequest.address":
-		value := x.Address
-		return protoreflect.ValueOfString(value)
-	case "imhub.node.v1.MsgRegisterNodeRequest.ext":
-		value := x.Ext
-		return protoreflect.ValueOfString(value)
-	case "imhub.node.v1.MsgRegisterNodeRequest.owner":
-		value := x.Owner
-		return protoreflect.ValueOfString(value)
-	case "imhub.node.v1.MsgRegisterNodeRequest.status":
-		value := x.Status
-		return protoreflect.ValueOfEnum((protoreflect.EnumNumber)(value))
-	case "imhub.node.v1.MsgRegisterNodeRequest.status_at":
-		value := x.StatusAt
-		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.MsgRegisterNodeRequest"))
@@ -264,20 +328,18 @@ func (x *fastReflection_MsgRegisterNodeRequest) Get(descriptor protoreflect.Fiel
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgRegisterNodeRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "imhub.node.v1.MsgRegisterNodeRequest.name":
-		x.Name = value.Interface().(string)
-	case "imhub.node.v1.MsgRegisterNodeRequest.type":
-		x.Type_ = value.Interface().(string)
-	case "imhub.node.v1.MsgRegisterNodeRequest.address":
-		x.Address = value.Interface().(string)
-	case "imhub.node.v1.MsgRegisterNodeRequest.ext":
-		x.Ext = value.Interface().(string)
-	case "imhub.node.v1.MsgRegisterNodeRequest.owner":
-		x.Owner = value.Interface().(string)
-	case "imhub.node.v1.MsgRegisterNodeRequest.status":
-		x.Status = (v1.Status)(value.Enum())
-	case "imhub.node.v1.MsgRegisterNodeRequest.status_at":
-		x.StatusAt = value.Message().Interface().(*timestamppb.Timestamp)
+	case "imhub.node.v1.MsgRegisterNodeRequest.from":
+		x.From = value.Interface().(string)
+	case "imhub.node.v1.MsgRegisterNodeRequest.gigabyte_prices":
+		lv := value.List()
+		clv := lv.(*_MsgRegisterNodeRequest_2_list)
+		x.GigabytePrices = *clv.list
+	case "imhub.node.v1.MsgRegisterNodeRequest.hourly_prices":
+		lv := value.List()
+		clv := lv.(*_MsgRegisterNodeRequest_3_list)
+		x.HourlyPrices = *clv.list
+	case "imhub.node.v1.MsgRegisterNodeRequest.remote_url":
+		x.RemoteUrl = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.MsgRegisterNodeRequest"))
@@ -298,23 +360,22 @@ func (x *fastReflection_MsgRegisterNodeRequest) Set(fd protoreflect.FieldDescrip
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgRegisterNodeRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "imhub.node.v1.MsgRegisterNodeRequest.status_at":
-		if x.StatusAt == nil {
-			x.StatusAt = new(timestamppb.Timestamp)
+	case "imhub.node.v1.MsgRegisterNodeRequest.gigabyte_prices":
+		if x.GigabytePrices == nil {
+			x.GigabytePrices = []*v1beta1.Coin{}
 		}
-		return protoreflect.ValueOfMessage(x.StatusAt.ProtoReflect())
-	case "imhub.node.v1.MsgRegisterNodeRequest.name":
-		panic(fmt.Errorf("field name of message imhub.node.v1.MsgRegisterNodeRequest is not mutable"))
-	case "imhub.node.v1.MsgRegisterNodeRequest.type":
-		panic(fmt.Errorf("field type of message imhub.node.v1.MsgRegisterNodeRequest is not mutable"))
-	case "imhub.node.v1.MsgRegisterNodeRequest.address":
-		panic(fmt.Errorf("field address of message imhub.node.v1.MsgRegisterNodeRequest is not mutable"))
-	case "imhub.node.v1.MsgRegisterNodeRequest.ext":
-		panic(fmt.Errorf("field ext of message imhub.node.v1.MsgRegisterNodeRequest is not mutable"))
-	case "imhub.node.v1.MsgRegisterNodeRequest.owner":
-		panic(fmt.Errorf("field owner of message imhub.node.v1.MsgRegisterNodeRequest is not mutable"))
-	case "imhub.node.v1.MsgRegisterNodeRequest.status":
-		panic(fmt.Errorf("field status of message imhub.node.v1.MsgRegisterNodeRequest is not mutable"))
+		value := &_MsgRegisterNodeRequest_2_list{list: &x.GigabytePrices}
+		return protoreflect.ValueOfList(value)
+	case "imhub.node.v1.MsgRegisterNodeRequest.hourly_prices":
+		if x.HourlyPrices == nil {
+			x.HourlyPrices = []*v1beta1.Coin{}
+		}
+		value := &_MsgRegisterNodeRequest_3_list{list: &x.HourlyPrices}
+		return protoreflect.ValueOfList(value)
+	case "imhub.node.v1.MsgRegisterNodeRequest.from":
+		panic(fmt.Errorf("field from of message imhub.node.v1.MsgRegisterNodeRequest is not mutable"))
+	case "imhub.node.v1.MsgRegisterNodeRequest.remote_url":
+		panic(fmt.Errorf("field remote_url of message imhub.node.v1.MsgRegisterNodeRequest is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.MsgRegisterNodeRequest"))
@@ -328,21 +389,16 @@ func (x *fastReflection_MsgRegisterNodeRequest) Mutable(fd protoreflect.FieldDes
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_MsgRegisterNodeRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "imhub.node.v1.MsgRegisterNodeRequest.name":
+	case "imhub.node.v1.MsgRegisterNodeRequest.from":
 		return protoreflect.ValueOfString("")
-	case "imhub.node.v1.MsgRegisterNodeRequest.type":
+	case "imhub.node.v1.MsgRegisterNodeRequest.gigabyte_prices":
+		list := []*v1beta1.Coin{}
+		return protoreflect.ValueOfList(&_MsgRegisterNodeRequest_2_list{list: &list})
+	case "imhub.node.v1.MsgRegisterNodeRequest.hourly_prices":
+		list := []*v1beta1.Coin{}
+		return protoreflect.ValueOfList(&_MsgRegisterNodeRequest_3_list{list: &list})
+	case "imhub.node.v1.MsgRegisterNodeRequest.remote_url":
 		return protoreflect.ValueOfString("")
-	case "imhub.node.v1.MsgRegisterNodeRequest.address":
-		return protoreflect.ValueOfString("")
-	case "imhub.node.v1.MsgRegisterNodeRequest.ext":
-		return protoreflect.ValueOfString("")
-	case "imhub.node.v1.MsgRegisterNodeRequest.owner":
-		return protoreflect.ValueOfString("")
-	case "imhub.node.v1.MsgRegisterNodeRequest.status":
-		return protoreflect.ValueOfEnum(0)
-	case "imhub.node.v1.MsgRegisterNodeRequest.status_at":
-		m := new(timestamppb.Timestamp)
-		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.MsgRegisterNodeRequest"))
@@ -412,31 +468,24 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 		var n int
 		var l int
 		_ = l
-		l = len(x.Name)
+		l = len(x.From)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.Type_)
+		if len(x.GigabytePrices) > 0 {
+			for _, e := range x.GigabytePrices {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if len(x.HourlyPrices) > 0 {
+			for _, e := range x.HourlyPrices {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		l = len(x.RemoteUrl)
 		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		l = len(x.Address)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		l = len(x.Ext)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		l = len(x.Owner)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		if x.Status != 0 {
-			n += 1 + runtime.Sov(uint64(x.Status))
-		}
-		if x.StatusAt != nil {
-			l = options.Size(x.StatusAt)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.unknownFields != nil {
@@ -468,57 +517,49 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.StatusAt != nil {
-			encoded, err := options.Marshal(x.StatusAt)
-			if err != nil {
-				return protoiface.MarshalOutput{
-					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-					Buf:               input.Buf,
-				}, err
-			}
-			i -= len(encoded)
-			copy(dAtA[i:], encoded)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
-			i--
-			dAtA[i] = 0x3a
-		}
-		if x.Status != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.Status))
-			i--
-			dAtA[i] = 0x30
-		}
-		if len(x.Owner) > 0 {
-			i -= len(x.Owner)
-			copy(dAtA[i:], x.Owner)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Owner)))
-			i--
-			dAtA[i] = 0x2a
-		}
-		if len(x.Ext) > 0 {
-			i -= len(x.Ext)
-			copy(dAtA[i:], x.Ext)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Ext)))
+		if len(x.RemoteUrl) > 0 {
+			i -= len(x.RemoteUrl)
+			copy(dAtA[i:], x.RemoteUrl)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.RemoteUrl)))
 			i--
 			dAtA[i] = 0x22
 		}
-		if len(x.Address) > 0 {
-			i -= len(x.Address)
-			copy(dAtA[i:], x.Address)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Address)))
-			i--
-			dAtA[i] = 0x1a
+		if len(x.HourlyPrices) > 0 {
+			for iNdEx := len(x.HourlyPrices) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.HourlyPrices[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x1a
+			}
 		}
-		if len(x.Type_) > 0 {
-			i -= len(x.Type_)
-			copy(dAtA[i:], x.Type_)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Type_)))
-			i--
-			dAtA[i] = 0x12
+		if len(x.GigabytePrices) > 0 {
+			for iNdEx := len(x.GigabytePrices) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.GigabytePrices[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0x12
+			}
 		}
-		if len(x.Name) > 0 {
-			i -= len(x.Name)
-			copy(dAtA[i:], x.Name)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Name)))
+		if len(x.From) > 0 {
+			i -= len(x.From)
+			copy(dAtA[i:], x.From)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.From)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -573,7 +614,7 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field From", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -601,158 +642,11 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Name = string(dAtA[iNdEx:postIndex])
+				x.From = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Type_", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Type_ = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 3:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Address = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 4:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Ext", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Ext = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 5:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Owner", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.Owner = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 6:
-				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
-				}
-				x.Status = 0
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					x.Status |= v1.Status(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-			case 7:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StatusAt", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GigabytePrices", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -779,12 +673,76 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				if x.StatusAt == nil {
-					x.StatusAt = &timestamppb.Timestamp{}
-				}
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.StatusAt); err != nil {
+				x.GigabytePrices = append(x.GigabytePrices, &v1beta1.Coin{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.GigabytePrices[len(x.GigabytePrices)-1]); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
+				iNdEx = postIndex
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field HourlyPrices", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.HourlyPrices = append(x.HourlyPrices, &v1beta1.Coin{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.HourlyPrices[len(x.HourlyPrices)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 4:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RemoteUrl", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.RemoteUrl = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -1195,13 +1153,10 @@ type MsgRegisterNodeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name     string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Type_    string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	Address  string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
-	Ext      string                 `protobuf:"bytes,4,opt,name=ext,proto3" json:"ext,omitempty"`
-	Owner    string                 `protobuf:"bytes,5,opt,name=owner,proto3" json:"owner,omitempty"`
-	Status   v1.Status              `protobuf:"varint,6,opt,name=status,proto3,enum=imhub.types.v1.Status" json:"status,omitempty"`
-	StatusAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=status_at,json=statusAt,proto3" json:"status_at,omitempty"`
+	From           string          `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	GigabytePrices []*v1beta1.Coin `protobuf:"bytes,2,rep,name=gigabyte_prices,json=gigabytePrices,proto3" json:"gigabyte_prices,omitempty"`
+	HourlyPrices   []*v1beta1.Coin `protobuf:"bytes,3,rep,name=hourly_prices,json=hourlyPrices,proto3" json:"hourly_prices,omitempty"`
+	RemoteUrl      string          `protobuf:"bytes,4,opt,name=remote_url,json=remoteUrl,proto3" json:"remote_url,omitempty"`
 }
 
 func (x *MsgRegisterNodeRequest) Reset() {
@@ -1224,53 +1179,32 @@ func (*MsgRegisterNodeRequest) Descriptor() ([]byte, []int) {
 	return file_imhub_node_v1_tx_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *MsgRegisterNodeRequest) GetName() string {
+func (x *MsgRegisterNodeRequest) GetFrom() string {
 	if x != nil {
-		return x.Name
+		return x.From
 	}
 	return ""
 }
 
-func (x *MsgRegisterNodeRequest) GetType_() string {
+func (x *MsgRegisterNodeRequest) GetGigabytePrices() []*v1beta1.Coin {
 	if x != nil {
-		return x.Type_
-	}
-	return ""
-}
-
-func (x *MsgRegisterNodeRequest) GetAddress() string {
-	if x != nil {
-		return x.Address
-	}
-	return ""
-}
-
-func (x *MsgRegisterNodeRequest) GetExt() string {
-	if x != nil {
-		return x.Ext
-	}
-	return ""
-}
-
-func (x *MsgRegisterNodeRequest) GetOwner() string {
-	if x != nil {
-		return x.Owner
-	}
-	return ""
-}
-
-func (x *MsgRegisterNodeRequest) GetStatus() v1.Status {
-	if x != nil {
-		return x.Status
-	}
-	return v1.Status(0)
-}
-
-func (x *MsgRegisterNodeRequest) GetStatusAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.StatusAt
+		return x.GigabytePrices
 	}
 	return nil
+}
+
+func (x *MsgRegisterNodeRequest) GetHourlyPrices() []*v1beta1.Coin {
+	if x != nil {
+		return x.HourlyPrices
+	}
+	return nil
+}
+
+func (x *MsgRegisterNodeRequest) GetRemoteUrl() string {
+	if x != nil {
+		return x.RemoteUrl
+	}
+	return ""
 }
 
 type MsgRegisterNodeResponse struct {
@@ -1308,49 +1242,56 @@ var file_imhub_node_v1_tx_proto_rawDesc = []byte{
 	0x6d, 0x69, 0x6e, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x17, 0x63, 0x6f, 0x73, 0x6d,
 	0x6f, 0x73, 0x2f, 0x6d, 0x73, 0x67, 0x2f, 0x76, 0x31, 0x2f, 0x6d, 0x73, 0x67, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x1a, 0x19, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x5f, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x14,
+	0x6f, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1e,
+	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x62, 0x61, 0x73, 0x65, 0x2f, 0x76, 0x31, 0x62, 0x65,
+	0x74, 0x61, 0x31, 0x2f, 0x63, 0x6f, 0x69, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x14,
 	0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1a, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65,
 	0x2f, 0x76, 0x31, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
 	0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x1a, 0x1b, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2f, 0x76,
-	0x31, 0x2f, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xf5,
-	0x01, 0x0a, 0x16, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f,
-	0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x12, 0x0a,
-	0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70,
-	0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x65,
-	0x78, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x65, 0x78, 0x74, 0x12, 0x14, 0x0a,
-	0x05, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6f, 0x77,
-	0x6e, 0x65, 0x72, 0x12, 0x2e, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x06, 0x20,
-	0x01, 0x28, 0x0e, 0x32, 0x16, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x74, 0x79, 0x70, 0x65,
-	0x73, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x12, 0x41, 0x0a, 0x09, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x5f, 0x61, 0x74,
-	0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
-	0x6d, 0x70, 0x42, 0x08, 0xc8, 0xde, 0x1f, 0x00, 0x90, 0xdf, 0x1f, 0x01, 0x52, 0x08, 0x73, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x41, 0x74, 0x22, 0x19, 0x0a, 0x17, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x67,
-	0x69, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x32, 0x67, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x60, 0x0a, 0x0f, 0x4d, 0x73, 0x67, 0x52,
-	0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x25, 0x2e, 0x69, 0x6d,
-	0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x52,
-	0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x26, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e,
-	0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f,
-	0x64, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0xa4, 0x01, 0x0a, 0x11, 0x63,
-	0x6f, 0x6d, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31,
-	0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x30, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x75, 0x6e, 0x2d, 0x69, 0x6f, 0x2f, 0x69,
-	0x6d, 0x68, 0x75, 0x62, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e,
-	0x6f, 0x64, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x6e, 0x6f, 0x64, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03,
-	0x49, 0x4e, 0x58, 0xaa, 0x02, 0x0d, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x4e, 0x6f, 0x64, 0x65,
-	0x2e, 0x56, 0x31, 0xca, 0x02, 0x0d, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65,
-	0x5c, 0x56, 0x31, 0xe2, 0x02, 0x19, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65,
-	0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea,
-	0x02, 0x0f, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x3a, 0x3a, 0x4e, 0x6f, 0x64, 0x65, 0x3a, 0x3a, 0x56,
-	0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x31, 0x2f, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xc2,
+	0x02, 0x0a, 0x16, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f,
+	0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x72, 0x6f,
+	0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x12, 0x74, 0x0a,
+	0x0f, 0x67, 0x69, 0x67, 0x61, 0x62, 0x79, 0x74, 0x65, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x73,
+	0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e,
+	0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69,
+	0x6e, 0x42, 0x30, 0xc8, 0xde, 0x1f, 0x00, 0xaa, 0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73,
+	0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f,
+	0x69, 0x6e, 0x73, 0x52, 0x0e, 0x67, 0x69, 0x67, 0x61, 0x62, 0x79, 0x74, 0x65, 0x50, 0x72, 0x69,
+	0x63, 0x65, 0x73, 0x12, 0x70, 0x0a, 0x0d, 0x68, 0x6f, 0x75, 0x72, 0x6c, 0x79, 0x5f, 0x70, 0x72,
+	0x69, 0x63, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73,
+	0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31,
+	0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x30, 0xc8, 0xde, 0x1f, 0x00, 0xaa, 0xdf, 0x1f, 0x28, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
+	0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65,
+	0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x73, 0x52, 0x0c, 0x68, 0x6f, 0x75, 0x72, 0x6c, 0x79, 0x50,
+	0x72, 0x69, 0x63, 0x65, 0x73, 0x12, 0x2c, 0x0a, 0x0a, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x5f,
+	0x75, 0x72, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x42, 0x0d, 0xe2, 0xde, 0x1f, 0x09, 0x52,
+	0x65, 0x6d, 0x6f, 0x74, 0x65, 0x55, 0x52, 0x4c, 0x52, 0x09, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65,
+	0x55, 0x72, 0x6c, 0x22, 0x19, 0x0a, 0x17, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74,
+	0x65, 0x72, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0x67,
+	0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x60, 0x0a, 0x0f, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69,
+	0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x25, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62,
+	0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69,
+	0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x26, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x2e,
+	0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f, 0x64, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0xa4, 0x01, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e,
+	0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x07, 0x54,
+	0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x75, 0x6e, 0x2d, 0x69, 0x6f, 0x2f, 0x69, 0x6d, 0x68, 0x75,
+	0x62, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65,
+	0x2f, 0x76, 0x31, 0x3b, 0x6e, 0x6f, 0x64, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x49, 0x4e, 0x58,
+	0xaa, 0x02, 0x0d, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x2e, 0x56, 0x31,
+	0xca, 0x02, 0x0d, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31,
+	0xe2, 0x02, 0x19, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31,
+	0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x49,
+	0x6d, 0x68, 0x75, 0x62, 0x3a, 0x3a, 0x4e, 0x6f, 0x64, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1369,12 +1310,11 @@ var file_imhub_node_v1_tx_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_imhub_node_v1_tx_proto_goTypes = []interface{}{
 	(*MsgRegisterNodeRequest)(nil),  // 0: imhub.node.v1.MsgRegisterNodeRequest
 	(*MsgRegisterNodeResponse)(nil), // 1: imhub.node.v1.MsgRegisterNodeResponse
-	(v1.Status)(0),                  // 2: imhub.types.v1.Status
-	(*timestamppb.Timestamp)(nil),   // 3: google.protobuf.Timestamp
+	(*v1beta1.Coin)(nil),            // 2: cosmos.base.v1beta1.Coin
 }
 var file_imhub_node_v1_tx_proto_depIdxs = []int32{
-	2, // 0: imhub.node.v1.MsgRegisterNodeRequest.status:type_name -> imhub.types.v1.Status
-	3, // 1: imhub.node.v1.MsgRegisterNodeRequest.status_at:type_name -> google.protobuf.Timestamp
+	2, // 0: imhub.node.v1.MsgRegisterNodeRequest.gigabyte_prices:type_name -> cosmos.base.v1beta1.Coin
+	2, // 1: imhub.node.v1.MsgRegisterNodeRequest.hourly_prices:type_name -> cosmos.base.v1beta1.Coin
 	0, // 2: imhub.node.v1.Msg.MsgRegisterNode:input_type -> imhub.node.v1.MsgRegisterNodeRequest
 	1, // 3: imhub.node.v1.Msg.MsgRegisterNode:output_type -> imhub.node.v1.MsgRegisterNodeResponse
 	3, // [3:4] is the sub-list for method output_type

@@ -4,19 +4,26 @@
 package v1
 
 import (
+	cosmossdk_io_math "cosmossdk.io/math"
 	fmt "fmt"
+	github_com_cosmos_cosmos_sdk_types "github.com/cosmos/cosmos-sdk/types"
+	types "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	proto "github.com/cosmos/gogoproto/proto"
+	github_com_cosmos_gogoproto_types "github.com/cosmos/gogoproto/types"
+	_ "google.golang.org/protobuf/types/known/durationpb"
 	io "io"
 	math "math"
 	math_bits "math/bits"
+	time "time"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+var _ = time.Kitchen
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
@@ -26,6 +33,15 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // Params defines the parameters for the module.
 type Params struct {
+	Deposit             types.Coin                               `protobuf:"bytes,1,opt,name=deposit,proto3" json:"deposit"`
+	ActiveDuration      time.Duration                            `protobuf:"bytes,2,opt,name=active_duration,json=activeDuration,proto3,stdduration" json:"active_duration"`
+	MinGigabytePrices   github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,3,rep,name=min_gigabyte_prices,json=minGigabytePrices,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"min_gigabyte_prices"`
+	MinHourlyPrices     github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,4,rep,name=min_hourly_prices,json=minHourlyPrices,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"min_hourly_prices"`
+	MaxSessionGigabytes int64                                    `protobuf:"varint,5,opt,name=max_session_gigabytes,json=maxSessionGigabytes,proto3" json:"max_session_gigabytes,omitempty"`
+	MinSessionGigabytes int64                                    `protobuf:"varint,6,opt,name=min_session_gigabytes,json=minSessionGigabytes,proto3" json:"min_session_gigabytes,omitempty"`
+	MaxSessionHours     int64                                    `protobuf:"varint,7,opt,name=max_session_hours,json=maxSessionHours,proto3" json:"max_session_hours,omitempty"`
+	MinSessionHours     int64                                    `protobuf:"varint,8,opt,name=min_session_hours,json=minSessionHours,proto3" json:"min_session_hours,omitempty"`
+	StakingShare        cosmossdk_io_math.LegacyDec              `protobuf:"bytes,9,opt,name=staking_share,json=stakingShare,proto3,customtype=cosmossdk.io/math.LegacyDec" json:"staking_share"`
 }
 
 func (m *Params) Reset()         { *m = Params{} }
@@ -68,41 +84,40 @@ func init() {
 func init() { proto.RegisterFile("imhub/node/v1/params.proto", fileDescriptor_40d8e3c0b4143344) }
 
 var fileDescriptor_40d8e3c0b4143344 = []byte{
-	// 173 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xca, 0xcc, 0xcd, 0x28,
-	0x4d, 0xd2, 0xcf, 0xcb, 0x4f, 0x49, 0xd5, 0x2f, 0x33, 0xd4, 0x2f, 0x48, 0x2c, 0x4a, 0xcc, 0x2d,
-	0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x05, 0xcb, 0xe9, 0x81, 0xe4, 0xf4, 0xca, 0x0c,
-	0xa5, 0x04, 0x13, 0x73, 0x33, 0xf3, 0xf2, 0xf5, 0xc1, 0x24, 0x44, 0x85, 0x94, 0x48, 0x7a, 0x7e,
-	0x7a, 0x3e, 0x98, 0xa9, 0x0f, 0x62, 0x41, 0x44, 0x95, 0xd4, 0xb8, 0xd8, 0x02, 0xc0, 0xe6, 0x58,
-	0xc9, 0xbc, 0x58, 0x20, 0xcf, 0xd8, 0xf5, 0x7c, 0x83, 0x96, 0x30, 0xc4, 0x9a, 0x0a, 0x88, 0x45,
-	0x10, 0x59, 0x27, 0xc7, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e,
-	0x71, 0xc2, 0x63, 0x39, 0x86, 0x0b, 0x8f, 0xe5, 0x18, 0x6e, 0x3c, 0x96, 0x63, 0x88, 0x52, 0x4f,
-	0xcf, 0x2c, 0x01, 0x59, 0x9d, 0x9c, 0x9f, 0xab, 0x9f, 0x52, 0x9a, 0xa7, 0x9b, 0x99, 0xaf, 0x8f,
-	0x62, 0x40, 0x49, 0x65, 0x41, 0x6a, 0xb1, 0x7e, 0x99, 0x61, 0x12, 0x1b, 0xd8, 0x46, 0x63, 0x40,
-	0x00, 0x00, 0x00, 0xff, 0xff, 0x92, 0x9d, 0xd2, 0x3c, 0xc7, 0x00, 0x00, 0x00,
+	// 494 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x53, 0xcd, 0x6e, 0xd3, 0x30,
+	0x1c, 0x4f, 0xe8, 0xd6, 0x6d, 0x81, 0x51, 0xb5, 0x03, 0x29, 0x14, 0x29, 0xad, 0xe0, 0x40, 0x85,
+	0x34, 0x9b, 0x8e, 0x13, 0xd7, 0x32, 0x89, 0x21, 0xed, 0x30, 0x75, 0x37, 0x2e, 0x91, 0x93, 0x98,
+	0xd4, 0xea, 0xec, 0x7f, 0x14, 0x3b, 0xa5, 0x15, 0x2f, 0x01, 0x37, 0x1e, 0x01, 0xf1, 0x24, 0x3d,
+	0xee, 0x88, 0x38, 0x6c, 0xd0, 0xbe, 0x08, 0xf2, 0x47, 0x58, 0x25, 0x10, 0xa7, 0x5d, 0x12, 0xc7,
+	0xbf, 0xaf, 0xbf, 0x7f, 0x8a, 0x83, 0x2e, 0xe3, 0x93, 0x2a, 0xc1, 0x02, 0x32, 0x8a, 0x67, 0x43,
+	0x5c, 0x90, 0x92, 0x70, 0x89, 0x8a, 0x12, 0x14, 0x74, 0xf6, 0x0d, 0x86, 0x34, 0x86, 0x66, 0xc3,
+	0x6e, 0x9b, 0x70, 0x26, 0x00, 0x9b, 0xa7, 0x65, 0x74, 0x1f, 0xe4, 0x90, 0x83, 0x59, 0x62, 0xbd,
+	0x72, 0xbb, 0x51, 0x0a, 0x92, 0x83, 0xc4, 0x09, 0x91, 0xda, 0x34, 0xa1, 0x8a, 0x0c, 0x71, 0x0a,
+	0x4c, 0xd4, 0x78, 0x0e, 0x90, 0x5f, 0x50, 0x6c, 0xbe, 0x92, 0xea, 0x3d, 0xce, 0xaa, 0x92, 0x28,
+	0x06, 0x0e, 0x7f, 0xf2, 0x79, 0x3b, 0x68, 0x9e, 0x99, 0x41, 0x3a, 0xaf, 0x82, 0x9d, 0x8c, 0x16,
+	0x20, 0x99, 0x0a, 0xfd, 0xbe, 0x3f, 0xb8, 0x7b, 0xf4, 0x08, 0x59, 0x73, 0xa4, 0xcd, 0x91, 0x33,
+	0x47, 0xaf, 0x81, 0x89, 0xd1, 0xd6, 0xf2, 0xaa, 0xe7, 0x8d, 0x6b, 0x7e, 0xe7, 0x34, 0x68, 0x91,
+	0x54, 0xb1, 0x19, 0x8d, 0x6b, 0xfb, 0xf0, 0x8e, 0xb3, 0xb0, 0xf9, 0xa8, 0xce, 0x47, 0xc7, 0x8e,
+	0x30, 0xda, 0xd5, 0x16, 0x5f, 0xae, 0x7b, 0xfe, 0xf8, 0xbe, 0xd5, 0xd6, 0x48, 0xe7, 0x63, 0x70,
+	0xc0, 0x99, 0x88, 0x73, 0x96, 0x93, 0x64, 0xa1, 0x68, 0x5c, 0x94, 0x2c, 0xa5, 0x32, 0x6c, 0xf4,
+	0x1b, 0xff, 0x1f, 0xea, 0x85, 0x76, 0xfc, 0x76, 0xdd, 0x1b, 0xe4, 0x4c, 0xe9, 0x32, 0x53, 0xe0,
+	0xd8, 0xd5, 0x63, 0x5f, 0x87, 0x32, 0x9b, 0x62, 0xb5, 0x28, 0xa8, 0x34, 0x02, 0x39, 0x6e, 0x73,
+	0x26, 0xde, 0xb8, 0x98, 0x33, 0x93, 0xd2, 0xf9, 0x10, 0xe8, 0xcd, 0x78, 0x02, 0x55, 0x79, 0xb1,
+	0xa8, 0xa3, 0xb7, 0x6e, 0x3f, 0xba, 0xc5, 0x99, 0x38, 0x31, 0x21, 0x2e, 0xf8, 0x28, 0x78, 0xc8,
+	0xc9, 0x3c, 0x96, 0x54, 0x4a, 0x06, 0x37, 0xa7, 0x97, 0xe1, 0x76, 0xdf, 0x1f, 0x34, 0xc6, 0x07,
+	0x9c, 0xcc, 0xcf, 0x2d, 0x56, 0x4f, 0x6c, 0x35, 0x4c, 0xfc, 0x43, 0xd3, 0x74, 0x1a, 0x26, 0xfe,
+	0xd2, 0x3c, 0x0f, 0xda, 0x9b, 0x39, 0xfa, 0xa0, 0x32, 0xdc, 0x31, 0xfc, 0xd6, 0x4d, 0x86, 0x1e,
+	0xcd, 0x72, 0x37, 0xfc, 0x2d, 0x77, 0xd7, 0x71, 0xff, 0x78, 0x5b, 0xee, 0x49, 0xb0, 0x2f, 0x15,
+	0x99, 0x32, 0x91, 0xc7, 0x72, 0x42, 0x4a, 0x1a, 0xee, 0xf5, 0xfd, 0xc1, 0xde, 0xe8, 0xa9, 0x6e,
+	0xe6, 0xc7, 0x55, 0xef, 0xb1, 0xed, 0x41, 0x66, 0x53, 0xc4, 0x00, 0x73, 0xa2, 0x26, 0xe8, 0x94,
+	0xe6, 0x24, 0x5d, 0x1c, 0xd3, 0x74, 0x7c, 0xcf, 0x29, 0xcf, 0xb5, 0x70, 0xf4, 0x76, 0xf9, 0x2b,
+	0xf2, 0xbe, 0xae, 0x22, 0x6f, 0xb9, 0x8a, 0xfc, 0xcb, 0x55, 0xe4, 0xff, 0x5c, 0x45, 0xfe, 0xa7,
+	0x75, 0xe4, 0x5d, 0xae, 0x23, 0xef, 0xfb, 0x3a, 0xf2, 0xde, 0x3d, 0xdb, 0xa8, 0x39, 0xab, 0xc4,
+	0x21, 0x03, 0x6c, 0xef, 0xd6, 0xdc, 0xde, 0x2e, 0x53, 0xb4, 0xbe, 0x0e, 0x4d, 0xf3, 0xdf, 0xbd,
+	0xfc, 0x1d, 0x00, 0x00, 0xff, 0xff, 0xf1, 0x5c, 0x1f, 0xf6, 0x7b, 0x03, 0x00, 0x00,
 }
 
-func (this *Params) Equal(that interface{}) bool {
-	if that == nil {
-		return this == nil
-	}
-
-	that1, ok := that.(*Params)
-	if !ok {
-		that2, ok := that.(Params)
-		if ok {
-			that1 = &that2
-		} else {
-			return false
-		}
-	}
-	if that1 == nil {
-		return this == nil
-	} else if this == nil {
-		return false
-	}
-	return true
-}
 func (m *Params) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -123,6 +138,82 @@ func (m *Params) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	{
+		size := m.StakingShare.Size()
+		i -= size
+		if _, err := m.StakingShare.MarshalTo(dAtA[i:]); err != nil {
+			return 0, err
+		}
+		i = encodeVarintParams(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x4a
+	if m.MinSessionHours != 0 {
+		i = encodeVarintParams(dAtA, i, uint64(m.MinSessionHours))
+		i--
+		dAtA[i] = 0x40
+	}
+	if m.MaxSessionHours != 0 {
+		i = encodeVarintParams(dAtA, i, uint64(m.MaxSessionHours))
+		i--
+		dAtA[i] = 0x38
+	}
+	if m.MinSessionGigabytes != 0 {
+		i = encodeVarintParams(dAtA, i, uint64(m.MinSessionGigabytes))
+		i--
+		dAtA[i] = 0x30
+	}
+	if m.MaxSessionGigabytes != 0 {
+		i = encodeVarintParams(dAtA, i, uint64(m.MaxSessionGigabytes))
+		i--
+		dAtA[i] = 0x28
+	}
+	if len(m.MinHourlyPrices) > 0 {
+		for iNdEx := len(m.MinHourlyPrices) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.MinHourlyPrices[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintParams(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.MinGigabytePrices) > 0 {
+		for iNdEx := len(m.MinGigabytePrices) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.MinGigabytePrices[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintParams(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	n1, err1 := github_com_cosmos_gogoproto_types.StdDurationMarshalTo(m.ActiveDuration, dAtA[i-github_com_cosmos_gogoproto_types.SizeOfStdDuration(m.ActiveDuration):])
+	if err1 != nil {
+		return 0, err1
+	}
+	i -= n1
+	i = encodeVarintParams(dAtA, i, uint64(n1))
+	i--
+	dAtA[i] = 0x12
+	{
+		size, err := m.Deposit.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintParams(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
 	return len(dAtA) - i, nil
 }
 
@@ -143,6 +234,36 @@ func (m *Params) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = m.Deposit.Size()
+	n += 1 + l + sovParams(uint64(l))
+	l = github_com_cosmos_gogoproto_types.SizeOfStdDuration(m.ActiveDuration)
+	n += 1 + l + sovParams(uint64(l))
+	if len(m.MinGigabytePrices) > 0 {
+		for _, e := range m.MinGigabytePrices {
+			l = e.Size()
+			n += 1 + l + sovParams(uint64(l))
+		}
+	}
+	if len(m.MinHourlyPrices) > 0 {
+		for _, e := range m.MinHourlyPrices {
+			l = e.Size()
+			n += 1 + l + sovParams(uint64(l))
+		}
+	}
+	if m.MaxSessionGigabytes != 0 {
+		n += 1 + sovParams(uint64(m.MaxSessionGigabytes))
+	}
+	if m.MinSessionGigabytes != 0 {
+		n += 1 + sovParams(uint64(m.MinSessionGigabytes))
+	}
+	if m.MaxSessionHours != 0 {
+		n += 1 + sovParams(uint64(m.MaxSessionHours))
+	}
+	if m.MinSessionHours != 0 {
+		n += 1 + sovParams(uint64(m.MinSessionHours))
+	}
+	l = m.StakingShare.Size()
+	n += 1 + l + sovParams(uint64(l))
 	return n
 }
 
@@ -181,6 +302,250 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: Params: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Deposit", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Deposit.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ActiveDuration", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := github_com_cosmos_gogoproto_types.StdDurationUnmarshal(&m.ActiveDuration, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MinGigabytePrices", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.MinGigabytePrices = append(m.MinGigabytePrices, types.Coin{})
+			if err := m.MinGigabytePrices[len(m.MinGigabytePrices)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MinHourlyPrices", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.MinHourlyPrices = append(m.MinHourlyPrices, types.Coin{})
+			if err := m.MinHourlyPrices[len(m.MinHourlyPrices)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MaxSessionGigabytes", wireType)
+			}
+			m.MaxSessionGigabytes = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.MaxSessionGigabytes |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MinSessionGigabytes", wireType)
+			}
+			m.MinSessionGigabytes = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.MinSessionGigabytes |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MaxSessionHours", wireType)
+			}
+			m.MaxSessionHours = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.MaxSessionHours |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MinSessionHours", wireType)
+			}
+			m.MinSessionHours = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.MinSessionHours |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StakingShare", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.StakingShare.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipParams(dAtA[iNdEx:])

@@ -1,6 +1,8 @@
 package v1
 
 import (
+	"context"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/dun-io/imhub/x/node/keeper"
 	"github.com/dun-io/imhub/x/node/types/v1"
 )
@@ -15,4 +17,9 @@ type msgServer struct {
 // for the provided Keeper.
 func NewMsgServerImpl(keeper keeper.Keeper) v1.MsgServer {
 	return &msgServer{Keeper: keeper}
+}
+
+func (m *msgServer) MsgRegisterNode(c context.Context, req *v1.MsgRegisterNodeRequest) (*v1.MsgRegisterNodeResponse, error) {
+	ctx := sdk.UnwrapSDKContext(c)
+	return m.HandleMsgRegisterNode(ctx, req)
 }

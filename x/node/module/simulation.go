@@ -1,6 +1,7 @@
 package node
 
 import (
+	"github.com/dun-io/imhub/x/node/types"
 	"github.com/dun-io/imhub/x/node/types/v1"
 	"math/rand"
 
@@ -36,7 +37,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		Params: v1.DefaultParams(),
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
-	simState.GenState[v1.ModuleName] = simState.Cdc.MustMarshalJSON(&nodeGenesis)
+	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&nodeGenesis)
 }
 
 // RegisterStoreDecoder registers a decoder.

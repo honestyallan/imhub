@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/dun-io/imhub/x/node/types"
 	"github.com/dun-io/imhub/x/node/types/v1"
 
 	"cosmossdk.io/core/appmodule"
@@ -53,7 +54,7 @@ func NewAppModuleBasic(cdc codec.BinaryCodec) AppModuleBasic {
 
 // Name returns the name of the module as a string.
 func (AppModuleBasic) Name() string {
-	return v1.ModuleName
+	return types.ModuleName
 }
 
 // RegisterLegacyAminoCodec registers the amino codec for the module, which is used
@@ -75,7 +76,7 @@ func (AppModuleBasic) DefaultGenesis(cdc codec.JSONCodec) json.RawMessage {
 func (AppModuleBasic) ValidateGenesis(cdc codec.JSONCodec, config client.TxEncodingConfig, bz json.RawMessage) error {
 	var genState v1.GenesisState
 	if err := cdc.UnmarshalJSON(bz, &genState); err != nil {
-		return fmt.Errorf("failed to unmarshal %s genesis state: %w", v1.ModuleName, err)
+		return fmt.Errorf("failed to unmarshal %s genesis state: %w", types.ModuleName, err)
 	}
 	return genState.Validate()
 }

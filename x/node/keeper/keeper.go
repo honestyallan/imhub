@@ -1,13 +1,12 @@
 package keeper
 
 import (
-	"fmt"
-	"github.com/dun-io/imhub/x/node/types/v1"
-
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
+	"fmt"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/dun-io/imhub/x/node/types"
 )
 
 type (
@@ -48,5 +47,5 @@ func (k Keeper) GetAuthority() string {
 
 // Logger returns a module-specific logger.
 func (k Keeper) Logger() log.Logger {
-	return k.logger.With("module", fmt.Sprintf("x/%s", v1.ModuleName))
+	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }

@@ -1,7 +1,7 @@
 package app
 
 import (
-	nodemoduletypes "github.com/dun-io/imhub/x/node/types/v1"
+	nodemoduletypes "github.com/dun-io/imhub/x/node/types"
 	"time"
 
 	runtimev1alpha1 "cosmossdk.io/api/cosmos/app/runtime/v1alpha1"

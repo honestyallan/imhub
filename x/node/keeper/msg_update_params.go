@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"github.com/dun-io/imhub/x/node/types"
 	"github.com/dun-io/imhub/x/node/types/v1"
 
 	errorsmod "cosmossdk.io/errors"
@@ -10,7 +11,7 @@ import (
 
 func (k msgServer) UpdateParams(goCtx context.Context, req *v1.MsgUpdateParams) (*v1.MsgUpdateParamsResponse, error) {
 	if k.GetAuthority() != req.Authority {
-		return nil, errorsmod.Wrapf(v1.ErrInvalidSigner, "invalid authority; expected %s, got %s", k.GetAuthority(), req.Authority)
+		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid authority; expected %s, got %s", k.GetAuthority(), req.Authority)
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)

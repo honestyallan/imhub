@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"github.com/dun-io/imhub/x/node/types"
 	"github.com/dun-io/imhub/x/node/types/v1"
 	"testing"
 
@@ -22,7 +23,7 @@ import (
 )
 
 func NodeKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {
-	storeKey := storetypes.NewKVStoreKey(v1.StoreKey)
+	storeKey := storetypes.NewKVStoreKey(types.StoreKey)
 
 	db := dbm.NewMemDB()
 	stateStore := store.NewCommitMultiStore(db, log.NewNopLogger(), metrics.NewNoOpMetrics())

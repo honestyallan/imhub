@@ -15,7 +15,7 @@ type queryServer struct {
 	keeper.Keeper
 }
 
-func NewQueryServiceServer(k keeper.Keeper) v1.QueryServer {
+func NewQueryServerImpl(k keeper.Keeper) v1.QueryServer {
 	return &queryServer{k}
 }
 

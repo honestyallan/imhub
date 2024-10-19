@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	v2 "github.com/dun-io/imhub/x/node/services/v1"
+	"github.com/dun-io/imhub/x/node/services"
 	"github.com/dun-io/imhub/x/node/types"
 	"github.com/dun-io/imhub/x/node/types/v1"
 
@@ -118,8 +118,7 @@ func NewAppModule(
 
 // RegisterServices registers a gRPC query service to respond to the module-specific gRPC queries
 func (am AppModule) RegisterServices(cfg module.Configurator) {
-	v1.RegisterMsgServer(cfg.MsgServer(), v2.NewMsgServerImpl(am.keeper))
-	v1.RegisterQueryServer(cfg.QueryServer(), v2.NewQueryServiceServer(am.keeper))
+	services.RegisterServices(cfg, am.keeper)
 }
 
 // RegisterInvariants registers the invariants of the module. If an invariant deviates from its predicted value, the InvariantRegistry triggers appropriate logic (most often the chain will be halted)

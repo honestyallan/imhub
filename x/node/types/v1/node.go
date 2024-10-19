@@ -5,8 +5,6 @@ import (
 	"net/url"
 
 	sdkerrors "cosmossdk.io/errors"
-	sdkmath "cosmossdk.io/math"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	base "github.com/dun-io/imhub/types"
 	v1base "github.com/dun-io/imhub/types/v1"
 )
@@ -30,30 +28,7 @@ func (m *Node) Validate() error {
 	if _, err := base.NodeAddressFromBech32(m.Address); err != nil {
 		return sdkerrors.Wrapf(err, "invalid address %s", m.Address)
 	}
-	if m.GigabytePrices == nil {
-		return fmt.Errorf("gigabyte_prices cannot be nil")
-	}
-	if m.GigabytePrices.Len() == 0 {
-		return fmt.Errorf("gigabyte_prices cannot be empty")
-	}
-	if m.GigabytePrices.IsAnyNil() {
-		return fmt.Errorf("gigabyte_prices cannot contain nil")
-	}
-	if !m.GigabytePrices.IsValid() {
-		return fmt.Errorf("gigabyte_prices must be valid")
-	}
-	if m.HourlyPrices == nil {
-		return fmt.Errorf("hourly_prices cannot be nil")
-	}
-	if m.HourlyPrices.Len() == 0 {
-		return fmt.Errorf("hourly_prices cannot be empty")
-	}
-	if m.HourlyPrices.IsAnyNil() {
-		return fmt.Errorf("hourly_prices cannot contain nil")
-	}
-	if !m.HourlyPrices.IsValid() {
-		return fmt.Errorf("hourly_prices must be valid")
-	}
+
 	if m.RemoteURL == "" {
 		return fmt.Errorf("remote_url cannot be empty")
 	}
@@ -90,26 +65,4 @@ func (m *Node) Validate() error {
 	}
 
 	return nil
-}
-
-func (m *Node) GigabytePrice(denom string) (sdk.Coin, bool) {
-	for _, v := range m.GigabytePrices {
-		if v.Denom == denom {
-			return v, true
-		}
-	}
-
-	// If there are no prices and denom is empty, return a zero amount coin and true
-	return sdk.Coin{Amount: sdkmath.ZeroInt()}, m.GigabytePrices.Len() == 0 && denom == ""
-}
-
-func (m *Node) HourlyPrice(denom string) (sdk.Coin, bool) {
-	for _, v := range m.HourlyPrices {
-		if v.Denom == denom {
-			return v, true
-		}
-	}
-
-	// If there are no prices and denom is empty, return a zero amount coin and true
-	return sdk.Coin{Amount: sdkmath.ZeroInt()}, m.HourlyPrices.Len() == 0 && denom == ""
 }

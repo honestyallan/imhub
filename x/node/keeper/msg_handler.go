@@ -10,13 +10,6 @@ import (
 )
 
 func (k *Keeper) HandleMsgRegisterNode(ctx sdk.Context, msg *v1.MsgRegisterNodeRequest) (*v1.MsgRegisterNodeResponse, error) {
-	if !k.IsValidGigabytePrices(ctx, msg.GigabytePrices) {
-		return nil, types.NewErrorInvalidPrices(msg.GigabytePrices)
-	}
-	if !k.IsValidHourlyPrices(ctx, msg.HourlyPrices) {
-		return nil, types.NewErrorInvalidPrices(msg.HourlyPrices)
-	}
-
 	accAddr, err := sdk.AccAddressFromBech32(msg.From)
 	if err != nil {
 		return nil, err
@@ -33,13 +26,11 @@ func (k *Keeper) HandleMsgRegisterNode(ctx sdk.Context, msg *v1.MsgRegisterNodeR
 	}
 
 	node := v1.Node{
-		Address:        nodeAddr.String(),
-		GigabytePrices: msg.GigabytePrices,
-		HourlyPrices:   msg.HourlyPrices,
-		RemoteURL:      msg.RemoteURL,
-		InactiveAt:     time.Time{},
-		Status:         v1base.StatusInactive,
-		StatusAt:       ctx.BlockTime(),
+		Address:    nodeAddr.String(),
+		RemoteURL:  msg.Address,
+		InactiveAt: time.Time{},
+		Status:     v1base.StatusInactive,
+		StatusAt:   ctx.BlockTime(),
 	}
 
 	k.SetNode(ctx, node)

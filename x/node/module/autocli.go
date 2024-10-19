@@ -20,12 +20,14 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			},
 		},
 		Tx: &autocliv1.ServiceCommandDescriptor{
-			Service:              v1.Msg_ServiceDesc.ServiceName,
+			Service:              v1.MsgService_ServiceDesc.ServiceName,
 			EnhanceCustomCommand: true, // only required if you want to use the custom command
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
-					RpcMethod: "MsgRegisterNode",
-					Skip:      true, // skipped because authority gated
+					RpcMethod:      "MsgRegisterNode",
+					Use:            "register-node [from] [address] [name] [pub_key]",
+					Short:          "Send a register-node tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "from"}, {ProtoField: "address"}, {ProtoField: "name"}, {ProtoField: "pub_key"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

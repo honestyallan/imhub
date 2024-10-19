@@ -9,24 +9,20 @@ import "gogoproto/gogo.proto";
 import "imhub/node/v1/params.proto";
 import "google/protobuf/timestamp.proto";
 import "imhub/types/v1/status.proto";
-option go_package = "github.com/dun-io/imhub/x/node/types/v1";
 
+option go_package = "github.com/dun-io/imhub/x/node/types/v1";
+option (gogoproto.equal_all) = false;
+option (gogoproto.goproto_getters_all) = false;
 // Msg defines the Msg service.
-service Msg {
+service MsgService {
   rpc MsgRegisterNode(MsgRegisterNodeRequest) returns (MsgRegisterNodeResponse);
 }
 
 message MsgRegisterNodeRequest {
   string from = 1;
-  repeated cosmos.base.v1beta1.Coin gigabyte_prices = 2 [
-    (gogoproto.nullable) = false,
-    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
-  ];
-  repeated cosmos.base.v1beta1.Coin hourly_prices = 3 [
-    (gogoproto.nullable) = false,
-    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
-  ];
-  string remote_url = 4 [(gogoproto.customname) = "RemoteURL"];
+  string name = 2;
+  string address = 3;
+  string pub_key = 4;
 }
 
 message MsgRegisterNodeResponse {

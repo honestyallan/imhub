@@ -19,89 +19,89 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_MsgRegisterNode_FullMethodName = "/imhub.node.v1.Msg/MsgRegisterNode"
+	MsgService_MsgRegisterNode_FullMethodName = "/imhub.node.v1.MsgService/MsgRegisterNode"
 )
 
-// MsgClient is the client API for Msg service.
+// MsgServiceClient is the client API for MsgService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type MsgClient interface {
+type MsgServiceClient interface {
 	MsgRegisterNode(ctx context.Context, in *MsgRegisterNodeRequest, opts ...grpc.CallOption) (*MsgRegisterNodeResponse, error)
 }
 
-type msgClient struct {
+type msgServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewMsgClient(cc grpc.ClientConnInterface) MsgClient {
-	return &msgClient{cc}
+func NewMsgServiceClient(cc grpc.ClientConnInterface) MsgServiceClient {
+	return &msgServiceClient{cc}
 }
 
-func (c *msgClient) MsgRegisterNode(ctx context.Context, in *MsgRegisterNodeRequest, opts ...grpc.CallOption) (*MsgRegisterNodeResponse, error) {
+func (c *msgServiceClient) MsgRegisterNode(ctx context.Context, in *MsgRegisterNodeRequest, opts ...grpc.CallOption) (*MsgRegisterNodeResponse, error) {
 	out := new(MsgRegisterNodeResponse)
-	err := c.cc.Invoke(ctx, Msg_MsgRegisterNode_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, MsgService_MsgRegisterNode_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// MsgServer is the server API for Msg service.
-// All implementations must embed UnimplementedMsgServer
+// MsgServiceServer is the server API for MsgService service.
+// All implementations must embed UnimplementedMsgServiceServer
 // for forward compatibility
-type MsgServer interface {
+type MsgServiceServer interface {
 	MsgRegisterNode(context.Context, *MsgRegisterNodeRequest) (*MsgRegisterNodeResponse, error)
-	mustEmbedUnimplementedMsgServer()
+	mustEmbedUnimplementedMsgServiceServer()
 }
 
-// UnimplementedMsgServer must be embedded to have forward compatible implementations.
-type UnimplementedMsgServer struct {
+// UnimplementedMsgServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMsgServiceServer struct {
 }
 
-func (UnimplementedMsgServer) MsgRegisterNode(context.Context, *MsgRegisterNodeRequest) (*MsgRegisterNodeResponse, error) {
+func (UnimplementedMsgServiceServer) MsgRegisterNode(context.Context, *MsgRegisterNodeRequest) (*MsgRegisterNodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MsgRegisterNode not implemented")
 }
-func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
+func (UnimplementedMsgServiceServer) mustEmbedUnimplementedMsgServiceServer() {}
 
-// UnsafeMsgServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to MsgServer will
+// UnsafeMsgServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MsgServiceServer will
 // result in compilation errors.
-type UnsafeMsgServer interface {
-	mustEmbedUnimplementedMsgServer()
+type UnsafeMsgServiceServer interface {
+	mustEmbedUnimplementedMsgServiceServer()
 }
 
-func RegisterMsgServer(s grpc.ServiceRegistrar, srv MsgServer) {
-	s.RegisterService(&Msg_ServiceDesc, srv)
+func RegisterMsgServiceServer(s grpc.ServiceRegistrar, srv MsgServiceServer) {
+	s.RegisterService(&MsgService_ServiceDesc, srv)
 }
 
-func _Msg_MsgRegisterNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MsgService_MsgRegisterNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MsgRegisterNodeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).MsgRegisterNode(ctx, in)
+		return srv.(MsgServiceServer).MsgRegisterNode(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Msg_MsgRegisterNode_FullMethodName,
+		FullMethod: MsgService_MsgRegisterNode_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).MsgRegisterNode(ctx, req.(*MsgRegisterNodeRequest))
+		return srv.(MsgServiceServer).MsgRegisterNode(ctx, req.(*MsgRegisterNodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
+// MsgService_ServiceDesc is the grpc.ServiceDesc for MsgService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Msg_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "imhub.node.v1.Msg",
-	HandlerType: (*MsgServer)(nil),
+var MsgService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "imhub.node.v1.MsgService",
+	HandlerType: (*MsgServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "MsgRegisterNode",
-			Handler:    _Msg_MsgRegisterNode_Handler,
+			Handler:    _MsgService_MsgRegisterNode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -7,7 +7,7 @@ import (
 	"github.com/dun-io/imhub/x/node/types/v1"
 )
 
-var _ v1.MsgServer = (*msgServer)(nil)
+var _ v1.MsgServiceServer = (*msgServer)(nil)
 
 type msgServer struct {
 	keeper.Keeper
@@ -15,7 +15,7 @@ type msgServer struct {
 
 // NewMsgServerImpl returns an implementation of the MsgServer interface
 // for the provided Keeper.
-func NewMsgServerImpl(keeper keeper.Keeper) v1.MsgServer {
+func NewMsgServerImpl(keeper keeper.Keeper) v1.MsgServiceServer {
 	return &msgServer{Keeper: keeper}
 }
 

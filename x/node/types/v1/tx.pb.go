@@ -7,8 +7,7 @@ import (
 	context "context"
 	fmt "fmt"
 	_ "github.com/cosmos/cosmos-proto"
-	github_com_cosmos_cosmos_sdk_types "github.com/cosmos/cosmos-sdk/types"
-	types "github.com/cosmos/cosmos-sdk/types"
+	_ "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/cosmos-sdk/types/msgservice"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
 	_ "github.com/cosmos/gogoproto/gogoproto"
@@ -36,10 +35,10 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type MsgRegisterNodeRequest struct {
-	From           string                                   `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
-	GigabytePrices github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,2,rep,name=gigabyte_prices,json=gigabytePrices,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"gigabyte_prices"`
-	HourlyPrices   github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,3,rep,name=hourly_prices,json=hourlyPrices,proto3,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"hourly_prices"`
-	RemoteURL      string                                   `protobuf:"bytes,4,opt,name=remote_url,json=remoteUrl,proto3" json:"remote_url,omitempty"`
+	From    string `protobuf:"bytes,1,opt,name=from,proto3" json:"from,omitempty"`
+	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Address string `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
+	PubKey  string `protobuf:"bytes,4,opt,name=pub_key,json=pubKey,proto3" json:"pub_key,omitempty"`
 }
 
 func (m *MsgRegisterNodeRequest) Reset()         { *m = MsgRegisterNodeRequest{} }
@@ -74,34 +73,6 @@ func (m *MsgRegisterNodeRequest) XXX_DiscardUnknown() {
 }
 
 var xxx_messageInfo_MsgRegisterNodeRequest proto.InternalMessageInfo
-
-func (m *MsgRegisterNodeRequest) GetFrom() string {
-	if m != nil {
-		return m.From
-	}
-	return ""
-}
-
-func (m *MsgRegisterNodeRequest) GetGigabytePrices() github_com_cosmos_cosmos_sdk_types.Coins {
-	if m != nil {
-		return m.GigabytePrices
-	}
-	return nil
-}
-
-func (m *MsgRegisterNodeRequest) GetHourlyPrices() github_com_cosmos_cosmos_sdk_types.Coins {
-	if m != nil {
-		return m.HourlyPrices
-	}
-	return nil
-}
-
-func (m *MsgRegisterNodeRequest) GetRemoteURL() string {
-	if m != nil {
-		return m.RemoteURL
-	}
-	return ""
-}
 
 type MsgRegisterNodeResponse struct {
 }
@@ -147,35 +118,30 @@ func init() {
 func init() { proto.RegisterFile("imhub/node/v1/tx.proto", fileDescriptor_992faf421a3a872b) }
 
 var fileDescriptor_992faf421a3a872b = []byte{
-	// 435 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x52, 0xcd, 0x6e, 0xd3, 0x40,
-	0x10, 0x8e, 0x9b, 0x0a, 0x29, 0x0b, 0xa1, 0xc2, 0x42, 0x6d, 0x12, 0x24, 0xa7, 0xaa, 0x04, 0xe4,
-	0x40, 0x77, 0x49, 0x79, 0x02, 0xc2, 0x95, 0x22, 0x64, 0xa9, 0x17, 0x2e, 0x61, 0x9d, 0x6c, 0xb7,
-	0x2b, 0xb2, 0x1e, 0xb3, 0xb3, 0xae, 0x9a, 0xb7, 0xe0, 0x39, 0x78, 0x0c, 0x4e, 0x3d, 0xf6, 0xc8,
-	0xa9, 0x20, 0xe7, 0x45, 0xd0, 0xfe, 0x58, 0x22, 0x80, 0xc4, 0xa5, 0x17, 0x7b, 0x67, 0xe6, 0xfb,
-	0xfc, 0xed, 0x7c, 0xfe, 0xc8, 0xbe, 0xd2, 0x17, 0x75, 0xc1, 0x4a, 0x58, 0x0a, 0x76, 0x39, 0x65,
-	0xf6, 0x8a, 0x56, 0x06, 0x2c, 0xa4, 0x7d, 0xdf, 0xa7, 0xae, 0x4f, 0x2f, 0xa7, 0xa3, 0x47, 0x5c,
-	0xab, 0x12, 0x98, 0x7f, 0x06, 0xc4, 0xe8, 0x60, 0x01, 0xa8, 0x01, 0x99, 0x46, 0xe9, 0x98, 0x1a,
-	0x65, 0x1c, 0x0c, 0xc3, 0x60, 0xee, 0x2b, 0x16, 0x8a, 0x38, 0xca, 0x22, 0xa7, 0xe0, 0xe8, 0xe4,
-	0x0a, 0x61, 0xf9, 0x94, 0x2d, 0x40, 0x95, 0x71, 0xfe, 0x58, 0x82, 0x84, 0xc0, 0x73, 0xa7, 0xd8,
-	0x1d, 0x6d, 0xdf, 0xb1, 0xe2, 0x86, 0xeb, 0xf6, 0x8b, 0x63, 0x09, 0x20, 0x57, 0x82, 0xf9, 0xaa,
-	0xa8, 0xcf, 0x99, 0x55, 0x5a, 0xa0, 0xe5, 0xba, 0x8a, 0x80, 0x27, 0x81, 0x6c, 0xd7, 0x95, 0x40,
-	0xc7, 0x46, 0xcb, 0x6d, 0x1d, 0xd9, 0x47, 0xdf, 0x76, 0xc8, 0xfe, 0x29, 0xca, 0x5c, 0x48, 0x85,
-	0x56, 0x98, 0x77, 0xb0, 0x14, 0xb9, 0xf8, 0x5c, 0x0b, 0xb4, 0x69, 0x4a, 0x76, 0xcf, 0x0d, 0xe8,
-	0x41, 0x72, 0x98, 0x4c, 0x7a, 0xb9, 0x3f, 0xa7, 0x96, 0xec, 0x49, 0x25, 0x79, 0xb1, 0xb6, 0x62,
-	0x5e, 0x19, 0xb5, 0x10, 0x38, 0xd8, 0x39, 0xec, 0x4e, 0xee, 0x9f, 0x0c, 0x69, 0x5c, 0xd3, 0x2d,
-	0x46, 0xe3, 0x62, 0xf4, 0x0d, 0xa8, 0x72, 0xf6, 0xf2, 0xfa, 0x76, 0xdc, 0xf9, 0xfa, 0x63, 0x3c,
-	0x91, 0xca, 0x3a, 0x47, 0x17, 0xa0, 0xa3, 0x27, 0xf1, 0x75, 0x8c, 0xcb, 0x4f, 0xe1, 0x7a, 0x9e,
-	0x80, 0xf9, 0xc3, 0x56, 0xe3, 0xbd, 0x97, 0x48, 0x2b, 0xd2, 0xbf, 0x80, 0xda, 0xac, 0xd6, 0xad,
-	0x66, 0xf7, 0xee, 0x35, 0x1f, 0x04, 0x85, 0xa8, 0xf8, 0x82, 0x10, 0x23, 0x34, 0x58, 0x31, 0xaf,
-	0xcd, 0x6a, 0xb0, 0xeb, 0x1c, 0x98, 0xf5, 0x9b, 0xdb, 0x71, 0x2f, 0xf7, 0xdd, 0xb3, 0xfc, 0x6d,
-	0xde, 0x0b, 0x80, 0x33, 0xb3, 0x3a, 0x1a, 0x92, 0x83, 0xbf, 0x3c, 0xc4, 0x0a, 0x4a, 0x14, 0x27,
-	0x92, 0x74, 0x4f, 0x51, 0xa6, 0x1f, 0xc9, 0xde, 0x1f, 0x88, 0xf4, 0x29, 0xdd, 0x0a, 0x18, 0xfd,
-	0xf7, 0x5f, 0x18, 0x3d, 0xfb, 0x1f, 0x2c, 0x08, 0xcd, 0x5e, 0x5f, 0x37, 0x59, 0x72, 0xd3, 0x64,
-	0xc9, 0xcf, 0x26, 0x4b, 0xbe, 0x6c, 0xb2, 0xce, 0xcd, 0x26, 0xeb, 0x7c, 0xdf, 0x64, 0x9d, 0x0f,
-	0xcf, 0x7f, 0xf3, 0x60, 0x59, 0x97, 0xc7, 0x0a, 0x58, 0x48, 0xc4, 0x55, 0x08, 0x54, 0x1b, 0x8c,
-	0xe2, 0x9e, 0x8f, 0xc4, 0xab, 0x5f, 0x01, 0x00, 0x00, 0xff, 0xff, 0xc0, 0xf2, 0xe8, 0x95, 0x12,
-	0x03, 0x00, 0x00,
+	// 364 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x51, 0xcd, 0xea, 0xd3, 0x40,
+	0x10, 0x4f, 0xb4, 0xb4, 0xb8, 0x20, 0x62, 0x90, 0x36, 0x8d, 0xb0, 0x4a, 0xc1, 0x8f, 0x8b, 0x59,
+	0xaa, 0x6f, 0xe0, 0x4d, 0xa4, 0x1e, 0xea, 0xcd, 0x4b, 0xdd, 0x24, 0xd3, 0x75, 0xd1, 0xcd, 0xc4,
+	0xcc, 0xa6, 0xb4, 0x6f, 0xe1, 0x63, 0xf8, 0x28, 0x3d, 0xf6, 0xe8, 0x51, 0xd3, 0x17, 0x91, 0xdd,
+	0x4d, 0x0f, 0xd5, 0x3f, 0xfc, 0x2f, 0xcb, 0xfc, 0xbe, 0x76, 0x86, 0x19, 0x36, 0xd5, 0xe6, 0x4b,
+	0x57, 0x88, 0x1a, 0x2b, 0x10, 0xbb, 0xa5, 0xb0, 0xfb, 0xbc, 0x69, 0xd1, 0x62, 0x72, 0xdf, 0xf3,
+	0xb9, 0xe3, 0xf3, 0xdd, 0x32, 0x7b, 0x28, 0x8d, 0xae, 0x51, 0xf8, 0x37, 0x38, 0xb2, 0x59, 0x89,
+	0x64, 0x90, 0x84, 0x21, 0xe5, 0x92, 0x86, 0xd4, 0x20, 0xcc, 0x83, 0xb0, 0xf1, 0x48, 0x04, 0x30,
+	0x48, 0x7c, 0xc8, 0x14, 0x92, 0x5c, 0xbb, 0x02, 0xac, 0x5c, 0x8a, 0x12, 0x75, 0x3d, 0xe8, 0x8f,
+	0x14, 0x2a, 0x0c, 0x39, 0x57, 0x0d, 0x6c, 0x76, 0x3d, 0x63, 0x23, 0x5b, 0x69, 0x2e, 0x3f, 0x3e,
+	0x51, 0x88, 0xea, 0x1b, 0x08, 0x8f, 0x8a, 0x6e, 0x2b, 0xac, 0x36, 0x40, 0x56, 0x9a, 0x66, 0x30,
+	0x3c, 0x0e, 0x61, 0x7b, 0x68, 0x80, 0x5c, 0x9a, 0xac, 0xb4, 0xdd, 0x90, 0x5e, 0x10, 0x9b, 0xae,
+	0x48, 0xad, 0x41, 0x69, 0xb2, 0xd0, 0x7e, 0xc0, 0x0a, 0xd6, 0xf0, 0xbd, 0x03, 0xb2, 0x49, 0xc2,
+	0x46, 0xdb, 0x16, 0x4d, 0x1a, 0x3f, 0x8d, 0x5f, 0xde, 0x5b, 0xfb, 0xda, 0x71, 0xb5, 0x34, 0x90,
+	0xde, 0x09, 0x9c, 0xab, 0x93, 0x94, 0x4d, 0x64, 0x55, 0xb5, 0x40, 0x94, 0xde, 0xf5, 0xf4, 0x05,
+	0x26, 0x33, 0x36, 0x69, 0xba, 0x62, 0xf3, 0x15, 0x0e, 0xe9, 0xc8, 0x2b, 0xe3, 0xa6, 0x2b, 0xde,
+	0xc3, 0x61, 0x31, 0x67, 0xb3, 0xff, 0x9a, 0x52, 0x83, 0x35, 0xc1, 0xeb, 0x9a, 0xb1, 0x15, 0xa9,
+	0x8f, 0xd0, 0xee, 0x74, 0x09, 0xc9, 0x67, 0xf6, 0xe0, 0x1f, 0x63, 0xf2, 0x2c, 0xbf, 0xba, 0x4b,
+	0x7e, 0xf3, 0xf4, 0xd9, 0xf3, 0xdb, 0x6c, 0xa1, 0xdf, 0xdb, 0x77, 0xc7, 0x3f, 0x3c, 0xfa, 0xd9,
+	0xf3, 0xe8, 0xd8, 0xf3, 0xf8, 0xd4, 0xf3, 0xf8, 0x77, 0xcf, 0xe3, 0x1f, 0x67, 0x1e, 0x9d, 0xce,
+	0x3c, 0xfa, 0x75, 0xe6, 0xd1, 0xa7, 0x17, 0x4a, 0x5b, 0xf7, 0x53, 0x89, 0x46, 0x54, 0x5d, 0xfd,
+	0x4a, 0xa3, 0x08, 0x0b, 0xdd, 0x87, 0x7b, 0x5c, 0xf6, 0x5a, 0x8c, 0xfd, 0x46, 0xdf, 0xfc, 0x0d,
+	0x00, 0x00, 0xff, 0xff, 0x08, 0xce, 0x90, 0xe8, 0x51, 0x02, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -186,73 +152,73 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// MsgClient is the client API for Msg service.
+// MsgServiceClient is the client API for MsgService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type MsgClient interface {
+type MsgServiceClient interface {
 	MsgRegisterNode(ctx context.Context, in *MsgRegisterNodeRequest, opts ...grpc.CallOption) (*MsgRegisterNodeResponse, error)
 }
 
-type msgClient struct {
+type msgServiceClient struct {
 	cc grpc1.ClientConn
 }
 
-func NewMsgClient(cc grpc1.ClientConn) MsgClient {
-	return &msgClient{cc}
+func NewMsgServiceClient(cc grpc1.ClientConn) MsgServiceClient {
+	return &msgServiceClient{cc}
 }
 
-func (c *msgClient) MsgRegisterNode(ctx context.Context, in *MsgRegisterNodeRequest, opts ...grpc.CallOption) (*MsgRegisterNodeResponse, error) {
+func (c *msgServiceClient) MsgRegisterNode(ctx context.Context, in *MsgRegisterNodeRequest, opts ...grpc.CallOption) (*MsgRegisterNodeResponse, error) {
 	out := new(MsgRegisterNodeResponse)
-	err := c.cc.Invoke(ctx, "/imhub.node.v1.Msg/MsgRegisterNode", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/imhub.node.v1.MsgService/MsgRegisterNode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// MsgServer is the server API for Msg service.
-type MsgServer interface {
+// MsgServiceServer is the server API for MsgService service.
+type MsgServiceServer interface {
 	MsgRegisterNode(context.Context, *MsgRegisterNodeRequest) (*MsgRegisterNodeResponse, error)
 }
 
-// UnimplementedMsgServer can be embedded to have forward compatible implementations.
-type UnimplementedMsgServer struct {
+// UnimplementedMsgServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedMsgServiceServer struct {
 }
 
-func (*UnimplementedMsgServer) MsgRegisterNode(ctx context.Context, req *MsgRegisterNodeRequest) (*MsgRegisterNodeResponse, error) {
+func (*UnimplementedMsgServiceServer) MsgRegisterNode(ctx context.Context, req *MsgRegisterNodeRequest) (*MsgRegisterNodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MsgRegisterNode not implemented")
 }
 
-func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
-	s.RegisterService(&_Msg_serviceDesc, srv)
+func RegisterMsgServiceServer(s grpc1.Server, srv MsgServiceServer) {
+	s.RegisterService(&_MsgService_serviceDesc, srv)
 }
 
-func _Msg_MsgRegisterNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MsgService_MsgRegisterNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MsgRegisterNodeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).MsgRegisterNode(ctx, in)
+		return srv.(MsgServiceServer).MsgRegisterNode(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/imhub.node.v1.Msg/MsgRegisterNode",
+		FullMethod: "/imhub.node.v1.MsgService/MsgRegisterNode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).MsgRegisterNode(ctx, req.(*MsgRegisterNodeRequest))
+		return srv.(MsgServiceServer).MsgRegisterNode(ctx, req.(*MsgRegisterNodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var Msg_serviceDesc = _Msg_serviceDesc
-var _Msg_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "imhub.node.v1.Msg",
-	HandlerType: (*MsgServer)(nil),
+var MsgService_serviceDesc = _MsgService_serviceDesc
+var _MsgService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "imhub.node.v1.MsgService",
+	HandlerType: (*MsgServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "MsgRegisterNode",
-			Handler:    _Msg_MsgRegisterNode_Handler,
+			Handler:    _MsgService_MsgRegisterNode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -279,40 +245,26 @@ func (m *MsgRegisterNodeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	_ = i
 	var l int
 	_ = l
-	if len(m.RemoteURL) > 0 {
-		i -= len(m.RemoteURL)
-		copy(dAtA[i:], m.RemoteURL)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.RemoteURL)))
+	if len(m.PubKey) > 0 {
+		i -= len(m.PubKey)
+		copy(dAtA[i:], m.PubKey)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.PubKey)))
 		i--
 		dAtA[i] = 0x22
 	}
-	if len(m.HourlyPrices) > 0 {
-		for iNdEx := len(m.HourlyPrices) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.HourlyPrices[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintTx(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x1a
-		}
+	if len(m.Address) > 0 {
+		i -= len(m.Address)
+		copy(dAtA[i:], m.Address)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Address)))
+		i--
+		dAtA[i] = 0x1a
 	}
-	if len(m.GigabytePrices) > 0 {
-		for iNdEx := len(m.GigabytePrices) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.GigabytePrices[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintTx(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0x12
-		}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x12
 	}
 	if len(m.From) > 0 {
 		i -= len(m.From)
@@ -368,19 +320,15 @@ func (m *MsgRegisterNodeRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	if len(m.GigabytePrices) > 0 {
-		for _, e := range m.GigabytePrices {
-			l = e.Size()
-			n += 1 + l + sovTx(uint64(l))
-		}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
 	}
-	if len(m.HourlyPrices) > 0 {
-		for _, e := range m.HourlyPrices {
-			l = e.Size()
-			n += 1 + l + sovTx(uint64(l))
-		}
+	l = len(m.Address)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
 	}
-	l = len(m.RemoteURL)
+	l = len(m.PubKey)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
@@ -465,75 +413,7 @@ func (m *MsgRegisterNodeRequest) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field GigabytePrices", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.GigabytePrices = append(m.GigabytePrices, types.Coin{})
-			if err := m.GigabytePrices[len(m.GigabytePrices)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HourlyPrices", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.HourlyPrices = append(m.HourlyPrices, types.Coin{})
-			if err := m.HourlyPrices[len(m.HourlyPrices)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RemoteURL", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -561,7 +441,71 @@ func (m *MsgRegisterNodeRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.RemoteURL = string(dAtA[iNdEx:postIndex])
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Address = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PubKey", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PubKey = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

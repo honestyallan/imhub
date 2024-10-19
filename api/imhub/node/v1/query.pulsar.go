@@ -3,10 +3,11 @@ package nodev1
 
 import (
 	_ "cosmossdk.io/api/amino"
-	_ "cosmossdk.io/api/cosmos/base/query/v1beta1"
+	v1beta1 "cosmossdk.io/api/cosmos/base/query/v1beta1"
 	fmt "fmt"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
+	v1 "github.com/dun-io/imhub/api/imhub/types/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoiface "google.golang.org/protobuf/runtime/protoiface"
@@ -17,23 +18,27 @@ import (
 )
 
 var (
-	md_QueryParamsRequest protoreflect.MessageDescriptor
+	md_QueryNodesRequest            protoreflect.MessageDescriptor
+	fd_QueryNodesRequest_status     protoreflect.FieldDescriptor
+	fd_QueryNodesRequest_pagination protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_imhub_node_v1_query_proto_init()
-	md_QueryParamsRequest = File_imhub_node_v1_query_proto.Messages().ByName("QueryParamsRequest")
+	md_QueryNodesRequest = File_imhub_node_v1_query_proto.Messages().ByName("QueryNodesRequest")
+	fd_QueryNodesRequest_status = md_QueryNodesRequest.Fields().ByName("status")
+	fd_QueryNodesRequest_pagination = md_QueryNodesRequest.Fields().ByName("pagination")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryParamsRequest)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryNodesRequest)(nil)
 
-type fastReflection_QueryParamsRequest QueryParamsRequest
+type fastReflection_QueryNodesRequest QueryNodesRequest
 
-func (x *QueryParamsRequest) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryParamsRequest)(x)
+func (x *QueryNodesRequest) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryNodesRequest)(x)
 }
 
-func (x *QueryParamsRequest) slowProtoReflect() protoreflect.Message {
+func (x *QueryNodesRequest) slowProtoReflect() protoreflect.Message {
 	mi := &file_imhub_node_v1_query_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -45,43 +50,43 @@ func (x *QueryParamsRequest) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryParamsRequest_messageType fastReflection_QueryParamsRequest_messageType
-var _ protoreflect.MessageType = fastReflection_QueryParamsRequest_messageType{}
+var _fastReflection_QueryNodesRequest_messageType fastReflection_QueryNodesRequest_messageType
+var _ protoreflect.MessageType = fastReflection_QueryNodesRequest_messageType{}
 
-type fastReflection_QueryParamsRequest_messageType struct{}
+type fastReflection_QueryNodesRequest_messageType struct{}
 
-func (x fastReflection_QueryParamsRequest_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryParamsRequest)(nil)
+func (x fastReflection_QueryNodesRequest_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryNodesRequest)(nil)
 }
-func (x fastReflection_QueryParamsRequest_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryParamsRequest)
+func (x fastReflection_QueryNodesRequest_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryNodesRequest)
 }
-func (x fastReflection_QueryParamsRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryParamsRequest
+func (x fastReflection_QueryNodesRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryNodesRequest
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryParamsRequest) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryParamsRequest
+func (x *fastReflection_QueryNodesRequest) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryNodesRequest
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryParamsRequest) Type() protoreflect.MessageType {
-	return _fastReflection_QueryParamsRequest_messageType
+func (x *fastReflection_QueryNodesRequest) Type() protoreflect.MessageType {
+	return _fastReflection_QueryNodesRequest_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryParamsRequest) New() protoreflect.Message {
-	return new(fastReflection_QueryParamsRequest)
+func (x *fastReflection_QueryNodesRequest) New() protoreflect.Message {
+	return new(fastReflection_QueryNodesRequest)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryParamsRequest) Interface() protoreflect.ProtoMessage {
-	return (*QueryParamsRequest)(x)
+func (x *fastReflection_QueryNodesRequest) Interface() protoreflect.ProtoMessage {
+	return (*QueryNodesRequest)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -89,7 +94,19 @@ func (x *fastReflection_QueryParamsRequest) Interface() protoreflect.ProtoMessag
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryParamsRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_QueryNodesRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Status != 0 {
+		value := protoreflect.ValueOfEnum((protoreflect.EnumNumber)(x.Status))
+		if !f(fd_QueryNodesRequest_status, value) {
+			return
+		}
+	}
+	if x.Pagination != nil {
+		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
+		if !f(fd_QueryNodesRequest_pagination, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -103,13 +120,17 @@ func (x *fastReflection_QueryParamsRequest) Range(f func(protoreflect.FieldDescr
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryParamsRequest) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryNodesRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "imhub.node.v1.QueryNodesRequest.status":
+		return x.Status != 0
+	case "imhub.node.v1.QueryNodesRequest.pagination":
+		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesRequest"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -119,13 +140,17 @@ func (x *fastReflection_QueryParamsRequest) Has(fd protoreflect.FieldDescriptor)
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryParamsRequest) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryNodesRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "imhub.node.v1.QueryNodesRequest.status":
+		x.Status = 0
+	case "imhub.node.v1.QueryNodesRequest.pagination":
+		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesRequest"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -135,13 +160,19 @@ func (x *fastReflection_QueryParamsRequest) Clear(fd protoreflect.FieldDescripto
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryParamsRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryNodesRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "imhub.node.v1.QueryNodesRequest.status":
+		value := x.Status
+		return protoreflect.ValueOfEnum((protoreflect.EnumNumber)(value))
+	case "imhub.node.v1.QueryNodesRequest.pagination":
+		value := x.Pagination
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesRequest"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsRequest does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesRequest does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -155,13 +186,17 @@ func (x *fastReflection_QueryParamsRequest) Get(descriptor protoreflect.FieldDes
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryParamsRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryNodesRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "imhub.node.v1.QueryNodesRequest.status":
+		x.Status = (v1.Status)(value.Enum())
+	case "imhub.node.v1.QueryNodesRequest.pagination":
+		x.Pagination = value.Message().Interface().(*v1beta1.PageRequest)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesRequest"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -175,36 +210,48 @@ func (x *fastReflection_QueryParamsRequest) Set(fd protoreflect.FieldDescriptor,
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryParamsRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryNodesRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "imhub.node.v1.QueryNodesRequest.pagination":
+		if x.Pagination == nil {
+			x.Pagination = new(v1beta1.PageRequest)
+		}
+		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
+	case "imhub.node.v1.QueryNodesRequest.status":
+		panic(fmt.Errorf("field status of message imhub.node.v1.QueryNodesRequest is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesRequest"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryParamsRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryNodesRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "imhub.node.v1.QueryNodesRequest.status":
+		return protoreflect.ValueOfEnum(0)
+	case "imhub.node.v1.QueryNodesRequest.pagination":
+		m := new(v1beta1.PageRequest)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesRequest"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryParamsRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryNodesRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in imhub.node.v1.QueryParamsRequest", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in imhub.node.v1.QueryNodesRequest", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -212,7 +259,7 @@ func (x *fastReflection_QueryParamsRequest) WhichOneof(d protoreflect.OneofDescr
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryParamsRequest) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryNodesRequest) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -223,7 +270,7 @@ func (x *fastReflection_QueryParamsRequest) GetUnknown() protoreflect.RawFields 
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryParamsRequest) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryNodesRequest) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -235,7 +282,7 @@ func (x *fastReflection_QueryParamsRequest) SetUnknown(fields protoreflect.RawFi
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryParamsRequest) IsValid() bool {
+func (x *fastReflection_QueryNodesRequest) IsValid() bool {
 	return x != nil
 }
 
@@ -245,9 +292,9 @@ func (x *fastReflection_QueryParamsRequest) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryParamsRequest) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryNodesRequest) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryParamsRequest)
+		x := input.Message.Interface().(*QueryNodesRequest)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -259,6 +306,13 @@ func (x *fastReflection_QueryParamsRequest) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
+		if x.Status != 0 {
+			n += 1 + runtime.Sov(uint64(x.Status))
+		}
+		if x.Pagination != nil {
+			l = options.Size(x.Pagination)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -269,7 +323,7 @@ func (x *fastReflection_QueryParamsRequest) ProtoMethods() *protoiface.Methods {
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryParamsRequest)
+		x := input.Message.Interface().(*QueryNodesRequest)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -288,6 +342,25 @@ func (x *fastReflection_QueryParamsRequest) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
+		if x.Pagination != nil {
+			encoded, err := options.Marshal(x.Pagination)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if x.Status != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Status))
+			i--
+			dAtA[i] = 0x8
+		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
 		} else {
@@ -299,7 +372,7 @@ func (x *fastReflection_QueryParamsRequest) ProtoMethods() *protoiface.Methods {
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryParamsRequest)
+		x := input.Message.Interface().(*QueryNodesRequest)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -331,12 +404,67 @@ func (x *fastReflection_QueryParamsRequest) ProtoMethods() *protoiface.Methods {
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryParamsRequest: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryNodesRequest: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryParamsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryNodesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+				}
+				x.Status = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Status |= v1.Status(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Pagination == nil {
+					x.Pagination = &v1beta1.PageRequest{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Pagination); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -372,26 +500,79 @@ func (x *fastReflection_QueryParamsRequest) ProtoMethods() *protoiface.Methods {
 	}
 }
 
+var _ protoreflect.List = (*_QueryNodesResponse_1_list)(nil)
+
+type _QueryNodesResponse_1_list struct {
+	list *[]*Node
+}
+
+func (x *_QueryNodesResponse_1_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_QueryNodesResponse_1_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_QueryNodesResponse_1_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Node)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_QueryNodesResponse_1_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*Node)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_QueryNodesResponse_1_list) AppendMutable() protoreflect.Value {
+	v := new(Node)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryNodesResponse_1_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_QueryNodesResponse_1_list) NewElement() protoreflect.Value {
+	v := new(Node)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryNodesResponse_1_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_QueryParamsResponse        protoreflect.MessageDescriptor
-	fd_QueryParamsResponse_params protoreflect.FieldDescriptor
+	md_QueryNodesResponse            protoreflect.MessageDescriptor
+	fd_QueryNodesResponse_nodes      protoreflect.FieldDescriptor
+	fd_QueryNodesResponse_pagination protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_imhub_node_v1_query_proto_init()
-	md_QueryParamsResponse = File_imhub_node_v1_query_proto.Messages().ByName("QueryParamsResponse")
-	fd_QueryParamsResponse_params = md_QueryParamsResponse.Fields().ByName("params")
+	md_QueryNodesResponse = File_imhub_node_v1_query_proto.Messages().ByName("QueryNodesResponse")
+	fd_QueryNodesResponse_nodes = md_QueryNodesResponse.Fields().ByName("nodes")
+	fd_QueryNodesResponse_pagination = md_QueryNodesResponse.Fields().ByName("pagination")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryParamsResponse)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryNodesResponse)(nil)
 
-type fastReflection_QueryParamsResponse QueryParamsResponse
+type fastReflection_QueryNodesResponse QueryNodesResponse
 
-func (x *QueryParamsResponse) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryParamsResponse)(x)
+func (x *QueryNodesResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryNodesResponse)(x)
 }
 
-func (x *QueryParamsResponse) slowProtoReflect() protoreflect.Message {
+func (x *QueryNodesResponse) slowProtoReflect() protoreflect.Message {
 	mi := &file_imhub_node_v1_query_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -403,43 +584,43 @@ func (x *QueryParamsResponse) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryParamsResponse_messageType fastReflection_QueryParamsResponse_messageType
-var _ protoreflect.MessageType = fastReflection_QueryParamsResponse_messageType{}
+var _fastReflection_QueryNodesResponse_messageType fastReflection_QueryNodesResponse_messageType
+var _ protoreflect.MessageType = fastReflection_QueryNodesResponse_messageType{}
 
-type fastReflection_QueryParamsResponse_messageType struct{}
+type fastReflection_QueryNodesResponse_messageType struct{}
 
-func (x fastReflection_QueryParamsResponse_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryParamsResponse)(nil)
+func (x fastReflection_QueryNodesResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryNodesResponse)(nil)
 }
-func (x fastReflection_QueryParamsResponse_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryParamsResponse)
+func (x fastReflection_QueryNodesResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryNodesResponse)
 }
-func (x fastReflection_QueryParamsResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryParamsResponse
+func (x fastReflection_QueryNodesResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryNodesResponse
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryParamsResponse) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryParamsResponse
+func (x *fastReflection_QueryNodesResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryNodesResponse
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryParamsResponse) Type() protoreflect.MessageType {
-	return _fastReflection_QueryParamsResponse_messageType
+func (x *fastReflection_QueryNodesResponse) Type() protoreflect.MessageType {
+	return _fastReflection_QueryNodesResponse_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryParamsResponse) New() protoreflect.Message {
-	return new(fastReflection_QueryParamsResponse)
+func (x *fastReflection_QueryNodesResponse) New() protoreflect.Message {
+	return new(fastReflection_QueryNodesResponse)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryParamsResponse) Interface() protoreflect.ProtoMessage {
-	return (*QueryParamsResponse)(x)
+func (x *fastReflection_QueryNodesResponse) Interface() protoreflect.ProtoMessage {
+	return (*QueryNodesResponse)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -447,10 +628,16 @@ func (x *fastReflection_QueryParamsResponse) Interface() protoreflect.ProtoMessa
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryParamsResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Params != nil {
-		value := protoreflect.ValueOfMessage(x.Params.ProtoReflect())
-		if !f(fd_QueryParamsResponse_params, value) {
+func (x *fastReflection_QueryNodesResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if len(x.Nodes) != 0 {
+		value := protoreflect.ValueOfList(&_QueryNodesResponse_1_list{list: &x.Nodes})
+		if !f(fd_QueryNodesResponse_nodes, value) {
+			return
+		}
+	}
+	if x.Pagination != nil {
+		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
+		if !f(fd_QueryNodesResponse_pagination, value) {
 			return
 		}
 	}
@@ -467,15 +654,17 @@ func (x *fastReflection_QueryParamsResponse) Range(f func(protoreflect.FieldDesc
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryParamsResponse) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryNodesResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "imhub.node.v1.QueryParamsResponse.params":
-		return x.Params != nil
+	case "imhub.node.v1.QueryNodesResponse.nodes":
+		return len(x.Nodes) != 0
+	case "imhub.node.v1.QueryNodesResponse.pagination":
+		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesResponse"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -485,15 +674,17 @@ func (x *fastReflection_QueryParamsResponse) Has(fd protoreflect.FieldDescriptor
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryParamsResponse) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryNodesResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "imhub.node.v1.QueryParamsResponse.params":
-		x.Params = nil
+	case "imhub.node.v1.QueryNodesResponse.nodes":
+		x.Nodes = nil
+	case "imhub.node.v1.QueryNodesResponse.pagination":
+		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesResponse"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -503,16 +694,22 @@ func (x *fastReflection_QueryParamsResponse) Clear(fd protoreflect.FieldDescript
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryParamsResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryNodesResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "imhub.node.v1.QueryParamsResponse.params":
-		value := x.Params
+	case "imhub.node.v1.QueryNodesResponse.nodes":
+		if len(x.Nodes) == 0 {
+			return protoreflect.ValueOfList(&_QueryNodesResponse_1_list{})
+		}
+		listValue := &_QueryNodesResponse_1_list{list: &x.Nodes}
+		return protoreflect.ValueOfList(listValue)
+	case "imhub.node.v1.QueryNodesResponse.pagination":
+		value := x.Pagination
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesResponse"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsResponse does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesResponse does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -526,15 +723,19 @@ func (x *fastReflection_QueryParamsResponse) Get(descriptor protoreflect.FieldDe
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryParamsResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryNodesResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "imhub.node.v1.QueryParamsResponse.params":
-		x.Params = value.Message().Interface().(*Params)
+	case "imhub.node.v1.QueryNodesResponse.nodes":
+		lv := value.List()
+		clv := lv.(*_QueryNodesResponse_1_list)
+		x.Nodes = *clv.list
+	case "imhub.node.v1.QueryNodesResponse.pagination":
+		x.Pagination = value.Message().Interface().(*v1beta1.PageResponse)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesResponse"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -548,44 +749,53 @@ func (x *fastReflection_QueryParamsResponse) Set(fd protoreflect.FieldDescriptor
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryParamsResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryNodesResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "imhub.node.v1.QueryParamsResponse.params":
-		if x.Params == nil {
-			x.Params = new(Params)
+	case "imhub.node.v1.QueryNodesResponse.nodes":
+		if x.Nodes == nil {
+			x.Nodes = []*Node{}
 		}
-		return protoreflect.ValueOfMessage(x.Params.ProtoReflect())
+		value := &_QueryNodesResponse_1_list{list: &x.Nodes}
+		return protoreflect.ValueOfList(value)
+	case "imhub.node.v1.QueryNodesResponse.pagination":
+		if x.Pagination == nil {
+			x.Pagination = new(v1beta1.PageResponse)
+		}
+		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesResponse"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryParamsResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryNodesResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "imhub.node.v1.QueryParamsResponse.params":
-		m := new(Params)
+	case "imhub.node.v1.QueryNodesResponse.nodes":
+		list := []*Node{}
+		return protoreflect.ValueOfList(&_QueryNodesResponse_1_list{list: &list})
+	case "imhub.node.v1.QueryNodesResponse.pagination":
+		m := new(v1beta1.PageResponse)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryParamsResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.QueryNodesResponse"))
 		}
-		panic(fmt.Errorf("message imhub.node.v1.QueryParamsResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message imhub.node.v1.QueryNodesResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryParamsResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryNodesResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in imhub.node.v1.QueryParamsResponse", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in imhub.node.v1.QueryNodesResponse", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -593,7 +803,7 @@ func (x *fastReflection_QueryParamsResponse) WhichOneof(d protoreflect.OneofDesc
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryParamsResponse) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryNodesResponse) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -604,7 +814,7 @@ func (x *fastReflection_QueryParamsResponse) GetUnknown() protoreflect.RawFields
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryParamsResponse) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryNodesResponse) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -616,7 +826,7 @@ func (x *fastReflection_QueryParamsResponse) SetUnknown(fields protoreflect.RawF
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryParamsResponse) IsValid() bool {
+func (x *fastReflection_QueryNodesResponse) IsValid() bool {
 	return x != nil
 }
 
@@ -626,9 +836,9 @@ func (x *fastReflection_QueryParamsResponse) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryNodesResponse) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryParamsResponse)
+		x := input.Message.Interface().(*QueryNodesResponse)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -640,8 +850,14 @@ func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods 
 		var n int
 		var l int
 		_ = l
-		if x.Params != nil {
-			l = options.Size(x.Params)
+		if len(x.Nodes) > 0 {
+			for _, e := range x.Nodes {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.Pagination != nil {
+			l = options.Size(x.Pagination)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.unknownFields != nil {
@@ -654,7 +870,7 @@ func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods 
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryParamsResponse)
+		x := input.Message.Interface().(*QueryNodesResponse)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -673,8 +889,8 @@ func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods 
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.Params != nil {
-			encoded, err := options.Marshal(x.Params)
+		if x.Pagination != nil {
+			encoded, err := options.Marshal(x.Pagination)
 			if err != nil {
 				return protoiface.MarshalOutput{
 					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -685,7 +901,23 @@ func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods 
 			copy(dAtA[i:], encoded)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x12
+		}
+		if len(x.Nodes) > 0 {
+			for iNdEx := len(x.Nodes) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.Nodes[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0xa
+			}
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -698,7 +930,7 @@ func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods 
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryParamsResponse)
+		x := input.Message.Interface().(*QueryNodesResponse)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -730,15 +962,15 @@ func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods 
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryParamsResponse: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryNodesResponse: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryParamsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryNodesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Params", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Nodes", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -765,10 +997,44 @@ func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods 
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				if x.Params == nil {
-					x.Params = &Params{}
+				x.Nodes = append(x.Nodes, &Node{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Nodes[len(x.Nodes)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Params); err != nil {
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Pagination == nil {
+					x.Pagination = &v1beta1.PageResponse{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Pagination); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
@@ -820,15 +1086,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// QueryParamsRequest is request type for the Query/Params RPC method.
-type QueryParamsRequest struct {
+type QueryNodesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Status     v1.Status            `protobuf:"varint,1,opt,name=status,proto3,enum=imhub.types.v1.Status" json:"status,omitempty"`
+	Pagination *v1beta1.PageRequest `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (x *QueryParamsRequest) Reset() {
-	*x = QueryParamsRequest{}
+func (x *QueryNodesRequest) Reset() {
+	*x = QueryNodesRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_imhub_node_v1_query_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -836,29 +1104,42 @@ func (x *QueryParamsRequest) Reset() {
 	}
 }
 
-func (x *QueryParamsRequest) String() string {
+func (x *QueryNodesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryParamsRequest) ProtoMessage() {}
+func (*QueryNodesRequest) ProtoMessage() {}
 
-// Deprecated: Use QueryParamsRequest.ProtoReflect.Descriptor instead.
-func (*QueryParamsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryNodesRequest.ProtoReflect.Descriptor instead.
+func (*QueryNodesRequest) Descriptor() ([]byte, []int) {
 	return file_imhub_node_v1_query_proto_rawDescGZIP(), []int{0}
 }
 
-// QueryParamsResponse is response type for the Query/Params RPC method.
-type QueryParamsResponse struct {
+func (x *QueryNodesRequest) GetStatus() v1.Status {
+	if x != nil {
+		return x.Status
+	}
+	return v1.Status(0)
+}
+
+func (x *QueryNodesRequest) GetPagination() *v1beta1.PageRequest {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
+type QueryNodesResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// params holds all the parameters of this module.
-	Params *Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
+	Nodes      []*Node               `protobuf:"bytes,1,rep,name=nodes,proto3" json:"nodes,omitempty"`
+	Pagination *v1beta1.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (x *QueryParamsResponse) Reset() {
-	*x = QueryParamsResponse{}
+func (x *QueryNodesResponse) Reset() {
+	*x = QueryNodesResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_imhub_node_v1_query_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -866,20 +1147,27 @@ func (x *QueryParamsResponse) Reset() {
 	}
 }
 
-func (x *QueryParamsResponse) String() string {
+func (x *QueryNodesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryParamsResponse) ProtoMessage() {}
+func (*QueryNodesResponse) ProtoMessage() {}
 
-// Deprecated: Use QueryParamsResponse.ProtoReflect.Descriptor instead.
-func (*QueryParamsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryNodesResponse.ProtoReflect.Descriptor instead.
+func (*QueryNodesResponse) Descriptor() ([]byte, []int) {
 	return file_imhub_node_v1_query_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *QueryParamsResponse) GetParams() *Params {
+func (x *QueryNodesResponse) GetNodes() []*Node {
 	if x != nil {
-		return x.Params
+		return x.Nodes
+	}
+	return nil
+}
+
+func (x *QueryNodesResponse) GetPagination() *v1beta1.PageResponse {
+	if x != nil {
+		return x.Pagination
 	}
 	return nil
 }
@@ -896,34 +1184,48 @@ var file_imhub_node_v1_query_proto_rawDesc = []byte{
 	0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x1a, 0x2a, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x62, 0x61, 0x73, 0x65, 0x2f, 0x71,
 	0x75, 0x65, 0x72, 0x79, 0x2f, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2f, 0x70, 0x61, 0x67,
-	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1a, 0x69,
-	0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x76, 0x31, 0x2f, 0x70, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x14, 0x0a, 0x12, 0x51, 0x75, 0x65,
-	0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22,
-	0x4f, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x38, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e,
-	0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8,
-	0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x32, 0x7b, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x72, 0x0a, 0x06, 0x50, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x12, 0x21, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65,
-	0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e,
-	0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61,
-	0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x21, 0x82, 0xd3, 0xe4, 0x93,
-	0x02, 0x1b, 0x12, 0x19, 0x2f, 0x64, 0x75, 0x6e, 0x2d, 0x69, 0x6f, 0x2f, 0x69, 0x6d, 0x68, 0x75,
-	0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0xa7, 0x01,
-	0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65,
-	0x2e, 0x76, 0x31, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
-	0x01, 0x5a, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x75,
-	0x6e, 0x2d, 0x69, 0x6f, 0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x69,
-	0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x6e, 0x6f, 0x64,
-	0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x49, 0x4e, 0x58, 0xaa, 0x02, 0x0d, 0x49, 0x6d, 0x68, 0x75,
-	0x62, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x0d, 0x49, 0x6d, 0x68, 0x75,
-	0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x19, 0x49, 0x6d, 0x68, 0x75,
-	0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74,
-	0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x3a, 0x3a, 0x4e,
-	0x6f, 0x64, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x18, 0x69,
+	0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x76, 0x31, 0x2f, 0x6e, 0x6f, 0x64,
+	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x74,
+	0x79, 0x70, 0x65, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x8b, 0x01, 0x0a, 0x11, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4e, 0x6f,
+	0x64, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2e, 0x0a, 0x06, 0x73, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x16, 0x2e, 0x69, 0x6d, 0x68,
+	0x75, 0x62, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x46, 0x0a, 0x0a, 0x70, 0x61,
+	0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26,
+	0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65,
+	0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x22, 0x8e, 0x01, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4e, 0x6f, 0x64, 0x65,
+	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2f, 0x0a, 0x05, 0x6e, 0x6f, 0x64,
+	0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62,
+	0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x42, 0x04, 0xc8,
+	0xde, 0x1f, 0x00, 0x52, 0x05, 0x6e, 0x6f, 0x64, 0x65, 0x73, 0x12, 0x47, 0x0a, 0x0a, 0x70, 0x61,
+	0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x27,
+	0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65,
+	0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x32, 0x78, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x6f, 0x0a, 0x0a,
+	0x51, 0x75, 0x65, 0x72, 0x79, 0x4e, 0x6f, 0x64, 0x65, 0x73, 0x12, 0x20, 0x2e, 0x69, 0x6d, 0x68,
+	0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79,
+	0x4e, 0x6f, 0x64, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x69,
+	0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x4e, 0x6f, 0x64, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x1c, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x16, 0x12, 0x14, 0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f,
+	0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x76, 0x32, 0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x73, 0x42, 0xaf, 0x01,
+	0xc8, 0xe1, 0x1e, 0x00, 0xa8, 0xe2, 0x1e, 0x00, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x69, 0x6d,
+	0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x0a, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x75, 0x6e, 0x2d, 0x69, 0x6f, 0x2f, 0x69, 0x6d, 0x68,
+	0x75, 0x62, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64,
+	0x65, 0x2f, 0x76, 0x31, 0x3b, 0x6e, 0x6f, 0x64, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x49, 0x4e,
+	0x58, 0xaa, 0x02, 0x0d, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x2e, 0x56,
+	0x31, 0xca, 0x02, 0x0d, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56,
+	0x31, 0xe2, 0x02, 0x19, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56,
+	0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f,
+	0x49, 0x6d, 0x68, 0x75, 0x62, 0x3a, 0x3a, 0x4e, 0x6f, 0x64, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -940,19 +1242,25 @@ func file_imhub_node_v1_query_proto_rawDescGZIP() []byte {
 
 var file_imhub_node_v1_query_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_imhub_node_v1_query_proto_goTypes = []interface{}{
-	(*QueryParamsRequest)(nil),  // 0: imhub.node.v1.QueryParamsRequest
-	(*QueryParamsResponse)(nil), // 1: imhub.node.v1.QueryParamsResponse
-	(*Params)(nil),              // 2: imhub.node.v1.Params
+	(*QueryNodesRequest)(nil),    // 0: imhub.node.v1.QueryNodesRequest
+	(*QueryNodesResponse)(nil),   // 1: imhub.node.v1.QueryNodesResponse
+	(v1.Status)(0),               // 2: imhub.types.v1.Status
+	(*v1beta1.PageRequest)(nil),  // 3: cosmos.base.query.v1beta1.PageRequest
+	(*Node)(nil),                 // 4: imhub.node.v1.Node
+	(*v1beta1.PageResponse)(nil), // 5: cosmos.base.query.v1beta1.PageResponse
 }
 var file_imhub_node_v1_query_proto_depIdxs = []int32{
-	2, // 0: imhub.node.v1.QueryParamsResponse.params:type_name -> imhub.node.v1.Params
-	0, // 1: imhub.node.v1.Query.Params:input_type -> imhub.node.v1.QueryParamsRequest
-	1, // 2: imhub.node.v1.Query.Params:output_type -> imhub.node.v1.QueryParamsResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 0: imhub.node.v1.QueryNodesRequest.status:type_name -> imhub.types.v1.Status
+	3, // 1: imhub.node.v1.QueryNodesRequest.pagination:type_name -> cosmos.base.query.v1beta1.PageRequest
+	4, // 2: imhub.node.v1.QueryNodesResponse.nodes:type_name -> imhub.node.v1.Node
+	5, // 3: imhub.node.v1.QueryNodesResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
+	0, // 4: imhub.node.v1.Query.QueryNodes:input_type -> imhub.node.v1.QueryNodesRequest
+	1, // 5: imhub.node.v1.Query.QueryNodes:output_type -> imhub.node.v1.QueryNodesResponse
+	5, // [5:6] is the sub-list for method output_type
+	4, // [4:5] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_imhub_node_v1_query_proto_init() }
@@ -960,10 +1268,10 @@ func file_imhub_node_v1_query_proto_init() {
 	if File_imhub_node_v1_query_proto != nil {
 		return
 	}
-	file_imhub_node_v1_params_proto_init()
+	file_imhub_node_v1_node_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_imhub_node_v1_query_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryParamsRequest); i {
+			switch v := v.(*QueryNodesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -975,7 +1283,7 @@ func file_imhub_node_v1_query_proto_init() {
 			}
 		}
 		file_imhub_node_v1_query_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryParamsResponse); i {
+			switch v := v.(*QueryNodesResponse); i {
 			case 0:
 				return &v.state
 			case 1:

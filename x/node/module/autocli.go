@@ -12,8 +12,8 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service: v1.Query_ServiceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
-					RpcMethod: "Params",
-					Use:       "params",
+					RpcMethod: "QueryNodes",
+					Use:       "queryNodes",
 					Short:     "Shows the parameters of the module",
 				},
 				// this line is used by ignite scaffolding # autocli/query

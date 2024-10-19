@@ -97,29 +97,29 @@ func (AppModuleBasic) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *r
 type AppModule struct {
 	AppModuleBasic
 
-	keeper        keeper.Keeper
-	accountKeeper v1.AccountKeeper
-	bankKeeper    v1.BankKeeper
+	keeper keeper.Keeper
+	//accountKeeper v1.AccountKeeper
+	//bankKeeper    v1.BankKeeper
 }
 
 func NewAppModule(
 	cdc codec.Codec,
 	keeper keeper.Keeper,
-	accountKeeper v1.AccountKeeper,
-	bankKeeper v1.BankKeeper,
+	// accountKeeper v1.AccountKeeper,
+	// bankKeeper v1.BankKeeper,
 ) AppModule {
 	return AppModule{
 		AppModuleBasic: NewAppModuleBasic(cdc),
 		keeper:         keeper,
-		accountKeeper:  accountKeeper,
-		bankKeeper:     bankKeeper,
+		//accountKeeper:  accountKeeper,
+		//bankKeeper:     bankKeeper,
 	}
 }
 
 // RegisterServices registers a gRPC query service to respond to the module-specific gRPC queries
 func (am AppModule) RegisterServices(cfg module.Configurator) {
 	v1.RegisterMsgServer(cfg.MsgServer(), v2.NewMsgServerImpl(am.keeper))
-	v1.RegisterQueryServer(cfg.QueryServer(), am.keeper)
+	v1.RegisterQueryServer(cfg.QueryServer(), v2.NewQueryServiceServer(am.keeper))
 }
 
 // RegisterInvariants registers the invariants of the module. If an invariant deviates from its predicted value, the InvariantRegistry triggers appropriate logic (most often the chain will be halted)
@@ -182,8 +182,8 @@ type ModuleInputs struct {
 	Config       *modulev1.Module
 	Logger       log.Logger
 
-	AccountKeeper v1.AccountKeeper
-	BankKeeper    v1.BankKeeper
+	//AccountKeeper v1.AccountKeeper
+	//BankKeeper    v1.BankKeeper
 }
 
 type ModuleOutputs struct {
@@ -208,8 +208,8 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 	m := NewAppModule(
 		in.Cdc,
 		k,
-		in.AccountKeeper,
-		in.BankKeeper,
+		//in.AccountKeeper,
+		//in.BankKeeper,
 	)
 
 	return ModuleOutputs{NodeKeeper: k, Module: m}

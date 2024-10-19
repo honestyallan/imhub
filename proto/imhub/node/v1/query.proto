@@ -13,7 +13,7 @@ option (gogoproto.goproto_getters_all) = false;
 // Query defines the gRPC querier service.
 service Query {
   rpc QueryNodes(QueryNodesRequest) returns (QueryNodesResponse) {
-    option (google.api.http).get = "/imhub/node/v2/nodes";
+    option (google.api.http).get = "/imhub/node/v1/nodes";
   }
 }
 

@@ -2,11 +2,7 @@
 package nodev1
 
 import (
-	_ "cosmossdk.io/api/amino"
-	_ "cosmossdk.io/api/cosmos/base/v1beta1"
-	_ "cosmossdk.io/api/cosmos/msg/v1"
 	fmt "fmt"
-	_ "github.com/cosmos/cosmos-proto"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	v1 "github.com/dun-io/imhub/api/imhub/types/v1"
@@ -21,21 +17,25 @@ import (
 
 var (
 	md_Node             protoreflect.MessageDescriptor
+	fd_Node_name        protoreflect.FieldDescriptor
 	fd_Node_address     protoreflect.FieldDescriptor
-	fd_Node_remote_url  protoreflect.FieldDescriptor
-	fd_Node_inactive_at protoreflect.FieldDescriptor
+	fd_Node_pubKey      protoreflect.FieldDescriptor
+	fd_Node_stakeAmount protoreflect.FieldDescriptor
 	fd_Node_status      protoreflect.FieldDescriptor
 	fd_Node_status_at   protoreflect.FieldDescriptor
+	fd_Node_inactive_at protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_imhub_node_v1_node_proto_init()
 	md_Node = File_imhub_node_v1_node_proto.Messages().ByName("Node")
+	fd_Node_name = md_Node.Fields().ByName("name")
 	fd_Node_address = md_Node.Fields().ByName("address")
-	fd_Node_remote_url = md_Node.Fields().ByName("remote_url")
-	fd_Node_inactive_at = md_Node.Fields().ByName("inactive_at")
+	fd_Node_pubKey = md_Node.Fields().ByName("pubKey")
+	fd_Node_stakeAmount = md_Node.Fields().ByName("stakeAmount")
 	fd_Node_status = md_Node.Fields().ByName("status")
 	fd_Node_status_at = md_Node.Fields().ByName("status_at")
+	fd_Node_inactive_at = md_Node.Fields().ByName("inactive_at")
 }
 
 var _ protoreflect.Message = (*fastReflection_Node)(nil)
@@ -103,21 +103,27 @@ func (x *fastReflection_Node) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_Node) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Name != "" {
+		value := protoreflect.ValueOfString(x.Name)
+		if !f(fd_Node_name, value) {
+			return
+		}
+	}
 	if x.Address != "" {
 		value := protoreflect.ValueOfString(x.Address)
 		if !f(fd_Node_address, value) {
 			return
 		}
 	}
-	if x.RemoteUrl != "" {
-		value := protoreflect.ValueOfString(x.RemoteUrl)
-		if !f(fd_Node_remote_url, value) {
+	if x.PubKey != "" {
+		value := protoreflect.ValueOfString(x.PubKey)
+		if !f(fd_Node_pubKey, value) {
 			return
 		}
 	}
-	if x.InactiveAt != nil {
-		value := protoreflect.ValueOfMessage(x.InactiveAt.ProtoReflect())
-		if !f(fd_Node_inactive_at, value) {
+	if x.StakeAmount != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.StakeAmount)
+		if !f(fd_Node_stakeAmount, value) {
 			return
 		}
 	}
@@ -130,6 +136,12 @@ func (x *fastReflection_Node) Range(f func(protoreflect.FieldDescriptor, protore
 	if x.StatusAt != nil {
 		value := protoreflect.ValueOfMessage(x.StatusAt.ProtoReflect())
 		if !f(fd_Node_status_at, value) {
+			return
+		}
+	}
+	if x.InactiveAt != nil {
+		value := protoreflect.ValueOfMessage(x.InactiveAt.ProtoReflect())
+		if !f(fd_Node_inactive_at, value) {
 			return
 		}
 	}
@@ -148,16 +160,20 @@ func (x *fastReflection_Node) Range(f func(protoreflect.FieldDescriptor, protore
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_Node) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "imhub.node.v1.Node.name":
+		return x.Name != ""
 	case "imhub.node.v1.Node.address":
 		return x.Address != ""
-	case "imhub.node.v1.Node.remote_url":
-		return x.RemoteUrl != ""
-	case "imhub.node.v1.Node.inactive_at":
-		return x.InactiveAt != nil
+	case "imhub.node.v1.Node.pubKey":
+		return x.PubKey != ""
+	case "imhub.node.v1.Node.stakeAmount":
+		return x.StakeAmount != uint64(0)
 	case "imhub.node.v1.Node.status":
 		return x.Status != 0
 	case "imhub.node.v1.Node.status_at":
 		return x.StatusAt != nil
+	case "imhub.node.v1.Node.inactive_at":
+		return x.InactiveAt != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.Node"))
@@ -174,16 +190,20 @@ func (x *fastReflection_Node) Has(fd protoreflect.FieldDescriptor) bool {
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Node) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "imhub.node.v1.Node.name":
+		x.Name = ""
 	case "imhub.node.v1.Node.address":
 		x.Address = ""
-	case "imhub.node.v1.Node.remote_url":
-		x.RemoteUrl = ""
-	case "imhub.node.v1.Node.inactive_at":
-		x.InactiveAt = nil
+	case "imhub.node.v1.Node.pubKey":
+		x.PubKey = ""
+	case "imhub.node.v1.Node.stakeAmount":
+		x.StakeAmount = uint64(0)
 	case "imhub.node.v1.Node.status":
 		x.Status = 0
 	case "imhub.node.v1.Node.status_at":
 		x.StatusAt = nil
+	case "imhub.node.v1.Node.inactive_at":
+		x.InactiveAt = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.Node"))
@@ -200,20 +220,26 @@ func (x *fastReflection_Node) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_Node) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "imhub.node.v1.Node.name":
+		value := x.Name
+		return protoreflect.ValueOfString(value)
 	case "imhub.node.v1.Node.address":
 		value := x.Address
 		return protoreflect.ValueOfString(value)
-	case "imhub.node.v1.Node.remote_url":
-		value := x.RemoteUrl
+	case "imhub.node.v1.Node.pubKey":
+		value := x.PubKey
 		return protoreflect.ValueOfString(value)
-	case "imhub.node.v1.Node.inactive_at":
-		value := x.InactiveAt
-		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "imhub.node.v1.Node.stakeAmount":
+		value := x.StakeAmount
+		return protoreflect.ValueOfUint64(value)
 	case "imhub.node.v1.Node.status":
 		value := x.Status
 		return protoreflect.ValueOfEnum((protoreflect.EnumNumber)(value))
 	case "imhub.node.v1.Node.status_at":
 		value := x.StatusAt
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
+	case "imhub.node.v1.Node.inactive_at":
+		value := x.InactiveAt
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
@@ -235,16 +261,20 @@ func (x *fastReflection_Node) Get(descriptor protoreflect.FieldDescriptor) proto
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Node) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "imhub.node.v1.Node.name":
+		x.Name = value.Interface().(string)
 	case "imhub.node.v1.Node.address":
 		x.Address = value.Interface().(string)
-	case "imhub.node.v1.Node.remote_url":
-		x.RemoteUrl = value.Interface().(string)
-	case "imhub.node.v1.Node.inactive_at":
-		x.InactiveAt = value.Message().Interface().(*timestamppb.Timestamp)
+	case "imhub.node.v1.Node.pubKey":
+		x.PubKey = value.Interface().(string)
+	case "imhub.node.v1.Node.stakeAmount":
+		x.StakeAmount = value.Uint()
 	case "imhub.node.v1.Node.status":
 		x.Status = (v1.Status)(value.Enum())
 	case "imhub.node.v1.Node.status_at":
 		x.StatusAt = value.Message().Interface().(*timestamppb.Timestamp)
+	case "imhub.node.v1.Node.inactive_at":
+		x.InactiveAt = value.Message().Interface().(*timestamppb.Timestamp)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: imhub.node.v1.Node"))
@@ -265,20 +295,24 @@ func (x *fastReflection_Node) Set(fd protoreflect.FieldDescriptor, value protore
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Node) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "imhub.node.v1.Node.inactive_at":
-		if x.InactiveAt == nil {
-			x.InactiveAt = new(timestamppb.Timestamp)
-		}
-		return protoreflect.ValueOfMessage(x.InactiveAt.ProtoReflect())
 	case "imhub.node.v1.Node.status_at":
 		if x.StatusAt == nil {
 			x.StatusAt = new(timestamppb.Timestamp)
 		}
 		return protoreflect.ValueOfMessage(x.StatusAt.ProtoReflect())
+	case "imhub.node.v1.Node.inactive_at":
+		if x.InactiveAt == nil {
+			x.InactiveAt = new(timestamppb.Timestamp)
+		}
+		return protoreflect.ValueOfMessage(x.InactiveAt.ProtoReflect())
+	case "imhub.node.v1.Node.name":
+		panic(fmt.Errorf("field name of message imhub.node.v1.Node is not mutable"))
 	case "imhub.node.v1.Node.address":
 		panic(fmt.Errorf("field address of message imhub.node.v1.Node is not mutable"))
-	case "imhub.node.v1.Node.remote_url":
-		panic(fmt.Errorf("field remote_url of message imhub.node.v1.Node is not mutable"))
+	case "imhub.node.v1.Node.pubKey":
+		panic(fmt.Errorf("field pubKey of message imhub.node.v1.Node is not mutable"))
+	case "imhub.node.v1.Node.stakeAmount":
+		panic(fmt.Errorf("field stakeAmount of message imhub.node.v1.Node is not mutable"))
 	case "imhub.node.v1.Node.status":
 		panic(fmt.Errorf("field status of message imhub.node.v1.Node is not mutable"))
 	default:
@@ -294,16 +328,20 @@ func (x *fastReflection_Node) Mutable(fd protoreflect.FieldDescriptor) protorefl
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_Node) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "imhub.node.v1.Node.name":
+		return protoreflect.ValueOfString("")
 	case "imhub.node.v1.Node.address":
 		return protoreflect.ValueOfString("")
-	case "imhub.node.v1.Node.remote_url":
+	case "imhub.node.v1.Node.pubKey":
 		return protoreflect.ValueOfString("")
-	case "imhub.node.v1.Node.inactive_at":
-		m := new(timestamppb.Timestamp)
-		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "imhub.node.v1.Node.stakeAmount":
+		return protoreflect.ValueOfUint64(uint64(0))
 	case "imhub.node.v1.Node.status":
 		return protoreflect.ValueOfEnum(0)
 	case "imhub.node.v1.Node.status_at":
+		m := new(timestamppb.Timestamp)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
+	case "imhub.node.v1.Node.inactive_at":
 		m := new(timestamppb.Timestamp)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
@@ -375,23 +413,30 @@ func (x *fastReflection_Node) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
+		l = len(x.Name)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		l = len(x.Address)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.RemoteUrl)
+		l = len(x.PubKey)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.InactiveAt != nil {
-			l = options.Size(x.InactiveAt)
-			n += 1 + l + runtime.Sov(uint64(l))
+		if x.StakeAmount != 0 {
+			n += 1 + runtime.Sov(uint64(x.StakeAmount))
 		}
 		if x.Status != 0 {
 			n += 1 + runtime.Sov(uint64(x.Status))
 		}
 		if x.StatusAt != nil {
 			l = options.Size(x.StatusAt)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		if x.InactiveAt != nil {
+			l = options.Size(x.InactiveAt)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.unknownFields != nil {
@@ -423,25 +468,6 @@ func (x *fastReflection_Node) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.StatusAt != nil {
-			encoded, err := options.Marshal(x.StatusAt)
-			if err != nil {
-				return protoiface.MarshalOutput{
-					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
-					Buf:               input.Buf,
-				}, err
-			}
-			i -= len(encoded)
-			copy(dAtA[i:], encoded)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
-			i--
-			dAtA[i] = 0x3a
-		}
-		if x.Status != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.Status))
-			i--
-			dAtA[i] = 0x30
-		}
 		if x.InactiveAt != nil {
 			encoded, err := options.Marshal(x.InactiveAt)
 			if err != nil {
@@ -454,19 +480,50 @@ func (x *fastReflection_Node) ProtoMethods() *protoiface.Methods {
 			copy(dAtA[i:], encoded)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
-			dAtA[i] = 0x2a
+			dAtA[i] = 0x3a
 		}
-		if len(x.RemoteUrl) > 0 {
-			i -= len(x.RemoteUrl)
-			copy(dAtA[i:], x.RemoteUrl)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.RemoteUrl)))
+		if x.StatusAt != nil {
+			encoded, err := options.Marshal(x.StatusAt)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
-			dAtA[i] = 0x22
+			dAtA[i] = 0x32
+		}
+		if x.Status != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Status))
+			i--
+			dAtA[i] = 0x28
+		}
+		if x.StakeAmount != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.StakeAmount))
+			i--
+			dAtA[i] = 0x20
+		}
+		if len(x.PubKey) > 0 {
+			i -= len(x.PubKey)
+			copy(dAtA[i:], x.PubKey)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.PubKey)))
+			i--
+			dAtA[i] = 0x1a
 		}
 		if len(x.Address) > 0 {
 			i -= len(x.Address)
 			copy(dAtA[i:], x.Address)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Address)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.Name) > 0 {
+			i -= len(x.Name)
+			copy(dAtA[i:], x.Name)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Name)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -521,6 +578,38 @@ func (x *fastReflection_Node) ProtoMethods() *protoiface.Methods {
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Name = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
 				}
 				var stringLen uint64
@@ -551,9 +640,9 @@ func (x *fastReflection_Node) ProtoMethods() *protoiface.Methods {
 				}
 				x.Address = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 4:
+			case 3:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RemoteUrl", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PubKey", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -581,13 +670,13 @@ func (x *fastReflection_Node) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.RemoteUrl = string(dAtA[iNdEx:postIndex])
+				x.PubKey = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 5:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field InactiveAt", wireType)
+			case 4:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StakeAmount", wireType)
 				}
-				var msglen int
+				x.StakeAmount = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -597,29 +686,12 @@ func (x *fastReflection_Node) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					msglen |= int(b&0x7F) << shift
+					x.StakeAmount |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
-				if msglen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + msglen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				if x.InactiveAt == nil {
-					x.InactiveAt = &timestamppb.Timestamp{}
-				}
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.InactiveAt); err != nil {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
-				}
-				iNdEx = postIndex
-			case 6:
+			case 5:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
 				}
@@ -638,7 +710,7 @@ func (x *fastReflection_Node) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
-			case 7:
+			case 6:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field StatusAt", wireType)
 				}
@@ -671,6 +743,42 @@ func (x *fastReflection_Node) ProtoMethods() *protoiface.Methods {
 					x.StatusAt = &timestamppb.Timestamp{}
 				}
 				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.StatusAt); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 7:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field InactiveAt", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.InactiveAt == nil {
+					x.InactiveAt = &timestamppb.Timestamp{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.InactiveAt); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
@@ -727,11 +835,13 @@ type Node struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Address    string                 `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
-	RemoteUrl  string                 `protobuf:"bytes,4,opt,name=remote_url,json=remoteUrl,proto3" json:"remote_url,omitempty"`
-	InactiveAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=inactive_at,json=inactiveAt,proto3" json:"inactive_at,omitempty"`
-	Status     v1.Status              `protobuf:"varint,6,opt,name=status,proto3,enum=imhub.types.v1.Status" json:"status,omitempty"`
-	StatusAt   *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=status_at,json=statusAt,proto3" json:"status_at,omitempty"`
+	Name        string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Address     string                 `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	PubKey      string                 `protobuf:"bytes,3,opt,name=pubKey,proto3" json:"pubKey,omitempty"`
+	StakeAmount uint64                 `protobuf:"varint,4,opt,name=stakeAmount,proto3" json:"stakeAmount,omitempty"`
+	Status      v1.Status              `protobuf:"varint,5,opt,name=status,proto3,enum=imhub.types.v1.Status" json:"status,omitempty"`
+	StatusAt    *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=status_at,json=statusAt,proto3" json:"status_at,omitempty"`
+	InactiveAt  *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=inactive_at,json=inactiveAt,proto3" json:"inactive_at,omitempty"`
 }
 
 func (x *Node) Reset() {
@@ -754,6 +864,13 @@ func (*Node) Descriptor() ([]byte, []int) {
 	return file_imhub_node_v1_node_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *Node) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 func (x *Node) GetAddress() string {
 	if x != nil {
 		return x.Address
@@ -761,18 +878,18 @@ func (x *Node) GetAddress() string {
 	return ""
 }
 
-func (x *Node) GetRemoteUrl() string {
+func (x *Node) GetPubKey() string {
 	if x != nil {
-		return x.RemoteUrl
+		return x.PubKey
 	}
 	return ""
 }
 
-func (x *Node) GetInactiveAt() *timestamppb.Timestamp {
+func (x *Node) GetStakeAmount() uint64 {
 	if x != nil {
-		return x.InactiveAt
+		return x.StakeAmount
 	}
-	return nil
+	return 0
 }
 
 func (x *Node) GetStatus() v1.Status {
@@ -789,51 +906,55 @@ func (x *Node) GetStatusAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *Node) GetInactiveAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.InactiveAt
+	}
+	return nil
+}
+
 var File_imhub_node_v1_node_proto protoreflect.FileDescriptor
 
 var file_imhub_node_v1_node_proto_rawDesc = []byte{
 	0x0a, 0x18, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x76, 0x31, 0x2f,
 	0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0d, 0x69, 0x6d, 0x68, 0x75,
-	0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x1a, 0x11, 0x61, 0x6d, 0x69, 0x6e, 0x6f,
-	0x2f, 0x61, 0x6d, 0x69, 0x6e, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x17, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x6d, 0x73, 0x67, 0x2f, 0x76, 0x31, 0x2f, 0x6d, 0x73, 0x67, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x19, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x5f, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x1a, 0x1e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x62, 0x61, 0x73, 0x65, 0x2f, 0x76, 0x31,
-	0x62, 0x65, 0x74, 0x61, 0x31, 0x2f, 0x63, 0x6f, 0x69, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
-	0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x74,
-	0x79, 0x70, 0x65, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x88, 0x02, 0x0a, 0x04, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x18, 0x0a,
-	0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
-	0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x2c, 0x0a, 0x0a, 0x72, 0x65, 0x6d, 0x6f, 0x74,
-	0x65, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x42, 0x0d, 0xe2, 0xde, 0x1f,
-	0x09, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x55, 0x52, 0x4c, 0x52, 0x09, 0x72, 0x65, 0x6d, 0x6f,
-	0x74, 0x65, 0x55, 0x72, 0x6c, 0x12, 0x45, 0x0a, 0x0b, 0x69, 0x6e, 0x61, 0x63, 0x74, 0x69, 0x76,
-	0x65, 0x5f, 0x61, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f,
-	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d,
-	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x42, 0x08, 0xc8, 0xde, 0x1f, 0x00, 0x90, 0xdf, 0x1f, 0x01,
-	0x52, 0x0a, 0x69, 0x6e, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x41, 0x74, 0x12, 0x2e, 0x0a, 0x06,
-	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x16, 0x2e, 0x69,
-	0x6d, 0x68, 0x75, 0x62, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x41, 0x0a, 0x09,
-	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x5f, 0x61, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
-	0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x42, 0x08, 0xc8, 0xde, 0x1f,
-	0x00, 0x90, 0xdf, 0x1f, 0x01, 0x52, 0x08, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x41, 0x74, 0x42,
-	0xa6, 0x01, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e, 0x6f,
-	0x64, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x09, 0x4e, 0x6f, 0x64, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f,
-	0x50, 0x01, 0x5a, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64,
-	0x75, 0x6e, 0x2d, 0x69, 0x6f, 0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x6e, 0x6f,
-	0x64, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x49, 0x4e, 0x58, 0xaa, 0x02, 0x0d, 0x49, 0x6d, 0x68,
-	0x75, 0x62, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x0d, 0x49, 0x6d, 0x68,
-	0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x19, 0x49, 0x6d, 0x68,
-	0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x3a, 0x3a,
-	0x4e, 0x6f, 0x64, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x62, 0x2e, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
+	0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
+	0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x1a, 0x1b, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2f, 0x76, 0x31,
+	0x2f, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa8, 0x02,
+	0x0a, 0x04, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64,
+	0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x75, 0x62, 0x4b, 0x65, 0x79, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x75, 0x62, 0x4b, 0x65, 0x79, 0x12, 0x20, 0x0a, 0x0b,
+	0x73, 0x74, 0x61, 0x6b, 0x65, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x0b, 0x73, 0x74, 0x61, 0x6b, 0x65, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2e,
+	0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x16,
+	0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x76, 0x31, 0x2e,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x41,
+	0x0a, 0x09, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x5f, 0x61, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x42, 0x08, 0xc8,
+	0xde, 0x1f, 0x00, 0x90, 0xdf, 0x1f, 0x01, 0x52, 0x08, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x41,
+	0x74, 0x12, 0x45, 0x0a, 0x0b, 0x69, 0x6e, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x5f, 0x61, 0x74,
+	0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
+	0x6d, 0x70, 0x42, 0x08, 0xc8, 0xde, 0x1f, 0x00, 0x90, 0xdf, 0x1f, 0x01, 0x52, 0x0a, 0x69, 0x6e,
+	0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x41, 0x74, 0x42, 0xae, 0x01, 0xc8, 0xe1, 0x1e, 0x00, 0xa8,
+	0xe2, 0x1e, 0x00, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2e, 0x6e,
+	0x6f, 0x64, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x09, 0x4e, 0x6f, 0x64, 0x65, 0x50, 0x72, 0x6f, 0x74,
+	0x6f, 0x50, 0x01, 0x5a, 0x30, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
+	0x64, 0x75, 0x6e, 0x2d, 0x69, 0x6f, 0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x61, 0x70, 0x69,
+	0x2f, 0x69, 0x6d, 0x68, 0x75, 0x62, 0x2f, 0x6e, 0x6f, 0x64, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x6e,
+	0x6f, 0x64, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x49, 0x4e, 0x58, 0xaa, 0x02, 0x0d, 0x49, 0x6d,
+	0x68, 0x75, 0x62, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x0d, 0x49, 0x6d,
+	0x68, 0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x19, 0x49, 0x6d,
+	0x68, 0x75, 0x62, 0x5c, 0x4e, 0x6f, 0x64, 0x65, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d,
+	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0f, 0x49, 0x6d, 0x68, 0x75, 0x62, 0x3a,
+	0x3a, 0x4e, 0x6f, 0x64, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -851,13 +972,13 @@ func file_imhub_node_v1_node_proto_rawDescGZIP() []byte {
 var file_imhub_node_v1_node_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_imhub_node_v1_node_proto_goTypes = []interface{}{
 	(*Node)(nil),                  // 0: imhub.node.v1.Node
-	(*timestamppb.Timestamp)(nil), // 1: google.protobuf.Timestamp
-	(v1.Status)(0),                // 2: imhub.types.v1.Status
+	(v1.Status)(0),                // 1: imhub.types.v1.Status
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_imhub_node_v1_node_proto_depIdxs = []int32{
-	1, // 0: imhub.node.v1.Node.inactive_at:type_name -> google.protobuf.Timestamp
-	2, // 1: imhub.node.v1.Node.status:type_name -> imhub.types.v1.Status
-	1, // 2: imhub.node.v1.Node.status_at:type_name -> google.protobuf.Timestamp
+	1, // 0: imhub.node.v1.Node.status:type_name -> imhub.types.v1.Status
+	2, // 1: imhub.node.v1.Node.status_at:type_name -> google.protobuf.Timestamp
+	2, // 2: imhub.node.v1.Node.inactive_at:type_name -> google.protobuf.Timestamp
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

@@ -16,7 +16,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:       "queryNodes",
 					Short:     "Shows the parameters of the module",
 				},
-				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
 		Tx: &autocliv1.ServiceCommandDescriptor{
@@ -25,11 +24,10 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
 					RpcMethod:      "MsgRegisterNode",
-					Use:            "register-node [from] [address] [name] [pub_key]",
+					Use:            "register-node [from] [name] [address] [pubKey]",
 					Short:          "Send a register-node tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "from"}, {ProtoField: "address"}, {ProtoField: "name"}, {ProtoField: "pub_key"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "from"}, {ProtoField: "name"}, {ProtoField: "address"}, {ProtoField: "pubKey"}},
 				},
-				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
 	}

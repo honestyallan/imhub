@@ -26,24 +26,17 @@ func (k *Keeper) HandleMsgRegisterNode(ctx sdk.Context, msg *v1.MsgRegisterNodeR
 	}
 
 	node := v1.Node{
-		Address:    nodeAddr.String(),
-		RemoteURL:  msg.Address,
-		InactiveAt: time.Time{},
-		Status:     v1base.StatusInactive,
-		StatusAt:   ctx.BlockTime(),
+		Name:        msg.Name,
+		Address:     nodeAddr.String(),
+		PubKey:      msg.PubKey,
+		StakeAmount: 0,
+		InactiveAt:  time.Time{},
+		Status:      v1base.StatusInactive,
+		StatusAt:    ctx.BlockTime(),
 	}
 
 	k.SetNode(ctx, node)
 	k.SetNodeForInactiveAt(ctx, node.InactiveAt, nodeAddr)
-
-	//ctx.EventManager().EmitTypedEvent(
-	//	&v3.EventCreate{
-	//		NodeAddress:    node.Address,
-	//		GigabytePrices: node.GigabytePrices.String(),
-	//		HourlyPrices:   node.HourlyPrices.String(),
-	//		RemoteUrl:      node.RemoteURL,
-	//	},
-	//)
 
 	return &v1.MsgRegisterNodeResponse{}, nil
 }

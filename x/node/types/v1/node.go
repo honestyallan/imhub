@@ -1,15 +1,13 @@
 package v1
 
 import (
-	"fmt"
-	"net/url"
-
 	sdkerrors "cosmossdk.io/errors"
+	"fmt"
 	base "github.com/dun-io/imhub/types"
 	v1base "github.com/dun-io/imhub/types/v1"
 )
 
-func (m *Node) GetAddr() base.NodeAddress {
+func (m *Node) GetAddress() base.NodeAddress {
 	if m.Address == "" {
 		return nil
 	}
@@ -21,30 +19,13 @@ func (m *Node) GetAddr() base.NodeAddress {
 
 	return addr
 }
+
 func (m *Node) Validate() error {
 	if m.Address == "" {
 		return fmt.Errorf("address cannot be empty")
 	}
 	if _, err := base.NodeAddressFromBech32(m.Address); err != nil {
 		return sdkerrors.Wrapf(err, "invalid address %s", m.Address)
-	}
-
-	if m.RemoteURL == "" {
-		return fmt.Errorf("remote_url cannot be empty")
-	}
-	if len(m.RemoteURL) > 64 {
-		return fmt.Errorf("remote_url length cannot be greater than %d chars", 64)
-	}
-
-	remoteURL, err := url.ParseRequestURI(m.RemoteURL)
-	if err != nil {
-		return sdkerrors.Wrapf(err, "invalid remote_url %s", m.RemoteURL)
-	}
-	if remoteURL.Scheme != "https" {
-		return fmt.Errorf("remote_url scheme must be https")
-	}
-	if remoteURL.Port() == "" {
-		return fmt.Errorf("remote_url port cannot be empty")
 	}
 
 	if m.InactiveAt.IsZero() {

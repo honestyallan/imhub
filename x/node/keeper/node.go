@@ -14,7 +14,7 @@ import (
 // SetActiveNode stores an active node in the module's KVStore.
 func (k *Keeper) SetActiveNode(ctx sdk.Context, node v1.Node) {
 	store := k.Store(ctx)
-	key := types.ActiveNodeKey(node.GetAddr())
+	key := types.ActiveNodeKey(node.GetAddress())
 	value := k.cdc.MustMarshal(&node)
 
 	store.Set(key, value)
@@ -54,7 +54,7 @@ func (k *Keeper) DeleteActiveNode(ctx sdk.Context, addr base.NodeAddress) {
 // SetInactiveNode stores an inactive node in the module's KVStore.
 func (k *Keeper) SetInactiveNode(ctx sdk.Context, node v1.Node) {
 	store := k.Store(ctx)
-	key := types.InactiveNodeKey(node.GetAddr())
+	key := types.InactiveNodeKey(node.GetAddress())
 	value := k.cdc.MustMarshal(&node)
 
 	store.Set(key, value)

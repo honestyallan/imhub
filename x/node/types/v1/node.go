@@ -8,11 +8,11 @@ import (
 )
 
 func (m *Node) GetAddress() base.NodeAddress {
-	if m.Address == "" {
+	if m.AccAddr == "" {
 		return nil
 	}
 
-	addr, err := base.NodeAddressFromBech32(m.Address)
+	addr, err := base.NodeAddressFromBech32(m.AccAddr)
 	if err != nil {
 		panic(err)
 	}
@@ -21,11 +21,11 @@ func (m *Node) GetAddress() base.NodeAddress {
 }
 
 func (m *Node) Validate() error {
-	if m.Address == "" {
+	if m.AccAddr == "" {
 		return fmt.Errorf("address cannot be empty")
 	}
-	if _, err := base.NodeAddressFromBech32(m.Address); err != nil {
-		return sdkerrors.Wrapf(err, "invalid address %s", m.Address)
+	if _, err := base.NodeAddressFromBech32(m.AccAddr); err != nil {
+		return sdkerrors.Wrapf(err, "invalid address %s", m.AccAddr)
 	}
 
 	if m.InactiveAt.IsZero() {

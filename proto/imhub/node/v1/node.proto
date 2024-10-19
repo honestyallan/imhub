@@ -11,10 +11,10 @@ option (gogoproto.equal_all) = false;
 option (gogoproto.goproto_getters_all) = false;
 
 message Node {
-  string name = 1;
-  string address = 2;
-  string pubKey = 3;
-  uint64 stakeAmount = 4;
+  string accAddr = 1;
+  string name = 2;
+  string url = 3;
+  string ext = 4;
   imhub.types.v1.Status status = 5;
   google.protobuf.Timestamp status_at = 6 [
     (gogoproto.nullable) = false,

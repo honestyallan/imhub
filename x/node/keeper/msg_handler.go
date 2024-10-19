@@ -10,7 +10,7 @@ import (
 )
 
 func (k *Keeper) HandleMsgRegisterNode(ctx sdk.Context, msg *v1.MsgRegisterNodeRequest) (*v1.MsgRegisterNodeResponse, error) {
-	accAddr, err := sdk.AccAddressFromBech32(msg.From)
+	accAddr, err := sdk.AccAddressFromBech32(msg.AccAddr)
 	if err != nil {
 		return nil, err
 	}
@@ -26,13 +26,10 @@ func (k *Keeper) HandleMsgRegisterNode(ctx sdk.Context, msg *v1.MsgRegisterNodeR
 	}
 
 	node := v1.Node{
-		Name:        msg.Name,
-		Address:     nodeAddr.String(),
-		PubKey:      msg.PubKey,
-		StakeAmount: 0,
-		InactiveAt:  time.Time{},
-		Status:      v1base.StatusInactive,
-		StatusAt:    ctx.BlockTime(),
+		Name:       msg.Name,
+		InactiveAt: time.Time{},
+		Status:     v1base.StatusInactive,
+		StatusAt:   ctx.BlockTime(),
 	}
 
 	k.SetNode(ctx, node)

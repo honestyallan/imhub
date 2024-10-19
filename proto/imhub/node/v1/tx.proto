@@ -15,10 +15,10 @@ service MsgService {
 }
 
 message MsgRegisterNodeRequest {
-  string from = 1;
+  string accAddr = 1;
   string name = 2;
-  string address = 3;
-  string pubKey = 4;
+  string url = 3;
+  string ext = 4;
 }
 
 message MsgRegisterNodeResponse {

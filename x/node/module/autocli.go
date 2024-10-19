@@ -24,9 +24,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
 					RpcMethod:      "MsgRegisterNode",
-					Use:            "register-node [from] [name] [address] [pubKey]",
+					Use:            "register-node [accAddr] [name] [url] [ext]",
 					Short:          "Send a register-node tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "from"}, {ProtoField: "name"}, {ProtoField: "address"}, {ProtoField: "pubKey"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "accAddr"}, {ProtoField: "name"}, {ProtoField: "url"}, {ProtoField: "ext"}},
 				},
 			},
 		},

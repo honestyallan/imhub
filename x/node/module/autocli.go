@@ -12,9 +12,10 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			Service: v1.Query_ServiceDesc.ServiceName,
 			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
 				{
-					RpcMethod: "QueryNodes",
-					Use:       "queryNodes",
-					Short:     "Shows the parameters of the module",
+					RpcMethod:      "QueryNodes",
+					Use:            "queryNodes [status]",
+					Short:          "Shows the parameters of the module",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "status"}},
 				},
 			},
 		},

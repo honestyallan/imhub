@@ -5,6 +5,9 @@ import "gogoproto/gogo.proto";
 import "imhub/node/v1/params.proto";
 import "google/protobuf/timestamp.proto";
 import "imhub/types/v1/status.proto";
+import "amino/amino.proto";
+import "cosmos/msg/v1/msg.proto";
+import "cosmos_proto/cosmos.proto";
 
 option go_package = "github.com/dun-io/imhub/x/node/types/v1";
 option (gogoproto.equal_all) = false;
@@ -15,10 +18,12 @@ service MsgService {
 }
 
 message MsgRegisterNodeRequest {
-  string accAddr = 1;
-  string name = 2;
-  string url = 3;
-  string ext = 4;
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  string accAddr = 2;
+  string name = 3;
+  string url = 4;
+  string ext = 5;
 }
 
 message MsgRegisterNodeResponse {

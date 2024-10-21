@@ -2,7 +2,10 @@
 package nodev1
 
 import (
+	_ "cosmossdk.io/api/amino"
+	_ "cosmossdk.io/api/cosmos/msg/v1"
 	fmt "fmt"
+	_ "github.com/cosmos/cosmos-proto"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	_ "github.com/dun-io/imhub/api/imhub/types/v1"
@@ -17,6 +20,7 @@ import (
 
 var (
 	md_MsgRegisterNodeRequest         protoreflect.MessageDescriptor
+	fd_MsgRegisterNodeRequest_creator protoreflect.FieldDescriptor
 	fd_MsgRegisterNodeRequest_accAddr protoreflect.FieldDescriptor
 	fd_MsgRegisterNodeRequest_name    protoreflect.FieldDescriptor
 	fd_MsgRegisterNodeRequest_url     protoreflect.FieldDescriptor
@@ -26,6 +30,7 @@ var (
 func init() {
 	file_imhub_node_v1_tx_proto_init()
 	md_MsgRegisterNodeRequest = File_imhub_node_v1_tx_proto.Messages().ByName("MsgRegisterNodeRequest")
+	fd_MsgRegisterNodeRequest_creator = md_MsgRegisterNodeRequest.Fields().ByName("creator")
 	fd_MsgRegisterNodeRequest_accAddr = md_MsgRegisterNodeRequest.Fields().ByName("accAddr")
 	fd_MsgRegisterNodeRequest_name = md_MsgRegisterNodeRequest.Fields().ByName("name")
 	fd_MsgRegisterNodeRequest_url = md_MsgRegisterNodeRequest.Fields().ByName("url")
@@ -97,6 +102,12 @@ func (x *fastReflection_MsgRegisterNodeRequest) Interface() protoreflect.ProtoMe
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_MsgRegisterNodeRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Creator != "" {
+		value := protoreflect.ValueOfString(x.Creator)
+		if !f(fd_MsgRegisterNodeRequest_creator, value) {
+			return
+		}
+	}
 	if x.AccAddr != "" {
 		value := protoreflect.ValueOfString(x.AccAddr)
 		if !f(fd_MsgRegisterNodeRequest_accAddr, value) {
@@ -136,6 +147,8 @@ func (x *fastReflection_MsgRegisterNodeRequest) Range(f func(protoreflect.FieldD
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_MsgRegisterNodeRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "imhub.node.v1.MsgRegisterNodeRequest.creator":
+		return x.Creator != ""
 	case "imhub.node.v1.MsgRegisterNodeRequest.accAddr":
 		return x.AccAddr != ""
 	case "imhub.node.v1.MsgRegisterNodeRequest.name":
@@ -160,6 +173,8 @@ func (x *fastReflection_MsgRegisterNodeRequest) Has(fd protoreflect.FieldDescrip
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgRegisterNodeRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "imhub.node.v1.MsgRegisterNodeRequest.creator":
+		x.Creator = ""
 	case "imhub.node.v1.MsgRegisterNodeRequest.accAddr":
 		x.AccAddr = ""
 	case "imhub.node.v1.MsgRegisterNodeRequest.name":
@@ -184,6 +199,9 @@ func (x *fastReflection_MsgRegisterNodeRequest) Clear(fd protoreflect.FieldDescr
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_MsgRegisterNodeRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "imhub.node.v1.MsgRegisterNodeRequest.creator":
+		value := x.Creator
+		return protoreflect.ValueOfString(value)
 	case "imhub.node.v1.MsgRegisterNodeRequest.accAddr":
 		value := x.AccAddr
 		return protoreflect.ValueOfString(value)
@@ -216,6 +234,8 @@ func (x *fastReflection_MsgRegisterNodeRequest) Get(descriptor protoreflect.Fiel
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgRegisterNodeRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "imhub.node.v1.MsgRegisterNodeRequest.creator":
+		x.Creator = value.Interface().(string)
 	case "imhub.node.v1.MsgRegisterNodeRequest.accAddr":
 		x.AccAddr = value.Interface().(string)
 	case "imhub.node.v1.MsgRegisterNodeRequest.name":
@@ -244,6 +264,8 @@ func (x *fastReflection_MsgRegisterNodeRequest) Set(fd protoreflect.FieldDescrip
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgRegisterNodeRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "imhub.node.v1.MsgRegisterNodeRequest.creator":
+		panic(fmt.Errorf("field creator of message imhub.node.v1.MsgRegisterNodeRequest is not mutable"))
 	case "imhub.node.v1.MsgRegisterNodeRequest.accAddr":
 		panic(fmt.Errorf("field accAddr of message imhub.node.v1.MsgRegisterNodeRequest is not mutable"))
 	case "imhub.node.v1.MsgRegisterNodeRequest.name":
@@ -265,6 +287,8 @@ func (x *fastReflection_MsgRegisterNodeRequest) Mutable(fd protoreflect.FieldDes
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_MsgRegisterNodeRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "imhub.node.v1.MsgRegisterNodeRequest.creator":
+		return protoreflect.ValueOfString("")
 	case "imhub.node.v1.MsgRegisterNodeRequest.accAddr":
 		return protoreflect.ValueOfString("")
 	case "imhub.node.v1.MsgRegisterNodeRequest.name":
@@ -342,6 +366,10 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 		var n int
 		var l int
 		_ = l
+		l = len(x.Creator)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		l = len(x.AccAddr)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
@@ -392,26 +420,33 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 			copy(dAtA[i:], x.Ext)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Ext)))
 			i--
-			dAtA[i] = 0x22
+			dAtA[i] = 0x2a
 		}
 		if len(x.Url) > 0 {
 			i -= len(x.Url)
 			copy(dAtA[i:], x.Url)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Url)))
 			i--
-			dAtA[i] = 0x1a
+			dAtA[i] = 0x22
 		}
 		if len(x.Name) > 0 {
 			i -= len(x.Name)
 			copy(dAtA[i:], x.Name)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Name)))
 			i--
-			dAtA[i] = 0x12
+			dAtA[i] = 0x1a
 		}
 		if len(x.AccAddr) > 0 {
 			i -= len(x.AccAddr)
 			copy(dAtA[i:], x.AccAddr)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.AccAddr)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.Creator) > 0 {
+			i -= len(x.Creator)
+			copy(dAtA[i:], x.Creator)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Creator)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -466,6 +501,38 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.Creator = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field AccAddr", wireType)
 				}
 				var stringLen uint64
@@ -496,7 +563,7 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 				}
 				x.AccAddr = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 2:
+			case 3:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
 				}
@@ -528,7 +595,7 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 				}
 				x.Name = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 3:
+			case 4:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Url", wireType)
 				}
@@ -560,7 +627,7 @@ func (x *fastReflection_MsgRegisterNodeRequest) ProtoMethods() *protoiface.Metho
 				}
 				x.Url = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 4:
+			case 5:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Ext", wireType)
 				}
@@ -1001,10 +1068,11 @@ type MsgRegisterNodeRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccAddr string `protobuf:"bytes,1,opt,name=accAddr,proto3" json:"accAddr,omitempty"`
-	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Url     string `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
-	Ext     string `protobuf:"bytes,4,opt,name=ext,proto3" json:"ext,omitempty"`
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	AccAddr string `protobuf:"bytes,2,opt,name=accAddr,proto3" json:"accAddr,omitempty"`
+	Name    string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Url     string `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
+	Ext     string `protobuf:"bytes,5,opt,name=ext,proto3" json:"ext,omitempty"`
 }
 
 func (x *MsgRegisterNodeRequest) Reset() {
@@ -1025,6 +1093,13 @@ func (*MsgRegisterNodeRequest) ProtoMessage() {}
 // Deprecated: Use MsgRegisterNodeRequest.ProtoReflect.Descriptor instead.
 func (*MsgRegisterNodeRequest) Descriptor() ([]byte, []int) {
 	return file_imhub_node_v1_tx_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *MsgRegisterNodeRequest) GetCreator() string {
+	if x != nil {
+		return x.Creator
+	}
+	return ""
 }
 
 func (x *MsgRegisterNodeRequest) GetAccAddr() string {
@@ -1093,14 +1168,21 @@ var file_imhub_node_v1_tx_proto_rawDesc = []byte{
 	0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73,
 	0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x69, 0x6d, 0x68, 0x75,
 	0x62, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x74, 0x61, 0x74, 0x75,
-	0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x6a, 0x0a, 0x16, 0x4d, 0x73, 0x67, 0x52, 0x65,
-	0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x41, 0x64, 0x64, 0x72, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x41, 0x64, 0x64, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
-	0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72,
-	0x6c, 0x12, 0x10, 0x0a, 0x03, 0x65, 0x78, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
-	0x65, 0x78, 0x74, 0x22, 0x19, 0x0a, 0x17, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74,
+	0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x11, 0x61, 0x6d, 0x69, 0x6e, 0x6f, 0x2f, 0x61,
+	0x6d, 0x69, 0x6e, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x17, 0x63, 0x6f, 0x73, 0x6d,
+	0x6f, 0x73, 0x2f, 0x6d, 0x73, 0x67, 0x2f, 0x76, 0x31, 0x2f, 0x6d, 0x73, 0x67, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x1a, 0x19, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x5f, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x92,
+	0x01, 0x0a, 0x16, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f,
+	0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65,
+	0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61,
+	0x74, 0x6f, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x41, 0x64, 0x64, 0x72, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x41, 0x64, 0x64, 0x72, 0x12, 0x12, 0x0a,
+	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d,
+	0x65, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
+	0x75, 0x72, 0x6c, 0x12, 0x10, 0x0a, 0x03, 0x65, 0x78, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x03, 0x65, 0x78, 0x74, 0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72, 0x65, 0x61,
+	0x74, 0x6f, 0x72, 0x22, 0x19, 0x0a, 0x17, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74,
 	0x65, 0x72, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0x6e,
 	0x0a, 0x0a, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x60, 0x0a, 0x0f,
 	0x4d, 0x73, 0x67, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x4e, 0x6f, 0x64, 0x65, 0x12,

@@ -26,7 +26,10 @@ func (k *Keeper) HandleMsgRegisterNode(ctx sdk.Context, msg *v1.MsgRegisterNodeR
 	}
 
 	node := v1.Node{
+		AccAddr:    nodeAddr.String(),
 		Name:       msg.Name,
+		Url:        msg.Url,
+		Ext:        msg.Ext,
 		InactiveAt: time.Time{},
 		Status:     v1base.StatusInactive,
 		StatusAt:   ctx.BlockTime(),

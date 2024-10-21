@@ -5,8 +5,10 @@ import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
+
 import "imhub/node/v1/node.proto";
 import "imhub/types/v1/status.proto";
+
 option go_package = "github.com/dun-io/imhub/x/node/types/v1";
 option (gogoproto.equal_all) = false;
 option (gogoproto.goproto_getters_all) = false;

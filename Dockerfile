@@ -1,13 +1,27 @@
-FROM alpine:edge
+FROM golang:1.22-alpine as build
 
-# Install ca-certificates
-RUN apk add --update ca-certificates
 
-# Install bash
-RUN apk add --no-cache bash
+WORKDIR /app
 
-COPY --from=hub/builder:latest /code/build/hub /usr/bin/hub
+COPY . /app
+
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+RUN go mod download
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./api-server cmd/server/main.go
+
+
+
+
+FROM alpine:latest
+MAINTAINER charlie "charlie@mt.social"
+
+USER root
+
+COPY --from=build /app/.imhub /app/.imhub
+RUN chmod +x /app/hub
 
 EXPOSE 26656 26657 1317 9090
 
-CMD ["hub"]
+WORKDIR /app
+
+CMD ["imhub"]

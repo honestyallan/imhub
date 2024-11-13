@@ -3,7 +3,7 @@ FROM golang:1.22-alpine as build
 
 WORKDIR /app
 
-COPY . /app
+COPY .. /app
 
 RUN go env -w GOPROXY=https://goproxy.cn,direct
 RUN go mod download

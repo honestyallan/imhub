@@ -1,0 +1,50 @@
+stages:
+  - build_image
+  - publish
+  - deploy
+  - notify
+
+build-docker-image:
+  tags:
+    - AWS-MT
+  stage: build_image
+  script:
+    - cd scripts/
+    - ls -al
+    - chmod +x build-image.sh
+    - ./build-image.sh latest
+    - echo "Build completed successfully."
+
+push-to-ecr:
+  only:
+    - main
+  when: manual
+  tags:
+    - AWS-MT
+  stage: publish
+  needs:
+    - build-docker-image
+  before_script:
+    - echo "push image to ecr"
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+  script:
+    - docker tag $REPOSITORY_IMAGE:latest $DOCKER_REGISTRY/$REPOSITORY_IMAGE:latest
+    - docker push $DOCKER_REGISTRY/$REPOSITORY_IMAGE:latest
+
+deploy-to-test-env:
+  only:
+    - main
+  tags:
+    - AWS-MT
+  stage: deploy
+  needs:
+    - push-to-ecr
+  script:
+    - aws ecs update-service --region $AWS_DEFAULT_REGION --cluster $ECS_CLUSTER --service $ECS_SERVICE   --force-new-deployment
+
+notify:
+  stage: notify
+  needs:
+    - deploy-to-test-env
+  script:
+    - echo "Deployment completed for tag $REPOSITORY_IMAGE."
